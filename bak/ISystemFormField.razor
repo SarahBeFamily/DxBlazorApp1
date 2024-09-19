@@ -1,0 +1,18 @@
+@using DxBlazorApp1.Components.Elements
+
+<div class="field-group">
+	
+	@foreach (var field in Fields)
+	{
+		<ISystemFormField>
+			@field
+		</ISystemFormField>
+	}
+
+</div>
+
+	@code {
+		[Parameter]
+		public List<string> Fields { get; set; }
+
+	}

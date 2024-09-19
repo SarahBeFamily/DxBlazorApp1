@@ -1,0 +1,154 @@
+﻿@page "/"
+@using System.Drawing
+@using DxBlazorApp1.Services
+
+<PageTitle>Welcome</PageTitle>
+
+<div class="main-content">
+
+    <div class="container x-10">
+        <h1>Welcome to iSystem</h1>
+
+        <p>Hai bisogno di <span class="info">richiedere un ritiro?</span> <a href="#">Prenotalo ora</a></p>
+    </div>
+
+    <div id="dashboard" class="container">
+        <h2>Dashboard</h2>
+
+        <div class="row mb-30">
+            <div class="col-6 col-lg-3 col-xl-2 gutter-lg-max">
+                <Card Title="Peso totale raccolto"
+					Text="[ton]"
+					MainData="212,03"
+					Percentage="+31%"
+					Year="2023"
+					Icon="icon-weight with-frame">
+                </Card>
+            </div>
+
+            <div class="col-6 col-lg-3 col-xl-2 gutter-lg-max">
+                <Card Title="N° di richieste totali"
+                      MainData="23"
+                      Percentage="+20%"
+                      Year="2023"
+                      Icon="icon-doc-check with-frame">
+                </Card>
+            </div>
+
+            <div class="col-12 col-lg-6 col-xl-8">
+                <Card Classes="with-child" Title="Quantità raccolta per mese">
+                    <DxChart Data="@dataSource">
+                        <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)"
+                                             ArgumentField="@((SaleInfo s) => s.City)"
+                                             ValueField="@((SaleInfo s) => s.Amount)"
+                                             SeriesType="ChartSeriesType.Bar"
+                                             SummaryMethod="Enumerable.Max">
+                        </DxChartCommonSeries>
+                    </DxChart>
+                </Card>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-xl-4 gutter-lg-max">
+                <Card Classes="card-alt"
+                      Category="Documenti"
+                      Title="Archivio Fir"
+                      Text=">Hai bisogno di visionare rapidamente i tuoi documenti?"
+                      Link="#"
+                      LinkText="Visualizzali tutti"
+                      Icon="icon-doc-xl">
+                </Card>
+            </div>
+
+            <div class="col-6 col-xl-2 gutter-lg-max">
+                <Card Classes="wheels"
+                      Title="Piccoli"
+                      MainData="6"
+                      Percentage="+6%"
+                      Year="2023"
+                      Icon="icon-wheels -sm with-frame">
+                </Card>
+            </div>
+
+            <div class="col-6 col-xl-2 gutter-lg-max">
+                <Card Classes="wheels"
+                      Title="Medi"
+                      MainData="15"
+                      Percentage="+65%"
+                      Year="2023"
+                      Icon="icon-wheels -md with-frame">
+                </Card>
+            </div>
+
+            <div class="col-6 col-xl-2 gutter-lg-max">
+                <Card Classes="wheels"
+                      Title="Grandi"
+                      MainData="2"
+                      Percentage="+9%"
+                      Year="2023"
+                      Icon="icon-wheels -xl with-frame">
+                </Card>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 col-lg-3 col-xl-2">
+                <Card Classes="dark"
+                      Title="Ricambio"
+                      MainData="43.780"
+                      Um="Kg"
+                      TextAlt="Stoccaggio attuale"
+                      Icon="icon-cube with-frame">
+                </Card>
+            </div>
+            <div class="col-6 col-lg-6 col-xl-4">
+                <Card Classes="card-wrap">
+                    <Card Classes="main-data-primary"
+                          Title="Peso raccolto"
+                          MainData="327.540"
+                          Um="Kg"
+                          TextAlt="Mese corrente"
+                          Icon="icon-weight with-frame">
+                    </Card>
+
+                    <Card Classes=""
+                          Title="Numero ritiri"
+                          MainData="61"
+                          TextAlt="Mese corrente"
+                          Icon="icon-clipboard with-frame">
+                    </Card>
+                </Card>
+            </div>
+        </div>
+    </div>
+
+    @code {
+        IEnumerable<SaleInfo> dataSource;
+
+        protected override async Task OnInitializedAsync()
+        {
+            dataSource = await Sales.GetSalesAsync();
+        }
+    }
+
+    @* <DxGridLayout CssClass="welcome-gridlayout" RowSpacing="3rem">
+        <Rows>
+            <DxGridLayoutRow Height="auto" Areas="header"></DxGridLayoutRow>
+            <DxGridLayoutRow Height="auto" Areas="cards"></DxGridLayoutRow>
+        </Rows>
+        <Items>
+            <DxGridLayoutItem Area="header" CssClass="title">
+                <Template>
+                    <h1>Welcome to iSystem</h1>
+                    <p>Hai bisogno di <span class="info">richiedere un ritiro?</span> <a href="#">Prenotalo ora</a></p>
+                    <h2>Dashboard</h2>
+                </Template>
+            </DxGridLayoutItem>
+            <DxGridLayoutItem Area="resume" CssClass="dashboard-resume">
+                <Template>
+                </Template>
+            </DxGridLayoutItem>
+        </Items>
+    </DxGridLayout> *@
+</div>

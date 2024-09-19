@@ -1,0 +1,87 @@
+@using static DxBlazorApp1.Components.Elements.ISystemFormRitiro
+@using DxBlazorApp1.Components.Elements;
+@using DevExpress.Blazor;
+@using System;
+
+<form>
+	
+		<DxFormLayout CaptionPosition="CaptionPosition.Vertical" CssClass="w-100">
+
+			<div class="alert w-100">
+				<span>Quantità massima consentita <b>@_maxQta kg</b></span>
+			</div>
+
+			<div class="fields-group-wrap mb-5">
+				<DxFormLayoutItem Caption="Luogo del ritiro" ColSpanLg="7" ColSpanSm="12">
+					<DxComboBox NullText="Inserisci l'indirizzo"
+								@bind-Value="@Value"
+								Data="Address" />
+				</DxFormLayoutItem>
+				<DxFormLayoutItem Caption="Note generali per il ritiro" ColSpanLg="5" ColSpanSm="12">
+					<DxMemo NullText="Scrivi le tue note per il corriere..." Rows="1" />
+				</DxFormLayoutItem>
+			</div>
+
+			@foreach (var article in Articles)
+			{
+			
+				<div class="fields-group-wrap">
+					<div class="icon-wrap">
+						<i class="icon-wheels icon-wheels-@article.Type --primary"></i>
+					</div>
+					<DxFormLayoutItem Caption="@article.Name" CssClass="label-xl" ColSpanMd="5" ColSpanSm="12">
+						<span>Peso medio: @(article.Weight)kg / cad</span>
+
+						<div class="range-wrap">
+							<input class="me-3" type="range" min="0" max="@_maxQta" step="50" @bind="@article.QtaPreview" @bind:event="oninput" @onchange="@(() => EditContext?.Validate())" />
+							<span class="var-data">Kg @article.QtaPreview.ToString("#,##0")</span>
+						</div>
+					</DxFormLayoutItem>
+					<DxFormLayoutItem Caption="Note" ColSpanMd="5" ColSpanSm="12">
+						<DxMemo NullText="Scrivi le tue note per il corriere..." Rows="2" />
+					</DxFormLayoutItem>
+				</div>
+			}
+
+			<DxFormLayoutItem ColSpanLg="12" ColSpanMd="12" CssClass="mt-5 text-center">
+				<DxButton CssClass="btn-with-chevron --primary" SubmitFormOnClick="true" Text="Invia richiesta" RenderStyle="@ButtonRenderStyle.Primary" />
+			</DxFormLayoutItem>
+
+			
+		</DxFormLayout>
+	
+</form>
+
+@code {
+    IEnumerable<string> Address = new List<string>() {
+		"Viale della pace",
+		"Via Manzoni",
+	  };
+
+    string Value { get; set; }
+
+    int _maxQta = 1500;
+
+	List<Article> Articles = new List<Article>
+	{
+		new Article { Name = "Pneumatici fuori uso piccoli", Type = "sm", Weight = 1, QtaPreview = 0 },
+		new Article { Name = "Pneumatici fuori uso medi", Type = "md", Weight = 2, QtaPreview = 0 },
+		new Article { Name = "Pneumatici fuori uso grandi", Type = "lg", Weight = 3, QtaPreview = 0 },
+	};
+
+	private EditContext? EditContext { get; set; }
+
+	protected override void OnInitialized()
+	{
+		EditContext = new EditContext(this);
+	}
+
+	public class Article
+	{
+		public required string Name { get; set; }
+		public required string Type { get; set; }
+		public int Weight { get; set; }
+		public int QtaPreview { get; set; }
+	}
+
+}

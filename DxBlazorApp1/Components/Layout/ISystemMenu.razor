@@ -1,0 +1,40 @@
+@using DxBlazorApp1.Services
+@inject IJSRuntime jsRuntime
+
+<nav id="isystem-menu-main">
+	<ul class="isystem-menu">
+		@foreach (var item in MenuItems.Groups)
+		{
+			var liId = (item.Name).ToLower().Replace(" ", "-");
+			
+			<li id="@liId">
+				<div class="li-wrap">
+					<a href="@item.NavigateUrl">
+						<i class="@item.IconCssClass"></i>
+						<span>@item.Name</span>
+					</a>
+					<span class="dxbl-image action-submenu ico-plus @(item.Groups != null && item.Groups.Count > 0 ? "" : "disabled")" 
+							aria-hidden="true"
+							onclick="document.querySelector('#sub-@liId').classList.toggle('show')">
+					</span>
+				</div>
+
+				@if (item.Groups != null && item.Groups.Count > 0)
+				{
+					<div id="sub-@liId" class="sub-menu-wrap">
+						<ul class="sub-menu">
+							@foreach (var subItem in item.Groups)
+							{
+								<li><a href="@subItem.NavigateUrl">@subItem.Name</a></li>
+							}
+						</ul>
+					</div>
+				}
+			</li>
+		}
+	</ul>
+</nav>
+
+@code {
+
+}

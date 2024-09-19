@@ -1,0 +1,76 @@
+﻿@implements IDisposable
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+
+<DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@isXSmallScreen" />
+
+<div class="page">
+
+    <header id="main" class="flex justify-content-between">
+		<div id="brand-image">
+            <div class="menu-button" onclick="(document.getElementById('sidebar').classList.toggle('auto-expanded'))">
+                <img src="images/logo-iSystem@2x.png" alt="iSystem" class="brand-image" width="39" height="48" />
+            </div>
+        </div>
+
+        <div class="w-100 nav-buttons-container">
+            <NavLink href="logout" class="button-link">
+                <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="Logout" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-logout"></DxButton>
+            </NavLink>
+            <AuthorizeView>
+                <Authorized>
+                    <NavLink href="Account/Manage" class="button-link menubutton-float-end display-desktop">
+                        <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="@context.User.Identity?.Name" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-user"></DxButton>
+                    </NavLink>
+                    <form action="Account/Logout" method="post" class="display-desktop">
+                        <AntiforgeryToken />
+                        <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                        <DxButton RenderStyle="@ButtonRenderStyle.Dark" SubmitFormOnClick="true" Text="Log out" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-log-out"></DxButton>
+                    </form>
+                </Authorized>
+                <NotAuthorized>
+                    <NavLink href="Account/Login" class="button-link menubutton-float-end display-desktop">
+                        <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="Log in" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-log-in"></DxButton>
+                    </NavLink>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+    </header>
+
+    @{
+        var sidebarClass = isXSmallScreen ? "auto-expanded" : "";
+        var flexWrap = isXSmallScreen ? " flex-wrap" : "";
+    }
+
+    <div id="main-container" class="flex @flexWrap">
+        <div id="sidebar" class="@sidebarClass">
+            <ISystemMenu></ISystemMenu>
+        </div>
+
+        <div class="main-content">
+            @Body
+        </div>
+    </div>
+</div>
+
+@code {
+    public bool isXSmallScreen { get; set; }
+    private string? currentUrl;
+
+    protected override void OnInitialized()
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}

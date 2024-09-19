@@ -1,0 +1,67 @@
+﻿@using DxBlazorApp1.Services
+@using DxBlazorApp1.Components.Elements
+
+<div id="sidebar">
+    <DxGridLayout CssClass="page-layout" RowSpacing="1.5rem">
+        <Rows>
+            <DxGridLayoutRow Areas="header menu-button" Height="auto"></DxGridLayoutRow>
+            <DxGridLayoutRow Areas="navigation navigation"></DxGridLayoutRow>
+            <DxGridLayoutRow Areas="footer footer" Height="auto"></DxGridLayoutRow>
+        </Rows>
+        <Columns>
+            <DxGridLayoutColumn></DxGridLayoutColumn>
+            <DxGridLayoutColumn Width="auto"></DxGridLayoutColumn>
+        </Columns>
+        <Items>
+            <DxGridLayoutItem Area="header" CssClass="sidebar-header">
+                <Template>
+                    <div class="menu-button" onclick="(document.getElementById('sidebar').classList.toggle('auto-expanded'))">
+                        <img src="images/logo-iSystem@2x.png" alt="iSystem" class="brand-image" width="39" height="48" />
+                    </div>
+                </Template>
+            </DxGridLayoutItem>
+            <DxGridLayoutItem Area="menu-button" CssClass="sidebar-header menu-button-container">
+                <Template>
+                    
+                </Template>
+            </DxGridLayoutItem>
+            <DxGridLayoutItem Area="navigation" CssClass="layout-item">
+                <Template>
+                    <div class="menu-closeonclick-placeholder" onclick="document.getElementById('sidebar').classList.remove('auto-expanded')">
+                    </div>
+                    @* <DxMenu Orientation="@Orientation.Vertical" CssClass="menu">
+                        <Items>
+                            <DxMenuItem NavigateUrl="/" Text="Home" CssClass="menu-item" IconCssClass="icon home-icon"></DxMenuItem>
+                            <DxMenuItem NavigateUrl="/counter" Text="Counter" CssClass="menu-item" IconCssClass="icon counter-icon"></DxMenuItem>
+                            <DxMenuItem NavigateUrl="/weather" Text="Weather" CssClass="menu-item" IconCssClass="icon weather-icon"></DxMenuItem>
+                        </Items>
+                    </DxMenu> *@
+
+                    @* <DxTreeView CssClass="main-menu"
+                                Data="@MenuItems.Groups"
+                                CollapseButtonIconCssClass="ico-minus"
+                                ExpandButtonIconCssClass="ico-plus"
+                                AnimationType="LayoutAnimationType.Slide">
+
+                        <DataMappings>
+                            <DxTreeViewDataMapping Children="Groups"
+                                                   Text="Name"
+                                                   IconCssClass="IconCssClass"
+                                                   IconUrl="IconUrl"
+                                                   NavigateUrl="NavigateUrl"
+                                                   />
+                        </DataMappings>
+                    </DxTreeView> *@
+
+                    <ISystemMenu></ISystemMenu>
+     
+                </Template>
+            </DxGridLayoutItem>
+            <DxGridLayoutItem Area="footer" CssClass="footer">
+                <Template>
+                    
+                </Template>
+            </DxGridLayoutItem>
+        </Items>
+    </DxGridLayout>
+</div>
