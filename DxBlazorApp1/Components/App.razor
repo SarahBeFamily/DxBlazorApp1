@@ -7,7 +7,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
-    @* <link href=@AppendVersion("css/isystem_theme.css") rel="stylesheet" /> *@
     <link href=@AppendVersion("css/bootstrap/bootstrap.min.css") rel="stylesheet" />
     <link href=@AppendVersion("_content/DevExpress.Blazor.Themes/bootstrap-external.bs5.min.css") rel="stylesheet" />
     @DxResourceManager.RegisterScripts()
@@ -17,7 +16,7 @@
     <HeadOutlet />
 </head>
 <body>
-    <Routes @rendermode="InteractiveServer"></Routes>
+    <Routes ></Routes>
     <script src="_framework/blazor.web.js"></script>
 </body>
 
