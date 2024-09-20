@@ -1,8 +1,4 @@
 ﻿@page "/richiesta-ritiro"
-@using System.Drawing
-@using DxBlazorApp1.Services
-@using static DxBlazorApp1.Components.Elements.ISystemFormRitiro
-
 
 <PageTitle>Richiesta di ritiro</PageTitle>
 
@@ -10,70 +6,49 @@
 
 @if (isXSmallScreen)
 {
-	<div class="title-wrap">
-		<h1>Richiesta di ritiro 🚚</h1>
-		<button class="offcanvas-open" onclick="document.querySelector('.offcanvas-data').classList.toggle('open')">Vedi dettagli</button>
-	</div>
+    <div class="title-wrap">
+        <h1>Richiesta di ritiro 🚚</h1>
+        <button class="offcanvas-open" onclick="document.querySelector('.offcanvas-data').classList.toggle('open')">Vedi dettagli</button>
+    </div>
 
-	<div class="offcanvas offcanvas-data">
+    <div class="offcanvas offcanvas-data">
 
-		<button class="offcanvas-close" onclick="document.querySelector('.offcanvas-data').classList.toggle('open')">Indietro</button>
+        <button class="offcanvas-close" onclick="document.querySelector('.offcanvas-data').classList.toggle('open')">Indietro</button>
 
-		<div class="offcanvas-body">
-			<div class="data-wrap flex">
-				@foreach (var data in Datas)
-				{
-					<div class="data">
-						<p>
-							<span class="data-label">@data.Label</span>
-							<span class="data-value">@data.Value</span>
-						</p>
-					</div>
-				}
-			</div>
-		</div>
+        <div class="offcanvas-body">
+            <ISysKeyValueCard Valori="@Datas"></ISysKeyValueCard>
+        </div>
 
-	</div>
-
-} else {
-
-	<h1>Richiesta di ritiro 🚚</h1>
-
-		<div class="data-wrap flex">
-			@foreach (var data in Datas)
-			{
-				<div class="data">
-					<p>
-						<span class="data-label">@data.Label</span>
-						<span class="data-value">@data.Value</span>
-					</p>
-				</div>
-			}
-		</div>
+    </div>
 
 }
+else
+{
+    <h1>Richiesta di ritiro 🚚</h1>
+    <ISysKeyValueCard Valori="@Datas"></ISysKeyValueCard>
+    }
 
 <ISystemFormRitiro />
 
 @code {
-	public bool isXSmallScreen { get; set; }
+    public bool isXSmallScreen { get; set; }
 
-	public IEnumerable<Data> Datas { get; set; }
+    public IEnumerable<KeyValuePair<string, string>> Datas { get; set; }
 
-	protected override void OnInitialized()
-	{
-		Datas = new List<Data>
-		{
-			new Data { Label = "Ragione sociale", Value = "Gommista di Test"},
-			new Data { Label = "P.IVA", Value = "123456789" },
-			new Data { Label = "Codice Fiscale", Value = "123456890sectyu" },
-			new Data { Label = "Codice", Value = "532142" },
-		};
-	}
+    protected override void OnInitialized()
+    {
+        Datas =
+        [
+            new KeyValuePair<string, string>("Ragione sociale", "Gommista di Test"),
+            new KeyValuePair<string, string>("P.IVA", "123456789"),
+            new KeyValuePair<string, string>("Codice Fiscale", "123456890sectyu"),
+            new KeyValuePair<string, string>("Codice", "532142")
+        ];
+    }
 
-	public class Data
-	{
-		public string Label { get; set; }
-		public string Value { get; set; }
-	}
+    public class Data
+    {
+        public string Label { get; set; }
+        public string Value { get; set; }
+    }
 }

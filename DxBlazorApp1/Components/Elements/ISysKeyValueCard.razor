@@ -1,0 +1,11 @@
+﻿<div class="data-wrap flex">
+    @foreach (var data in Valori)
+    {
+        <div class="data">
+            <p>
+                <span class="data-label">@data.Key</span>
+                <span class="data-value">@data.Value</span>
+            </p>
+        </div>
+    }
+</div>
