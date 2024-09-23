@@ -1,0 +1,222 @@
+﻿@page "/archivio-fir"
+
+<PageTitle>Archivio FIR</PageTitle>
+
+<DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@isXSmallScreen" />
+
+<h1>Archivio FIR 🚚</h1>
+
+<DxGrid Data="@FIRs">
+    <Columns>
+		<DxGridCommandColumn EditButtonVisible="false" CancelButtonVisible="false" 
+                             SaveButtonVisible="false" Width="50px" />
+        <DxGridDataColumn FieldName="Ticket" />
+		<DxGridDataColumn FieldName="DataRichiesta" Caption="@("Data richiesta")" DisplayFormat="dd/MM/yyyy" />
+		<DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
+		<DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
+        <DxGridDataColumn FieldName="Indirizzo" />
+        <DxGridDataColumn FieldName="Trasportatore" />
+    </Columns>
+</DxGrid>
+
+<DxPopup @bind-Visible="@PopupVisible"
+		 HeaderText="Dettaglio"
+		 BodyText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel
+             nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor,
+             imperdiet mauris. Fusce id purus magna."
+		 ShowFooter="true">
+	<FooterContentTemplate>
+		<DxButton RenderStyle="ButtonRenderStyle.Primary" Text="OK"
+				  Click="@context.CloseCallback" />
+	</FooterContentTemplate>
+</DxPopup>
+
+@code {
+	public bool isXSmallScreen { get; set; }
+	bool PopupVisible { get; set; } = false;
+
+	public IEnumerable<FIR> FIRs { get; set; }
+
+	// edit button click event
+	void EditClickHandler(FIR fir)
+	{
+		PopupVisible = true;
+	}
+
+	protected override void OnInitialized() => FIRs = new List<FIR>
+		{
+			new FIR
+			{
+				Ticket = "FIR-123",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 1000,
+				Indirizzo = "Via Manzoni",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-124",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2000,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-125",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2500,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-123",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 1000,
+				Indirizzo = "Via Manzoni",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-124",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2000,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-125",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2500,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-123",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 1000,
+				Indirizzo = "Via Manzoni",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-124",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2000,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-125",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2500,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-123",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 1000,
+				Indirizzo = "Via Manzoni",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-124",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2000,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-125",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2500,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-123",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 1000,
+				Indirizzo = "Via Manzoni",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-124",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2000,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-125",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2500,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-123",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 1000,
+				Indirizzo = "Via Manzoni",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-124",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2000,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			},
+			new FIR
+			{
+				Ticket = "FIR-125",
+				DataRichiesta = DateTime.Now,
+				DataRitiro = DateTime.Now,
+				Qty = 2500,
+				Indirizzo = "Viale della pace",
+				Trasportatore = "Bartolini"
+			}
+		};
+
+    public class FIR
+    {
+		public string Ticket { get; set; }
+		public DateTime DataRichiesta { get; set; }
+		public DateTime DataRitiro { get; set; }
+		public int Qty { get; set; }
+		public string Indirizzo { get; set; }
+		public string Trasportatore { get; set; }
+	}
+
+}

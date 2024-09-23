@@ -18,7 +18,7 @@ namespace DxBlazorApp1.Services
                 new MenuItemGroup("Documenti", "icon-nav icon-doc", "images/Documenti.svg", "#",
                      [
                         new("Documenti generali", "", "", "#"),
-                        new("Archivio FIR", "", "", "#"),
+                        new("Archivio FIR", "", "", "archivio-fir"),
                      ]),
 
             ];

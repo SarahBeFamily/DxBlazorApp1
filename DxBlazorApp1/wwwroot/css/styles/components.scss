@@ -180,3 +180,55 @@ dxbl-combo-box {
 .dxbl-btn.dxbl-btn-outline-secondary.dxbl-edit-btn-dropdown:hover::before {
     background: transparent !important;
 }
+
+/** tabelle **/
+
+.dxbl-grid {
+    border-color: white;
+    border-radius: 12px !important;
+    font-family: var(--font-titles);
+    color: #46413c;
+
+    .dxbl-grid-header-row {
+        th {
+            border-width: 0 !important;
+            padding: 20px !important;
+
+            &::before {
+                background-color: transparent !important;
+            }
+
+            .dxbl-grid-header-content span {
+                font-size: 16px;
+                color: #46413c;
+            }
+        }
+    }
+
+    td {
+        border-width: 0 !important;
+        padding: 15px 20px !important;
+        font-size: 14px !important;
+        text-align: left !important;
+    }
+
+    tbody tr {
+        &:nth-child(even) {
+            background-color: #fafaf7;
+        }
+    }
+
+    .dxbl-grid-selected-row {
+        background-color: var(--light-gray) !important;
+    }
+
+    .dxbl-pager-active-page-btn span {
+        color: white !important;
+    }
+
+    .dxbl-grid-bottom-panel.dxbl-pager-container {
+        border-top: 0;
+        padding: 20px 20px 24px;
+        justify-content: center;
+    }
+}

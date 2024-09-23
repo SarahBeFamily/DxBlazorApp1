@@ -79,6 +79,7 @@
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: var(--primary-color) !important;
     --bs-btn-disabled-border-color: var(--primary-color) !important;
+    --dxbl-grid-border-color: white !important;
 }
 
 html, body {
