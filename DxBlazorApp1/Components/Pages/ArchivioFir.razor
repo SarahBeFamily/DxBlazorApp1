@@ -1,4 +1,5 @@
 ﻿@page "/archivio-fir"
+@rendermode InteractiveServer
 
 <PageTitle>Archivio FIR</PageTitle>
 
@@ -6,17 +7,20 @@
 
 <h1>Archivio FIR 🚚</h1>
 
-<DxGrid Data="@FIRs" ShowFilterRow="true" ShowSearchBox="true">
+<DxGrid Data="@FIRs" ShowFilterRow="true" ShowSearchBox="true" ShowGroupPanel="true">
     <Columns>
-		<DxGridCommandColumn EditButtonVisible="false" CancelButtonVisible="false" 
+         <DxGridCommandColumn EditButtonVisible="false" CancelButtonVisible="false" 
                              SaveButtonVisible="false" Width="50px" />
         <DxGridDataColumn FieldName="Ticket" />
-		<DxGridDataColumn FieldName="DataRichiesta" Caption="@("Data richiesta")" DisplayFormat="dd/MM/yyyy" />
-		<DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
-		<DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
+        <DxGridDataColumn FieldName="DataRichiesta" Caption="@("Data richiesta")" DisplayFormat="dd/MM/yyyy" />
+        <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
+        <DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
         <DxGridDataColumn FieldName="Indirizzo" />
         <DxGridDataColumn FieldName="Trasportatore" />
     </Columns>
+    <DetailRowTemplate >
+		<text>Note di dettaglio della riga</text>
+    </DetailRowTemplate>
 </DxGrid>
 
 <DxPopup @bind-Visible="@PopupVisible"
