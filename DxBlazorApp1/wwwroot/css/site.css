@@ -57,12 +57,16 @@
 
 :root {
     --primary-color: #ff5a1e;
+    --rgb-primary-color: 255, 90, 30;
     --light-gray: #f5f5f0;
+    --rgb-light-gray: 245, 245, 240;
     --font-color: #C8C3B9;
+    --rgb-font-color: 200, 195, 185;
     --dark: #191919;
+    --rgb-dark: 25, 25, 25;
     --font-text: 'DM Sans', sans-serif;
     --font-titles: 'Archia', sans-serif;
-    --bs-primary: #ff5a1e !important;
+    --bs-primary: var(--primary-color) !important;
     --bs-body-color: var(--dark) !important;
     --bs-link-color-rgb: 255, 90, 30 !important;
     --bs-btn-color: #fff;

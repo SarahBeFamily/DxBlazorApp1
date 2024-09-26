@@ -6,7 +6,26 @@
 
 <h1>Archivio FIR 🚚</h1>
 
-<DxGrid Data="@FIRs">
+<div class="grid-top-panel d-flex py-2 justify-content-between align-items-end">
+	<div class="d-flex">
+		<ISysBtn Text="Ricambio" RenderStyle="Tab" CssClass="icon-info active" OnClick="OpenPopup" />
+		<ISysBtn Text="Trade" RenderStyle="Tab" CssClass="icon-info" />
+	</div>
+
+	<div class="d-flex">
+		<ul class="filter-form">
+			<li><ISysBtn RenderStyle="Secondary" Text="Assegnata" /></li>
+			<li><ISysBtn RenderStyle="Secondary" Text="In lavorazione" /></li>
+			<li><ISysBtn RenderStyle="Secondary" Text="Blocco per quote" /></li>
+			<li><ISysBtn RenderStyle="Secondary" Text="Sospesa" /></li>
+		</ul>
+
+		<DxTextBox @bind-Text="SearchText" NullText="Cerca" CssClass="isys-search-box mx-2" />
+		<DxButton Text="Cerca" Click="() => GridSearchText = SearchText" CssClass="" />
+	</div>
+</div>
+
+<DxGrid Data="@FIRs" ShowFilterRow="true" ShowSearchBox="false" SearchText="@GridSearchText" PagerNavigationMode="PagerNavigationMode.NumericButtons">
     <Columns>
 		<DxGridCommandColumn EditButtonVisible="false" CancelButtonVisible="false" 
                              SaveButtonVisible="false" Width="50px" />
@@ -34,11 +53,12 @@
 @code {
 	public bool isXSmallScreen { get; set; }
 	bool PopupVisible { get; set; } = false;
+	string SearchText { get; set; }
+	string GridSearchText { get; set; }
 
 	public IEnumerable<FIR> FIRs { get; set; }
 
-	// edit button click event
-	void EditClickHandler(FIR fir)
+	void OpenPopup()
 	{
 		PopupVisible = true;
 	}

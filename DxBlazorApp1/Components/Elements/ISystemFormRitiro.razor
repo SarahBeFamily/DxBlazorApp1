@@ -24,7 +24,8 @@
 
 			@foreach (var article in Articles)
 			{
-			
+				var QtyNotZero = article.QtaPreview > 0 ? "on" : "";
+
 				<div class="fields-group-wrap">
 					<div class="icon-wrap">
 						<i class="icon-wheels icon-wheels-@article.Type --primary"></i>
@@ -34,7 +35,7 @@
 
 						<div class="range-wrap">
 							<input class="me-3" type="range" min="0" max="@_maxQta" step="50" @bind="@article.QtaPreview" @bind:event="oninput" @onchange="@(() => EditContext?.Validate())" />
-							<span class="var-data">Kg @article.QtaPreview.ToString("#,##0")</span>
+							<span class="var-data @QtyNotZero">Kg @article.QtaPreview.ToString("#,##0")</span>
 						</div>
 					</DxFormLayoutItem>
 					<DxFormLayoutItem Caption="Note" ColSpanMd="5" ColSpanSm="12">
