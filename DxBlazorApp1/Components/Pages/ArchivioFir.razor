@@ -28,12 +28,12 @@
 
 <DxGrid Data="@FIRs" ShowFilterRow="true"  ShowGroupPanel="true" ShowSearchBox="false" SearchText="@GridSearchText" PagerNavigationMode="PagerNavigationMode.NumericButtons">
     <Columns>
-		<DxGridCommandColumn EditButtonVisible="false" CancelButtonVisible="false" 
+         <DxGridCommandColumn EditButtonVisible="false" CancelButtonVisible="false" 
                              SaveButtonVisible="false" Width="50px" />
         <DxGridDataColumn FieldName="Ticket" />
-		<DxGridDataColumn FieldName="DataRichiesta" Caption="@("Data richiesta")" DisplayFormat="dd/MM/yyyy" />
-		<DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
-		<DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
+        <DxGridDataColumn FieldName="DataRichiesta" Caption="@("Data richiesta")" DisplayFormat="dd/MM/yyyy" />
+        <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
+        <DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
         <DxGridDataColumn FieldName="Indirizzo" />
         <DxGridDataColumn FieldName="Trasportatore" />
     </Columns>
