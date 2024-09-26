@@ -1,4 +1,5 @@
 ﻿@page "/archivio-fir"
+@rendermode InteractiveServer
 
 <PageTitle>Archivio FIR</PageTitle>
 
@@ -25,7 +26,7 @@
 	</div>
 </div>
 
-<DxGrid Data="@FIRs" ShowFilterRow="true" ShowSearchBox="false" SearchText="@GridSearchText" PagerNavigationMode="PagerNavigationMode.NumericButtons">
+<DxGrid Data="@FIRs" ShowFilterRow="true"  ShowGroupPanel="true" ShowSearchBox="false" SearchText="@GridSearchText" PagerNavigationMode="PagerNavigationMode.NumericButtons">
     <Columns>
 		<DxGridCommandColumn EditButtonVisible="false" CancelButtonVisible="false" 
                              SaveButtonVisible="false" Width="50px" />
@@ -36,6 +37,9 @@
         <DxGridDataColumn FieldName="Indirizzo" />
         <DxGridDataColumn FieldName="Trasportatore" />
     </Columns>
+	<DetailRowTemplate>
+		<text>Note di dettaglio della riga</text>
+	</DetailRowTemplate>
 </DxGrid>
 
 <DxPopup @bind-Visible="@PopupVisible"
