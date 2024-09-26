@@ -25,10 +25,25 @@
 	</div>
 </div>
 
-<DxGrid Data="@FIRs" ShowFilterRow="true" ShowGroupPanel="true" ShowSearchBox="false" SearchText="@SearchText" PagerNavigationMode="PagerNavigationMode.NumericButtons">
+<DxGrid Data="@FIRs" 
+		@ref="GridFir"
+        ShowFilterRow="true" 
+        ShowGroupPanel="true" 
+        ShowSearchBox="false" 
+        SearchText="@SearchText" 
+        PagerNavigationMode="PagerNavigationMode.NumericButtons"
+        ColumnResizeMode="GridColumnResizeMode.NextColumn"
+        >
     <Columns>
-         <DxGridCommandColumn EditButtonVisible="false" CancelButtonVisible="false" 
-                             SaveButtonVisible="false" Width="50px" />
+        <ISysCommandEditColumn></ISysCommandEditColumn>
+        <ISysCommandViewColumn></ISysCommandViewColumn>
+        <ISysCommandDeleteColumn></ISysCommandDeleteColumn>
+        <DxGridCommandColumn Caption="Action" Width="30px" ClearFilterButtonVisible="false">
+            <HeaderTemplate>Azione</HeaderTemplate>
+            <CellDisplayTemplate>
+                <div><i class="oi oi-pencil" style="color:blue;" @onclick="@(() => GridFir.StartEditDataItemAsync(context.DataItem))"></i></div>
+            </CellDisplayTemplate>
+        </DxGridCommandColumn>
         <DxGridDataColumn FieldName="Ticket" />
         <DxGridDataColumn FieldName="DataRichiesta" Caption="@("Data richiesta")" DisplayFormat="dd/MM/yyyy" />
         <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
@@ -36,9 +51,25 @@
         <DxGridDataColumn FieldName="Indirizzo" />
         <DxGridDataColumn FieldName="Trasportatore" />
     </Columns>
-	<DetailRowTemplate>
-		<text>Note di dettaglio della riga</text>
-	</DetailRowTemplate>
+    <DetailRowTemplate>
+        <text>Note di dettaglio della riga</text>
+    </DetailRowTemplate>
+	<EditFormTemplate Context="editContext">
+        <DxFormLayout >
+			<DxFormLayoutItem Caption="Data richiesta" ColSpanMd="4">
+                @editContext.GetEditor("DataRichiesta")
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Data" ColSpanMd="4">
+				@editContext.GetEditor("Data ritiro")
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Qty" ColSpanMd="4">
+                @editContext.GetEditor("Qty")
+            </DxFormLayoutItem>
+			<DxFormLayoutItem Caption="Indirizzo" ColSpanMd="8" BeginRow="true">
+				@editContext.GetEditor("Indirizzo")
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </EditFormTemplate>
 </DxGrid>
 
 <DxPopup @bind-Visible="@PopupVisible"
@@ -59,7 +90,7 @@
 	string? SearchText { get; set; }
 
 	public IEnumerable<FIR> FIRs { get; set; }
-
+    IGrid GridFir;
 	void OpenPopup()
 	{
 		PopupVisible = true;
