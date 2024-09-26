@@ -4,58 +4,124 @@
 
 <DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@isXSmallScreen" />
 
-<div class="page">
+@if ( currentUrl != "login" ) {
+    
+    <div class="page">
 
-    <header id="main" class="flex justify-content-between">
-		<div id="brand-image">
-            <div class="menu-button" onclick="(document.getElementById('sidebar').classList.toggle('auto-expanded'))">
-                <img src="images/logo-iSystem@2x.png" alt="iSystem" class="brand-image" width="39" height="48" />
+        <header id="main" class="flex justify-content-between">
+		    <div id="brand-image">
+                <div class="menu-button" onclick="(document.getElementById('sidebar').classList.toggle('auto-expanded'))">
+                    <img src="images/logo-iSystem@2x.png" alt="iSystem" class="brand-image" width="39" height="48" />
+                </div>
+            </div>
+
+            <div class="w-100 nav-buttons-container">
+                <NavLink href="logout" class="button-link">
+                    <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="Logout" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-logout"></DxButton>
+                </NavLink>
+                <AuthorizeView>
+                    <Authorized>
+                        <NavLink href="Account/Manage" class="button-link menubutton-float-end display-desktop">
+                            <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="@context.User.Identity?.Name" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-user"></DxButton>
+                        </NavLink>
+                        <form action="Account/Logout" method="post" class="display-desktop">
+                            <AntiforgeryToken />
+                            <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                            <DxButton RenderStyle="@ButtonRenderStyle.Dark" SubmitFormOnClick="true" Text="Log out" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-log-out"></DxButton>
+                        </form>
+                    </Authorized>
+                    <NotAuthorized>
+                        <NavLink href="Account/Login" class="button-link menubutton-float-end display-desktop">
+                            <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="Log in" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-log-in"></DxButton>
+                        </NavLink>
+                    </NotAuthorized>
+                </AuthorizeView>
+            </div>
+        </header>
+
+        @{
+            var sidebarClass = isXSmallScreen ? "auto-expanded" : "";
+            var flexWrap = isXSmallScreen ? " flex-wrap" : "";
+        }
+
+        <div id="main-container" class="flex @flexWrap">
+            <div id="sidebar" class="@sidebarClass">
+                <ISystemMenu></ISystemMenu>
+            </div>
+
+            <div class="main-content">
+                @Body
             </div>
         </div>
-
-        <div class="w-100 nav-buttons-container">
-            <NavLink href="logout" class="button-link">
-                <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="Logout" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-logout"></DxButton>
-            </NavLink>
-            <AuthorizeView>
-                <Authorized>
-                    <NavLink href="Account/Manage" class="button-link menubutton-float-end display-desktop">
-                        <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="@context.User.Identity?.Name" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-user"></DxButton>
-                    </NavLink>
-                    <form action="Account/Logout" method="post" class="display-desktop">
-                        <AntiforgeryToken />
-                        <input type="hidden" name="ReturnUrl" value="@currentUrl" />
-                        <DxButton RenderStyle="@ButtonRenderStyle.Dark" SubmitFormOnClick="true" Text="Log out" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-log-out"></DxButton>
-                    </form>
-                </Authorized>
-                <NotAuthorized>
-                    <NavLink href="Account/Login" class="button-link menubutton-float-end display-desktop">
-                        <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="Log in" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-log-in"></DxButton>
-                    </NavLink>
-                </NotAuthorized>
-            </AuthorizeView>
         </div>
-    </header>
+}
+else
+{
+    <div id="loginPage">
 
-    @{
-        var sidebarClass = isXSmallScreen ? "auto-expanded" : "";
-        var flexWrap = isXSmallScreen ? " flex-wrap" : "";
-    }
-
-    <div id="main-container" class="flex @flexWrap">
-        <div id="sidebar" class="@sidebarClass">
-            <ISystemMenu></ISystemMenu>
+        <div id="logo">
+            <img src="images/logo-iSystem-white@2x.png" alt="iSystem" class="brand-image" width="63" height="80" />
         </div>
 
-        <div class="main-content">
-            @Body
+        <div class="login-box">
+            <h1>Accedi ad iSystem</h1>
+
+            <p>Gestisci in pochi click le tue richieste.</p>
+
+            <DxFormLayout CaptionPosition="CaptionPosition.Vertical" CssClass="w-100">
+                <DxFormLayoutItem Caption="Email" ColSpanMd="12" CssClass="mt-5 mb-3">
+                    <DxTextBox @bind-Text="email" NullText="Inserisci la tua mail" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Password" ColSpanMd="12" CssClass="mb-3">
+                    <DxTextBox @bind-Text="password" NullText="Inserisci la tua password" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12" CssClass="mb-3">
+                    <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="Accedi" Click="Accedi" CssClass="w-100" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <DxButton RenderStyle="ButtonRenderStyle.Link" Text="Hai dimenticato la password?" CssClass="w-100 --primary" />
+                </DxFormLayoutItem>
+            </DxFormLayout>
         </div>
+
+        <div class="bg-photo"></div>
+
     </div>
-</div>
+
+    <DxPopup @bind-Visible="@PopupVisible"
+             HeaderText="Errore"
+             BodyText="Username o password errati, riprova."
+             ShowFooter="true">
+        <FooterContentTemplate>
+            <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="OK"
+                      Click="@context.CloseCallback" />
+        </FooterContentTemplate>
+    </DxPopup>
+}
 
 @code {
     public bool isXSmallScreen { get; set; }
     private string? currentUrl;
+    private string email;
+    private string password;
+    bool PopupVisible { get; set; } = false;
+
+    private void OpenPopoup()
+    {
+        PopupVisible = true;
+    }
+
+    private void Accedi()
+    {
+        if (email == "admin" && password == "admin")
+        {
+            NavigationManager.NavigateTo("/");
+        }
+        else
+        {
+            OpenPopoup();
+        }
+    }
 
     protected override void OnInitialized()
     {
