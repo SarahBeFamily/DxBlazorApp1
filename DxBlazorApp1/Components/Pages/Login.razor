@@ -1,0 +1,69 @@
+﻿@page "/Account/login"
+@layout LoginLayout
+@inject NavigationManager NavManager
+@rendermode InteractiveServer
+
+<div id="loginPage">
+
+    <div id="logo">
+        <img src="images/logo-iSystem-white@2x.png" alt="iSystem" class="brand-image" width="63" height="80" />
+    </div>
+
+    <div class="login-box">
+        <h1>Accedi ad iSystem</h1>
+
+        <p>Gestisci in pochi click le tue richieste.</p>
+
+        <DxFormLayout CaptionPosition="CaptionPosition.Vertical" CssClass="w-100">
+            <DxFormLayoutItem Caption="Email" ColSpanMd="12" CssClass="mt-5 mb-3">
+                <DxTextBox @bind-Text="email" NullText="Inserisci la tua mail" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Password" ColSpanMd="12" CssClass="mb-3">
+                <DxTextBox @bind-Text="password" NullText="Inserisci la tua password" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="12" CssClass="mb-3">
+                <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="Accedi" Click="Accedi" CssClass="w-100" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem ColSpanMd="12">
+                <DxButton RenderStyle="ButtonRenderStyle.Link" Text="Hai dimenticato la password?" CssClass="w-100 --primary" />
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </div>
+
+    <div class="bg-photo"></div>
+
+</div>
+
+<DxPopup @bind-Visible="@PopupVisible"
+         HeaderText="Errore"
+         BodyText="Username o password errati, riprova."
+         ShowFooter="true">
+    <FooterContentTemplate>
+        <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="OK"
+                  Click="@context.CloseCallback" />
+    </FooterContentTemplate>
+</DxPopup>
+
+@code
+{
+    private string email;
+    private string password;
+    bool PopupVisible { get; set; } = false;
+
+    private void OpenPopoup()
+    {
+        PopupVisible = true;
+    }
+
+    private void Accedi()
+    {
+        if (email == "admin" && password == "admin")
+        {
+            NavManager.NavigateTo("/");
+        }
+        else
+        {
+            OpenPopoup();
+        }
+    }
+}
