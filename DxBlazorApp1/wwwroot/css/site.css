@@ -60,6 +60,8 @@
     --rgb-primary-color: 255, 90, 30;
     --light-gray: #f5f5f0;
     --rgb-light-gray: 245, 245, 240;
+    --medium-gray: #ecece4;
+    --rgb-medium-gray: 236, 236, 228;
     --font-color: #C8C3B9;
     --rgb-font-color: 200, 195, 185;
     --dark: #191919;
@@ -68,12 +70,13 @@
     --font-titles: 'Archia', sans-serif;
     --bs-primary: var(--primary-color) !important;
     --bs-body-color: var(--dark) !important;
-    --bs-link-color-rgb: 255, 90, 30 !important;
+    --bs-link-color-rgb: var(--rgb-primary-color) !important;
+    --bs-link-hover-color-rgb: var(--rgb-dark) !important;
     --bs-btn-color: #fff;
     --bs-btn-bg: var(--primary-color) !important;
     --bs-btn-border-color: var(--primary-color) !important;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #0b5ed7;
+    --bs-btn-hover-bg: var(--dark);
     --bs-btn-hover-border-color: #0a58ca;
     --bs-btn-focus-shadow-rgb: 49,132,253;
     --bs-btn-active-color: #fff;

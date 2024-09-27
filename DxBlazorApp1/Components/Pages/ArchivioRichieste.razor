@@ -1,0 +1,179 @@
+﻿@page "/archivio-richieste"
+@rendermode InteractiveServer
+
+<PageTitle>Archivio richieste</PageTitle>
+
+<h1>Archivio richieste 🗄️</h1>
+
+<div class="grid-top-panel d-flex justify-content-between align-items-end">
+    <DxTabs @bind-ActiveTabIndex="@ActiveTabIndex">
+        <DxTab Text="Prelievo" TabIconCssClass="tabs-icon-info tabs-icon"></DxTab>
+        <DxTab Text="Trattamento" TabIconCssClass="tabs-icon-info tabs-icon"></DxTab>
+        <DxTab Text="Support" TabIconCssClass="tabs-icon-info tabs-icon"></DxTab>
+    </DxTabs>
+
+	<div class="d-flex py-3">
+		<ul class="filter-form">
+			<li><ISysBtn RenderStyle="Secondary" Text="Assegnata" /></li>
+			<li><ISysBtn RenderStyle="Secondary" Text="In lavorazione" /></li>
+			<li><ISysBtn RenderStyle="Secondary" Text="Blocco per quote" /></li>
+			<li><ISysBtn RenderStyle="Secondary" Text="Sospesa" /></li>
+		</ul>
+
+        <DxTextBox ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" @bind-Text="SearchText" BindValueMode="BindValueMode.OnDelayedInput" NullText="Cerca" CssClass="isys-search-box mx-2" />
+	</div>
+</div>
+
+<div class="tabs-page tabs-border-top-0 tabs-border-radius-top-0" style="min-height: 190px">
+    <div class="tabs-page-body">
+        @switch (ActiveTabIndex)
+        {
+            case 0:
+
+                <DxGrid Data="@FIRs"
+                        @ref="GridFir"
+                        ShowFilterRow="true"
+                        ShowGroupPanel="true"
+                        ShowSearchBox="false"
+                        SearchText="@SearchText"
+                        PagerNavigationMode="PagerNavigationMode.NumericButtons"
+                        ColumnResizeMode="GridColumnResizeMode.NextColumn">
+                    <Columns>
+                        <ISysCommandEditColumn></ISysCommandEditColumn>
+                        <ISysCommandViewColumn></ISysCommandViewColumn>
+                        <ISysCommandDeleteColumn></ISysCommandDeleteColumn>
+                        <DxGridCommandColumn Caption="Action" Width="30px" ClearFilterButtonVisible="false">
+                            <HeaderTemplate>Azione</HeaderTemplate>
+                            <CellDisplayTemplate>
+                                <div><i class="oi oi-pencil" style="color:blue;" @onclick="@(() => GridFir.StartEditDataItemAsync(context.DataItem))"></i></div>
+                            </CellDisplayTemplate>
+                        </DxGridCommandColumn>
+                        <DxGridDataColumn FieldName="NumeroDocumento" Caption="@("Numero documento")" />
+                        <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
+                        <DxGridDataColumn FieldName="Indirizzo" />
+                        <DxGridDataColumn FieldName="Articolo" />
+                        <DxGridDataColumn FieldName="UM" />
+                        <DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
+                    </Columns>
+                    <DetailRowTemplate>
+                        <text>Note di dettaglio della riga</text>
+                    </DetailRowTemplate>
+                    <EditFormTemplate Context="editContext">
+                        <DxFormLayout>
+                            <DxFormLayoutItem Caption="Data" ColSpanMd="4">
+                                @editContext.GetEditor("Data ritiro")
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Qty" ColSpanMd="4">
+                                @editContext.GetEditor("Qty")
+                            </DxFormLayoutItem>
+                            <DxFormLayoutItem Caption="Indirizzo" ColSpanMd="8" BeginRow="true">
+                                @editContext.GetEditor("Indirizzo")
+                            </DxFormLayoutItem>
+                        </DxFormLayout>
+                    </EditFormTemplate>
+                </DxGrid>
+
+                break;
+            case 1:
+                <ul>
+                    <li><a href="https://www.devexpress.com/products/net/controls/asp/">ASP.NET Web Forms </a></li>
+                    <li><a href="https://www.devexpress.com/products/net/controls/asp/mvc/">ASP.NET MVC</a></li>
+                    <li><a href="https://www.devexpress.com/products/net/controls/asp/core.xml">ASP.NET Core</a></li>
+                    <li><a href="https://www.devexpress.com/products/net/controls/asp/bootstrap-webforms.xml">Bootstrap Web Forms</a></li>
+                    <li><a href="https://js.devexpress.com/">JavaScript - jQuery, Angular, React, Vue</a></li>
+                    <li><a href="https://www.devexpress.com/blazor/">Blazor</a></li>
+                    <li><a href="https://www.devexpress.com/subscriptions/reporting/">Web Reporting</a></li>
+                </ul>
+                break;
+            case 2:
+                <p>Submit your support inquiries via the <a href="https://supportcenter.devexpress.com/">DevExpress Support Center</a> for assistance.</p>
+                break;
+
+        }
+    </div>
+</div>
+
+@code {
+    int ActiveTabIndex { get; set; } = 1;
+    string? SearchText { get; set; }
+
+    public IEnumerable<FIR> FIRs { get; set; }
+    IGrid GridFir;
+
+	protected override void OnInitialized() => FIRs = new List<FIR>
+		{
+			new FIR
+			{
+                NumeroDocumento = "FIR-123",
+				DataRitiro = DateTime.Now,
+                UM = "Kg",
+				Qty = 10000,
+				Indirizzo = "Via della pace - Battaglia Terme",
+				Articolo = "PNEUMATICI FUORI USO GRANDI"
+			},
+            new FIR
+			{
+                NumeroDocumento = "FIR-123",
+				DataRitiro = DateTime.Now,
+                UM = "Kg",
+				Qty = 10000,
+				Indirizzo = "Via della pace - Battaglia Terme",
+				Articolo = "PNEUMATICI FUORI USO GRANDI"
+			},
+            new FIR
+			{
+                NumeroDocumento = "FIR-123",
+				DataRitiro = DateTime.Now,
+                UM = "Kg",
+				Qty = 10000,
+				Indirizzo = "Via della pace - Battaglia Terme",
+				Articolo = "PNEUMATICI FUORI USO GRANDI"
+			},
+            new FIR
+			{
+                NumeroDocumento = "FIR-123",
+				DataRitiro = DateTime.Now,
+                UM = "Kg",
+				Qty = 10000,
+				Indirizzo = "Via della pace - Battaglia Terme",
+				Articolo = "PNEUMATICI FUORI USO GRANDI"
+			},
+            new FIR
+			{
+                NumeroDocumento = "FIR-123",
+				DataRitiro = DateTime.Now,
+                UM = "Kg",
+				Qty = 10000,
+				Indirizzo = "Via della pace - Battaglia Terme",
+				Articolo = "PNEUMATICI FUORI USO GRANDI"
+			},
+            new FIR
+			{
+                NumeroDocumento = "FIR-123",
+				DataRitiro = DateTime.Now,
+                UM = "Kg",
+				Qty = 10000,
+				Indirizzo = "Via della pace - Battaglia Terme",
+				Articolo = "PNEUMATICI FUORI USO GRANDI"
+			},
+            new FIR
+            {
+                NumeroDocumento = "FIR-123",
+                DataRitiro = DateTime.Now,
+                UM = "Kg",
+                Qty = 10000,
+                Indirizzo = "Via della pace - Battaglia Terme",
+                Articolo = "PNEUMATICI FUORI USO GRANDI"
+            },
+		};
+
+	public class FIR
+	{
+		public string NumeroDocumento { get; set; }
+		public DateTime DataRitiro { get; set; }
+		public string UM { get; set; }
+		public int Qty { get; set; }
+		public string Indirizzo { get; set; }
+		public string Articolo { get; set; }
+	}
+}
