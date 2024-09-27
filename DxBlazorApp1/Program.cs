@@ -1,7 +1,7 @@
-﻿using DxBlazorApp1.Client.Pages;
+﻿using DevExpress.Blazor;
+using DxBlazorApp1.Client.Pages;
 using DxBlazorApp1.Components;
 using DxBlazorApp1.Services;
-using DevExpress.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +13,12 @@ builder.Services.AddRazorComponents()
 builder.Services.AddDevExpressBlazor(options =>
 {
     options.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
+    options.SizeMode = SizeMode.Medium;
 });
+
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddMvc();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,7 +34,6 @@ else
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 app.UseAntiforgery();
 
