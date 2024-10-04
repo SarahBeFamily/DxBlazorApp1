@@ -1,1 +1,8 @@
-﻿<button class="isys-button @CssClass" render-style="@RenderStyle" @onclick="OnClick"><span>@Text</span></button>
+﻿<button class="isys-button @CssClass" render-style="@RenderStyle" @onclick="OnClick">
+	@if (Icon != null) {
+		<i class="@Icon"></i>
+	}
+	@if (Text != null) {
+		<span>@Text</span>
+	}
+</button>

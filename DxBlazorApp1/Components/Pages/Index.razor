@@ -16,17 +16,17 @@
 
         <div class="row mb-30">
             <div class="col-6 col-lg-3 col-xl-2 gutter-lg-max">
-                <Card Title="Peso totale raccolto"
+                <Card Classes="card-col"
+                    Title="Peso totale raccolto"
 					Text="[ton]"
 					MainData="212,03"
 					Percentage="+31%"
 					Year="2023"
 					Icon="icon-weight with-frame">
                 </Card>
-            </div>
 
-            <div class="col-6 col-lg-3 col-xl-2 gutter-lg-max">
-                <Card Title="N° di richieste totali"
+                 <Card Classes="card-col"
+                      Title="N° di richieste totali"
                       MainData="23"
                       Percentage="+20%"
                       Year="2023"
@@ -34,8 +34,12 @@
                 </Card>
             </div>
 
-            <div class="col-12 col-lg-6 col-xl-8">
-                <Card Classes="with-child" Title="Quantità raccolta per mese">
+            @* <div class="col-6 col-lg-3 col-xl-2 gutter-lg-max">
+                
+            </div> *@
+
+            <div class="col-12 col-lg-9 col-xl-10">
+                <Card Classes="with-child full-h" Title="Quantità raccolta per mese">
                     <DxChart Data="@dataSource">
                         <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)"
                                              ArgumentField="@((SaleInfo s) => s.City)"
@@ -50,7 +54,7 @@
 
         <div class="row">
             <div class="col-6 col-xl-4 gutter-lg-max">
-                <Card Classes="card-alt"
+                <Card Classes="card-alt full-h"
                       Category="Documenti"
                       Title="Archivio Fir"
                       Text=">Hai bisogno di visionare rapidamente i tuoi documenti?"

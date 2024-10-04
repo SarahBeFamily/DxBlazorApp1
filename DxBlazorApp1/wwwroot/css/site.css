@@ -200,3 +200,11 @@ html, body {
     margin-bottom: 30px;
 }
 
+.dark-color {
+    color: var(--dark);
+}
+
+.primary-color {
+    color: var(--primary-color);
+}
+

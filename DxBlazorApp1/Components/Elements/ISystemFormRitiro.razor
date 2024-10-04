@@ -11,7 +11,7 @@
 				<span>Quantità massima consentita <b>@_maxQta kg</b></span>
 			</div>
 
-			<div class="fields-group-wrap mb-5">
+			<div class="fields-group-wrap mb-3">
 				<DxFormLayoutItem Caption="Luogo del ritiro" ColSpanLg="7" ColSpanSm="12">
 					<DxComboBox NullText="Inserisci l'indirizzo"
 								@bind-Value="@Value"
@@ -27,9 +27,9 @@
 				var QtyNotZero = article.QtaPreview > 0 ? "on" : "";
 
 				<div class="fields-group-wrap">
-					<div class="icon-wrap">
+					@* <div class="icon-wrap">
 						<i class="icon-wheels icon-wheels-@article.Type --primary"></i>
-					</div>
+					</div> *@
 					<DxFormLayoutItem Caption="@article.Name" CssClass="label-xl" ColSpanMd="5" ColSpanSm="12">
 						<span>Peso medio: @(article.Weight)kg / cad</span>
 
@@ -43,6 +43,10 @@
 					</DxFormLayoutItem>
 				</div>
 			}
+
+			<DxFormLayoutItem ColSpanLg="12" ColSpanMd="12" CssClass="mt-3">
+				<p class="text-right primary-color mb-0">Totale raccolta: <b>@Articles.Sum(a => a.QtaPreview) kg</b></p>
+			</DxFormLayoutItem>
 
 			<DxFormLayoutItem ColSpanLg="12" ColSpanMd="12" CssClass="mt-5 text-center">
 				<DxButton CssClass="btn-with-chevron --primary" SubmitFormOnClick="true" Text="Invia richiesta" RenderStyle="@ButtonRenderStyle.Primary" />

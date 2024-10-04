@@ -1,14 +1,18 @@
 @rendermode InteractiveServer
+@inject NavigationManager NavigationManager
 
 <nav id="isystem-menu-main">
 	<ul class="isystem-menu">
 		@foreach (var item in MenuItems.Groups)
 		{
 			var liId = (item.Name).ToLower().Replace(" ", "-");
-			
-			<li id="@liId">
-				<div class="li-wrap">
-					<a href="@item.NavigateUrl">
+			var active = @item.NavigateUrl == (NavigationManager.ToBaseRelativePath(NavigationManager.Uri)).ToString() ? "active" : "";
+			var activeSub = item.Groups != null && item.Groups.Any(x => x.NavigateUrl == (NavigationManager.ToBaseRelativePath(NavigationManager.Uri)).ToString()) ? "active" : "";
+			var show = activeSub == "active" ? "show" : "";
+
+			<li id="@liId" class="@active @activeSub">
+				<div class="li-wrap @show" onclick="document.querySelector('#sub-@liId').classList.toggle('show')">
+					<a href="@item.NavigateUrl" class="@(item.Groups != null && item.Groups.Count > 0 ? "" : "no-group")">
 						<i class="@item.IconCssClass"></i>
 						<span>@item.Name</span>
 					</a>
@@ -24,7 +28,8 @@
 						<ul class="sub-menu">
 							@foreach (var subItem in item.Groups)
 							{
-								<li><a href="@subItem.NavigateUrl">@subItem.Name</a></li>
+								var subactive = subItem.NavigateUrl == (NavigationManager.ToBaseRelativePath(NavigationManager.Uri)).ToString() ? "active" : "";
+								<li class="@subactive"><a href="@subItem.NavigateUrl">@subItem.Name</a></li>
 							}
 						</ul>
 					</div>
@@ -33,3 +38,20 @@
 		}
 	</ul>
 </nav>
+
+@code{
+	protected override void OnInitialized()
+	{
+		NavigationManager.LocationChanged += OnLocationChanged;
+	}
+
+	private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+	{
+		StateHasChanged();
+	}
+
+	public void Dispose()
+	{
+		NavigationManager.LocationChanged -= OnLocationChanged;
+	}
+}

@@ -159,7 +159,7 @@ header#main {
 
     > li {
         &:hover,
-        .active {
+        &.active {
             .li-wrap {
                 background-color: var(--light-gray);
                 border-radius: 8px;
@@ -168,13 +168,13 @@ header#main {
     }
 
     li {
-        margin-top: 2rem;
+        margin-top: 1rem;
         position: relative;
         transition: all 0.4s ease;
         list-style: none;
 
         &:hover,
-        .active {
+        &.active {
             /*background-color: transparent !important;*/
 
             > .dxbl-treeview-item-content {
@@ -202,6 +202,7 @@ header#main {
             justify-content: space-between;
             align-items: center;
             padding: 5px;
+            cursor: pointer;
 
             a {
                 display: flex;
@@ -218,6 +219,10 @@ header#main {
             text-decoration: none;
             font-weight: 500;
             font-size: 1rem;
+
+            &.no-group {
+                padding: 8px 0;
+            }
 
             &:hover::before {
                 background-color: transparent !important;
@@ -271,7 +276,7 @@ header#main {
                 margin-top: 5px;
 
                 &:hover,
-                .active {
+                &.active {
                     background-color: $light-gray;
                     border-radius: 8px;
 
@@ -345,6 +350,12 @@ header#main {
                 width: 60% !important;
             }
         }
+
+        .col-xl-10 {
+            @include media-query($xl) {
+                width: 80% !important;
+            }
+        }
     }
 }
 
@@ -359,9 +370,16 @@ header#main {
     border-radius: 30px;
     padding: 25px;
     border: 0;
-    height: 100%;
     /*max-height: 274px;*/
     justify-content: space-between;
+
+    &.full-h {
+        height: 100%;
+    }
+
+    &.card-col:not(:last-child) {
+        margin-bottom: 25px;
+    }
 
     &.card-wrap {
         flex-direction: row;

@@ -21,7 +21,9 @@
 		</ul>
 
         <DxTextBox ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" @bind-Text="SearchText" BindValueMode="BindValueMode.OnDelayedInput" NullText="Cerca" CssClass="isys-search-box mx-2" />
-	</div>
+        <ISysBtn RenderStyle="Primary" Icon="icon-filter" OnClick="filterToggle" />
+        
+    </div>
 </div>
 
 <div class="tabs-page tabs-border-top-0 tabs-border-radius-top-0" style="min-height: 190px">
@@ -32,7 +34,7 @@
 
                 <DxGrid Data="@FIRs"
                         @ref="GridFir"
-                        ShowFilterRow="true"
+                        ShowFilterRow="@IsFilterVisible"
                         ShowGroupPanel="true"
                         ShowSearchBox="false"
                         SearchText="@SearchText"
@@ -96,11 +98,14 @@
 @code {
     int ActiveTabIndex { get; set; } = 1;
     string? SearchText { get; set; }
+    bool IsFilterVisible { get; set; } = true;
 
     public IEnumerable<FIR> FIRs { get; set; }
     IGrid GridFir;
 
-	protected override void OnInitialized() => FIRs = new List<FIR>
+    protected override void OnInitialized() {
+
+        FIRs = new List<FIR>
 		{
 			new FIR
 			{
@@ -166,14 +171,21 @@
                 Articolo = "PNEUMATICI FUORI USO GRANDI"
             },
 		};
+    }
 
-	public class FIR
+    public class FIR
+    {
+        public string NumeroDocumento { get; set; }
+        public DateTime DataRitiro { get; set; }
+        public string UM { get; set; }
+        public int Qty { get; set; }
+        public string Indirizzo { get; set; }
+        public string Articolo { get; set; }
+    }
+    
+    public void filterToggle()
 	{
-		public string NumeroDocumento { get; set; }
-		public DateTime DataRitiro { get; set; }
-		public string UM { get; set; }
-		public int Qty { get; set; }
-		public string Indirizzo { get; set; }
-		public string Articolo { get; set; }
+		IsFilterVisible = !IsFilterVisible;
 	}
+
 }
