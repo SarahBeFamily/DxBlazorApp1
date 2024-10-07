@@ -41,13 +41,13 @@
                         PagerNavigationMode="PagerNavigationMode.NumericButtons"
                         ColumnResizeMode="GridColumnResizeMode.NextColumn">
                     <Columns>
-                        <ISysCommandEditColumn></ISysCommandEditColumn>
+                        <ISysCommandEditColumn Width="30px"></ISysCommandEditColumn>
                         <ISysCommandViewColumn></ISysCommandViewColumn>
                         <ISysCommandDeleteColumn></ISysCommandDeleteColumn>
                         <DxGridCommandColumn Caption="Action" Width="30px" ClearFilterButtonVisible="false">
                             <HeaderTemplate>Azione</HeaderTemplate>
                             <CellDisplayTemplate>
-                                <div><i class="oi oi-pencil" style="color:blue;" @onclick="@(() => GridFir.StartEditDataItemAsync(context.DataItem))"></i></div>
+                                <div><i class="oi oi-pencil" @onclick="@(() => GridFir.StartEditDataItemAsync(context.DataItem))"></i></div>
                             </CellDisplayTemplate>
                         </DxGridCommandColumn>
                         <DxGridDataColumn FieldName="NumeroDocumento" Caption="@("Numero documento")" />

@@ -308,6 +308,8 @@ header#main {
 
         .action-submenu {
             cursor: pointer;
+            z-index: 0;
+            pointer-events: none;
         }
 
         button.dxbl-disabled,
