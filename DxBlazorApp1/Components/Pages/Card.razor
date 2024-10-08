@@ -1,6 +1,4 @@
-@using static DxBlazorApp1.Components.Elements.Card
-
-<div class="card @Classes">
+<div class="card @Classes @(FullHeight? "full-h":"") ">
     @if (Classes.Contains("card-alt"))
     {
         <div class="flex flex-column align-start">
@@ -124,4 +122,6 @@
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public bool FullHeight { get; set; } = true;
 }
