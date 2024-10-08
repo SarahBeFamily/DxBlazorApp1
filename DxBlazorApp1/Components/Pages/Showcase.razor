@@ -6,24 +6,25 @@
     <Row1Col2><Card Title="Titolo Card" Text="Testo" FullHeight="false"></Card></Row1Col2>
     <Row1Col1><Card Title="Titolo Card" Text="Con icona" Icon="icon-weight" /></Row1Col1>
     <Row2Col1><Card Title="Titolo Card" Text="Con icona" Icon="icon-weight"></Card></Row2Col1>
-    <Row2Col2><Card Title="Titolo Card" Text="Testo full h" ></Card></Row2Col2>
+    <Row2Col2><Card Title="Titolo Card" Text="Testo full h"></Card></Row2Col2>
 </ISysContainer>
-<h1>Tabelle</h1>
+
+<h1>Tabella e Filtri</h1>
 
 <ISysHeaderNavigator>
     <TabInfo>
         <ISysBtn Text="Ricambio" RenderStyle="Tab" CssClass="icon-info active" OnClick="OpenPopup" />
     </TabInfo>
-    
+
     <Filters>
-      
-            <li><ISysBtn RenderStyle="Secondary" Text="Assegnata" /></li>
-            <li><ISysBtn RenderStyle="Secondary" Text="In lavorazione" /></li>
-            <li><ISysBtn RenderStyle="Secondary" Text="Blocco per quote" /></li>
-            <li><ISysBtn RenderStyle="Secondary" Text="Sospesa" /></li>
-     
+
+        <li><ISysBtn RenderStyle="Secondary" Text="Assegnata" /></li>
+        <li><ISysBtn RenderStyle="Secondary" Text="In lavorazione" /></li>
+        <li><ISysBtn RenderStyle="Secondary" Text="Blocco per quote" /></li>
+        <li><ISysBtn RenderStyle="Secondary" Text="Sospesa" /></li>
+
     </Filters>
-    
+
 </ISysHeaderNavigator>
 <DxGrid Data="@FIRs"
         @ref="GridFir"
@@ -70,4 +71,60 @@
         </DxFormLayout>
     </EditFormTemplate>
 </DxGrid>
+<DxPopup @bind-Visible="@PopupVisible"
+         HeaderText="Dettaglio"
+         BodyText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel
+             nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor,
+             imperdiet mauris. Fusce id purus magna."
+         ShowFooter="true">
+    <FooterContentTemplate>
+        <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="OK"
+                  Click="@context.CloseCallback" />
+    </FooterContentTemplate>
+</DxPopup>
 
+<h1>Editor</h1>
+<DxFormLayout CaptionPosition="CaptionPosition.Vertical">
+
+    <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+        <DxTextBox NullText="Scrivi del testo"></DxTextBox>
+    </DxFormLayoutItem>
+    <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+        <DxTextBox NullText="Readonly" ReadOnly="true"></DxTextBox>
+    </DxFormLayoutItem>
+    <DxFormLayoutItem Caption="DxCheckBox" ColSpanMd="4">
+        <DxCheckBox @bind-Checked="@Selezionato">Multimedia</DxCheckBox>
+    </DxFormLayoutItem>
+   
+    
+    <DxFormLayoutItem Caption="DxDateEdit" ColSpanMd="4">
+        <DxDateEdit @bind-Date="@DateTimeValue"></DxDateEdit>
+    </DxFormLayoutItem>
+    <DxFormLayoutItem Caption="DxComboBox" ColSpanMd="4">
+        <DxComboBox Data="@FIRs"
+                    TextFieldName="@nameof(FIR.Indirizzo)"
+                    ValueFieldName="@nameof(FIR.Ticket)"
+                    NullText="Seleziona..."
+                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                    @bind-Value="@Ticket"
+                    />
+    </DxFormLayoutItem>
+    <DxFormLayoutItem Caption="DxSpinEdit" ColSpanMd="4">
+        <DxSpinEdit @bind-Value="@Quantita" DisplayFormat="N2" Mask="N2" />
+    </DxFormLayoutItem>
+    <DxFormLayoutGroup Caption="Viaggio">
+        <DxFormLayoutItem Caption="Destinatario" ColSpanMd="6">
+                <DxComboBox Data="@Locations"
+                            EditFormat="{0}, {1} {2}"
+                            ValueFieldName="@nameof(Location.RagioneSociale)"
+                            @bind-Value="@Trasportatore">
+                    <Columns>
+                        <DxListEditorColumn FieldName="@nameof(Location.RagioneSociale)" Caption="RagioneSociale" />
+                        <DxListEditorColumn FieldName="@nameof(Location.Indirizzo)" Caption="Indirizzo" />
+                        <DxListEditorColumn FieldName="@nameof(Location.Citta)" Caption="Citta" />
+                    </Columns>
+                </DxComboBox>
+            </DxFormLayoutItem>
+        
+    </DxFormLayoutGroup>
+</DxFormLayout>
