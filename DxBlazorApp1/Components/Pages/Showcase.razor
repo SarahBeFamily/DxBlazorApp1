@@ -1,0 +1,73 @@
+﻿@page "/showcase"
+@rendermode InteractiveServer
+
+<h1>Card</h1>
+<ISysContainer>
+    <Row1Col2><Card Title="Titolo Card" Text="Testo" FullHeight="false"></Card></Row1Col2>
+    <Row1Col1><Card Title="Titolo Card" Text="Con icona" Icon="icon-weight" /></Row1Col1>
+    <Row2Col1><Card Title="Titolo Card" Text="Con icona" Icon="icon-weight"></Card></Row2Col1>
+    <Row2Col2><Card Title="Titolo Card" Text="Testo full h" ></Card></Row2Col2>
+</ISysContainer>
+<h1>Tabelle</h1>
+
+<ISysHeaderNavigator>
+    <TabInfo>
+        <ISysBtn Text="Ricambio" RenderStyle="Tab" CssClass="icon-info active" OnClick="OpenPopup" />
+    </TabInfo>
+    
+    <Filters>
+      
+            <li><ISysBtn RenderStyle="Secondary" Text="Assegnata" /></li>
+            <li><ISysBtn RenderStyle="Secondary" Text="In lavorazione" /></li>
+            <li><ISysBtn RenderStyle="Secondary" Text="Blocco per quote" /></li>
+            <li><ISysBtn RenderStyle="Secondary" Text="Sospesa" /></li>
+     
+    </Filters>
+    
+</ISysHeaderNavigator>
+<DxGrid Data="@FIRs"
+        @ref="GridFir"
+        ShowFilterRow="true"
+        ShowGroupPanel="true"
+        ShowSearchBox="false"
+        SearchText="@SearchText"
+        PagerNavigationMode="PagerNavigationMode.NumericButtons"
+        ColumnResizeMode="GridColumnResizeMode.NextColumn">
+    <Columns>
+        <ISysCommandEditColumn></ISysCommandEditColumn>
+        <ISysCommandViewColumn></ISysCommandViewColumn>
+        <ISysCommandDeleteColumn></ISysCommandDeleteColumn>
+        <DxGridCommandColumn Caption="Action" Width="30px" ClearFilterButtonVisible="false">
+            <HeaderTemplate>Azione</HeaderTemplate>
+            <CellDisplayTemplate>
+                <div><i class="oi oi-pencil" style="color:blue;" @onclick="@(() => GridFir.StartEditDataItemAsync(context.DataItem))"></i></div>
+            </CellDisplayTemplate>
+        </DxGridCommandColumn>
+        <DxGridDataColumn FieldName="Ticket" />
+        <DxGridDataColumn FieldName="DataRichiesta" Caption="@("Data richiesta")" DisplayFormat="dd/MM/yyyy" />
+        <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
+        <DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
+        <DxGridDataColumn FieldName="Indirizzo" />
+        <DxGridDataColumn FieldName="Trasportatore" />
+    </Columns>
+    <DetailRowTemplate>
+        <text>Note di dettaglio della riga</text>
+    </DetailRowTemplate>
+    <EditFormTemplate Context="editContext">
+        <DxFormLayout>
+            <DxFormLayoutItem Caption="Data richiesta" ColSpanMd="4">
+                @editContext.GetEditor("DataRichiesta")
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Data" ColSpanMd="4">
+                @editContext.GetEditor("Data ritiro")
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Qty" ColSpanMd="4">
+                @editContext.GetEditor("Qty")
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Indirizzo" ColSpanMd="8" BeginRow="true">
+                @editContext.GetEditor("Indirizzo")
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </EditFormTemplate>
+</DxGrid>
+

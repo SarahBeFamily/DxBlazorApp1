@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DxBlazorApp1.Services
+﻿namespace DxBlazorApp1.Services
 {
     public static class MenuItems
     {
@@ -9,6 +6,7 @@ namespace DxBlazorApp1.Services
         {
             List<MenuItemGroup> groups = [
                 new MenuItemGroup("Dashboard", "icon-nav icon-dashboard", "images/Home.svg", "dashboard"),
+                new MenuItemGroup("ShowCase", "icon-nav icon-dashboard", "images/Home.svg", "showcase"),
                 new MenuItemGroup("Logistica", "icon-nav icon-logistica", "images/Logistica.svg", "#",
                      [
                         new("Richiesta ritiro", "", "", "richiesta-ritiro"),

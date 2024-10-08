@@ -1,0 +1,15 @@
+﻿<div class="grid-top-panel d-flex py-2 justify-content-between align-items-end">
+    <div class="d-flex">
+        @TabInfo
+    </div>
+
+    <div class="d-flex">
+        <ul class="filter-form">
+            @Filters
+        </ul>
+        <DxTextBox ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" TextChanged="OnSearchTextChange" BindValueMode="BindValueMode.OnDelayedInput" NullText="Cerca" CssClass="isys-search-box mx-2" />
+        <ISysBtn RenderStyle="Primary" Icon="icon-filter" OnClick="@(() => ToggleFilter())" />
+    </div>
+</div>
+
+

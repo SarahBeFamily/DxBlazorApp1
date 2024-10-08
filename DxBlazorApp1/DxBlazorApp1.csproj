@@ -29,8 +29,8 @@
 
   <ItemGroup>
     <PackageReference Include="DartSassBuilder" Version="1.1.0" />
-    <PackageReference Include="DevExpress.Blazor" Version="24.1-*" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.*-*" />
+    <PackageReference Include="DevExpress.Blazor" Version="24.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.4" />
   </ItemGroup>
 
