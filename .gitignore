@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/DxBlazorApp1/Components/Elements/GridTopPanel.razor
+/DxBlazorApp1/Components/Elements/GridTopPanel.razor.cs
+/DxBlazorApp1/Components/Elements/InnerColumn.razor
+/DxBlazorApp1/Components/Elements/InnerColumn.razor.cs

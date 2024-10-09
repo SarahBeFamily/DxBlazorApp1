@@ -31,12 +31,17 @@
         <div>
             @if (Classes.Contains("wheels"))
             {
-                <div class="@Icon">
+                <div class="with-frame @Icon">
 					<i></i>
-				</div>
+                </div>
             } else 
-			{
-				<i class="@Icon"></i>
+            {
+                if(!string.IsNullOrEmpty(Icon))
+                {
+                    <div class="with-frame">
+                       <i class="@Icon"></i>
+                    </div>
+                }
 			}
 
             <h4 class="card-title">@Title</h4>

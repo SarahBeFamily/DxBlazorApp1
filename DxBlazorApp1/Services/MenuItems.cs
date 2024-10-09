@@ -5,7 +5,7 @@
         private static readonly Lazy<List<MenuItemGroup>> menuItemGroups = new(() =>
         {
             List<MenuItemGroup> groups = [
-                new MenuItemGroup("Dashboard", "icon-nav icon-dashboard", "images/Home.svg", "dashboard"),
+                new MenuItemGroup("Dashboard", "icon-nav icon-dashboard", "images/Home.svg", "/"),
                 new MenuItemGroup("ShowCase", "icon-nav icon-dashboard", "images/Home.svg", "showcase"),
                 new MenuItemGroup("Logistica", "icon-nav icon-logistica", "images/Logistica.svg", "#",
                      [
