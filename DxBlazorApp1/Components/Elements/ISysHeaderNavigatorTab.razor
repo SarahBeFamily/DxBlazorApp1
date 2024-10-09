@@ -1,0 +1,20 @@
+﻿@if (ChildContent is null)
+{
+    <button class="isys-button icon-info active" render-style="Tab" @onclick="OnClick">
+        @if (Text != null)
+        {
+            <span>@Text</span>
+        }
+    </button>
+}
+else
+{
+    @ChildContent
+}
+
+@code
+{
+    [Parameter] public string? Text { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}
