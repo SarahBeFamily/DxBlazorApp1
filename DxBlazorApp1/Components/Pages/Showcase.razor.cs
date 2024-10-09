@@ -223,5 +223,7 @@ namespace DxBlazorApp1.Components.Pages
             public string Indirizzo { get; set; }
             public string Citta { get; set; }
         }
+
+
     }
 }

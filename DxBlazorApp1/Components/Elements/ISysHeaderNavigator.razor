@@ -7,6 +7,7 @@
         <ul class="filter-form">
             @Filters
         </ul>
+
         <DxTextBox ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" TextChanged="OnSearchTextChange" BindValueMode="BindValueMode.OnDelayedInput" NullText="Cerca" CssClass="isys-search-box mx-2" />
         <ISysBtn RenderStyle="Primary" Icon="icon-filter" OnClick="@(() => ToggleFilter())" />
     </div>
