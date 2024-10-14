@@ -7,6 +7,7 @@ namespace DxBlazorApp1.Components.Pages
         bool isXSmallScreen { get; set; }
         bool PopupVisible { get; set; } = false;
         string? SearchText { get; set; }
+        bool ShowFilterRow { get; set; }
         DateTime DateTimeValue { get; set; } = DateTime.Now;
         string? Ticket { get; set; }
         private decimal Quantita { get; set; }
