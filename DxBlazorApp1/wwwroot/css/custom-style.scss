@@ -104,10 +104,44 @@ header#main {
         }
     }
 
+    #ham {
+        padding: 10px 20px;
+        cursor: pointer;
+
+        i {
+            font-size: 28px;
+
+            &.bi-list {
+                display: block;
+            }
+
+            &.bi-x {
+                display: none;
+                font-size: 36px;
+                margin-top: -8px;
+                margin-left: -5px;
+            }
+        }
+
+        &.open {
+            i.bi-list {
+                display: none !important;
+            }
+
+            i.bi-x {
+                display: block !important;
+            }
+        }
+    }
+
     .nav-buttons-container {
         background-color: white;
         justify-content: flex-end;
         padding-right: 45px !important;
+
+        @include media-query($mobile) {
+            padding-right: 17px !important;
+        }
     }
 }
 
@@ -123,10 +157,14 @@ header#main {
     transition: all 0.5s ease;
 
     @include media-query($mobile) {
-        position: absolute;
+        position: fixed;
         left: 0;
         z-index: 99;
         width: 100%;
+        top: 70px;
+        height: 100%;
+        overflow-y: auto;
+        border-top: 1px solid var(--light-gray);
     }
 
     &.auto-expanded {
@@ -210,6 +248,12 @@ header#main {
                 &.icon-doc {
                     content: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath opacity='0.4' d='M16.191 2H7.81C4.77 2 3 3.78 3 6.83V17.16C3 20.26 4.77 22 7.81 22H16.191C19.28 22 21 20.26 21 17.16V6.83C21 3.78 19.28 2 16.191 2Z' fill='%23FF5A1E'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8.07997 6.6499V6.6599C7.64897 6.6599 7.29997 7.0099 7.29997 7.4399C7.29997 7.8699 7.64897 8.2199 8.07997 8.2199H11.069C11.5 8.2199 11.85 7.8699 11.85 7.4289C11.85 6.9999 11.5 6.6499 11.069 6.6499H8.07997ZM15.92 12.7399H8.07997C7.64897 12.7399 7.29997 12.3899 7.29997 11.9599C7.29997 11.5299 7.64897 11.1789 8.07997 11.1789H15.92C16.35 11.1789 16.7 11.5299 16.7 11.9599C16.7 12.3899 16.35 12.7399 15.92 12.7399ZM15.92 17.3099H8.07996C7.77996 17.3499 7.48996 17.1999 7.32996 16.9499C7.16996 16.6899 7.16996 16.3599 7.32996 16.1099C7.48996 15.8499 7.77996 15.7099 8.07996 15.7399H15.92C16.319 15.7799 16.62 16.1199 16.62 16.5299C16.62 16.9289 16.319 17.2699 15.92 17.3099Z' fill='%23FF5A1E'/%3E%3C/svg%3E");
                 }
+            }
+        }
+
+        &:last-child {
+            @include media-query($mobile) {
+                margin-bottom: 15%;
             }
         }
 
@@ -341,13 +385,18 @@ header#main {
     padding: 3% 4%;
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 85px);
     width: 100%;
     position: relative;
 
     @include media-query($mobile) {
         padding: 5%;
         border-top-left-radius: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    @include media-query($no_mobile) {
+        min-height: calc(100vh - 85px);
     }
 
     #dashboard {
@@ -417,9 +466,9 @@ header#main {
 .offcanvas.offcanvas-data {
     width: 100vw;
     left: 100vw;
-    top: 0;
+    top: 70px;
     height: 100vh !important;
-    position: absolute;
+    position: fixed;
     background: var(--light-gray);
     padding: 4%;
     visibility: visible;

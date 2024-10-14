@@ -4,15 +4,24 @@
 
 <DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@isXSmallScreen" />
 
-
 <div class="page">
 
     <header id="main" class="flex justify-content-between">
-        <div id="brand-image">
-            <div class="menu-button" onclick="(document.getElementById('sidebar').classList.toggle('auto-expanded'))">
-                <img src="images/logo-iSystem@2x.png" alt="iSystem" class="brand-image" width="39" height="48" />
+
+        @if (isXSmallScreen)
+        {
+            <div id="ham" onclick="(document.getElementById('sidebar').classList.toggle('auto-expanded'));(this.classList.toggle('open'))">
+                <i class="bi bi-list"></i>
+                <i class="bi bi-x"></i>
             </div>
-        </div>
+        } else
+		{
+            <div id="brand-image">
+                <div class="menu-button" onclick="(document.getElementById('sidebar').classList.toggle('auto-expanded'))">
+                    <img src="images/logo-iSystem@2x.png" alt="iSystem" class="brand-image" width="39" height="48" />
+                </div>
+            </div>
+		}
 
         <div class="w-100 nav-buttons-container">
             <NavLink href="logout" class="button-link">
@@ -54,12 +63,10 @@
     </div>
 </div>
 
-
-
 @code {
     public bool isXSmallScreen { get; set; }
     private string? currentUrl;
-   
+
     protected override void OnInitialized()
     {
         currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);

@@ -18,7 +18,59 @@ $wide: 'min-width: 1920px';
     }
 }
 
+a.link {
+    color: var(--primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+
+    &.icon-left {
+        i {
+            margin-right: 4px;
+        }
+    }
+
+    &.icon-right {
+        i {
+            margin-left: 4px;
+        }
+    }
+
+    &.note-link {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+}
+
 /** Override stile bottoni **/
+
+.btn.btn-primary {
+    --bs-btn-border-color: var(--primary-color) !important;
+    --bs-btn-hover-bg: var(--primary-color) !important;
+    --bs-btn-hover-border-color: var(--primary-color) !important;
+    --bs-btn-focus-shadow-rgb: var(--rgb-primary-color) !important;
+    --bs-btn-active-bg: var(--primary-color) !important;
+    --bs-btn-active-border-color: var(--primary-color) !important;
+    --bs-btn-disabled-bg: rgba(var(--rgb-primary-color), 0.1) !important;
+    --bs-btn-disabled-border-color: rgba(var(--rgb-primary-color), 0.1) !important;
+    border-radius: 30px;
+    padding: 4px 15px;
+
+    &.-light {
+        --bs-btn-bg: rgba(var(--rgb-primary-color), 0.1) !important;
+        color: var(--primary-color);
+
+        i.bi.bi-plus {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        i.bi.bi-dash {
+            font-size: 20px;
+            line-height: 1;
+        }
+    }
+}
 
 .isys-button {
     &[render-style="Tab"] {
@@ -333,60 +385,110 @@ $wide: 'min-width: 1920px';
     }
 }
 
-    .dxbl-fl {
-        font-family: var(--font-titles);
+.dxbl-fl {
+    font-family: var(--font-titles);
 
-        .label-xl {
-            label {
-                font-size: 1.3rem !important;
-                line-height: 1;
-                padding-top: 5px;
-            }
-        }
-
+    .label-xl {
         label {
-            font-weight: 600 !important;
-            font-size: 1rem;
-        }
+            font-size: 1.3rem !important;
+            line-height: 1;
+            padding-top: 5px;
 
-        span:not(.dxbl-btn-caption) {
-            color: var(--font-color);
-        }
-
-        .range-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 15px;
-
-            input {
-                flex-basis: 75%;
-            }
-
-            .var-data {
-                //border: 1px solid var(--light-gray);
-                //border-radius: 4px;
-                //padding: 5px 15px;
-                flex-basis: 35%;
-
-                @include media-query($tablet) {
-                    flex-basis: 22%;
-                }
-
-                @include media-query($xxl-wide) {
-                    flex-basis: 26%;
-                }
-
-                @include media-query($wide) {
-                    flex-basis: 22%;
-                }
-
-                &.on {
-                    color: var(--dark);
-                }
+            @include media-query($mobile) {
+                width: 59%;
+                font-weight: 400 !important;
             }
         }
     }
+
+    label {
+        font-weight: 600 !important;
+        font-size: 1rem;
+    }
+
+    span:not(.dxbl-btn-caption) {
+        color: var(--font-color);
+    }
+
+    .range-wrap,
+    .num-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 15px;
+
+        input {
+            flex-basis: 75%;
+        }
+
+        .var-data {
+            //border: 1px solid var(--light-gray);
+            //border-radius: 4px;
+            //padding: 5px 15px;
+            flex-basis: 35%;
+
+            @include media-query($tablet) {
+                flex-basis: 22%;
+            }
+
+            @include media-query($xxl-wide) {
+                flex-basis: 26%;
+            }
+
+            @include media-query($wide) {
+                flex-basis: 22%;
+            }
+
+            &.on {
+                color: var(--dark);
+            }
+        }
+    }
+
+    .num-wrap {
+        .qty-data {
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            padding: 7px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: var(--font-color);
+
+            &.on {
+                color: var(--dark);
+            }
+        }
+
+        input {
+            padding: 0;
+            border: 0;
+            color: var(--font-color);
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+
+            &[type=number] {
+                -moz-appearance: textfield;
+            }
+
+            &:focus-visible {
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 0.2rem var(--primary-color);
+            }
+
+            &.on {
+                color: var(--dark) !important;
+            }
+        }
+
+        button.disabled {
+            pointer-events: none;
+        }
+    }
+}
 
 .dxbl-text-edit {
     border-radius: 4px !important;

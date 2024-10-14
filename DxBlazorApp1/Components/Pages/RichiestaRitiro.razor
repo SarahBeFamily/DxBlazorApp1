@@ -9,14 +9,17 @@
 
 @if (isXSmallScreen)
 {
-    <div class="title-wrap">
+    <div class="title-wrap flex justify-content-between">
         <h1>Richiesta di ritiro 🚚</h1>
-        <ISysBtn Icon="icon-chevron-down" CssClass="offcanvas-open" Text="Vedi dettagli" onclick="document.querySelector('.offcanvas-data').classList.toggle('open')"></ISysBtn>
+
+        <a onclick="document.querySelector('.offcanvas-data').classList.toggle('open')" class="offcanvas-open link">Vedi dettagli</a>
     </div>
 
     <div class="offcanvas offcanvas-data">
 
-        <ISysBtn Icon="icon-chevron-down" CssClass="offcanvas-close" Text="Indietro" onclick="document.querySelector('.offcanvas-data').classList.toggle('open')"></ISysBtn>
+        <a onclick="document.querySelector('.offcanvas-data').classList.toggle('open')" class="offcanvas-open link icon-left">
+            <i class="bi bi-chevron-left"></i>Indietro
+        </a>
 
         <div class="offcanvas-body">
             <DxFormLayout CaptionPosition="CaptionPosition.Vertical" CssClass="w-100 mt-4">
@@ -50,39 +53,45 @@
 
         <div class="container">
 
+            @{var i = 0;}
             @foreach (var article in Articles)
             {
                 var QtyNotZero = article.QtaPreview > 0 ? "on" : "";
+                var BtnDisabled = article.QtaPreview == 0 ? "disabled" : "";
                 var QtyPz = article.QtaPreview > 0 ? article.Weight / article.QtaPreview : 0;
-                var NoteOpen = false;
 
                 <div class="fields-group-wrap">
                     @* <div class="icon-wrap">
-            <i class="icon-wheels icon-wheels-@article.Type --primary"></i>
-            </div> *@
+                    <i class="icon-wheels icon-wheels-@article.Type --primary"></i>
+                    </div> *@
                     <DxFormLayoutItem Caption="@article.Name" CssClass="label-xl" ColSpanMd="6" ColSpanSm="12">
                         <span>Peso medio: @(article.Weight)kg / cad</span>
 
-                        <div class="range-wrap">
-                            <input class="me-3" type="range" min="0" max="@_maxQta" step="50" @bind="@article.QtaPreview" @bind:event="oninput" @onchange="@(() => EditContext?.Validate())" />
-                            <div class="flex flex-column">
-                                <span class="var-data">ca @QtyPz pz.</span>
-                                <span class="var-data @QtyNotZero">Kg @article.QtaPreview.ToString("#,##0")</span>
+                        <div class="num-wrap">
+                            <button class="btn btn-primary -light @BtnDisabled" @onclick="() => article.QtaPreview -=50"><i class="bi bi-dash"></i>50</button>
+                            <div class="qty-data @QtyNotZero">
+                                Kg <input class="ms-3 @QtyNotZero" type="number" min="0" max="@_maxQta" step="50" @bind="@article.QtaPreview" @bind:event="oninput" @onchange="@(() => EditContext?.Validate())" />
                             </div>
+                            <button class="btn btn-primary -light" @onclick="() => article.QtaPreview +=50"><i class="bi bi-plus"></i>50</button>
                         </div>
                     </DxFormLayoutItem>
 
-                    <ISysBtn CssClass="link" RenderStyle="Primary" Icon="bi bi-plus-circle" Text="Note" onclick="@(NoteOpen = true)"></ISysBtn>
+                    <a class="note-link link icon-left" onclick="document.querySelector('.note-@i').classList.toggle('hidden')">
+                        <i class="bi bi-plus-circle"></i>Note
+                    </a>
 
-                    <DxFormLayoutItem Caption="Note" ColSpanMd="5" ColSpanSm="12" style="@(NoteOpen == false ? "display:none;" : "")">
-                        <DxMemo NullText="Scrivi le tue note per il corriere..." Rows="2" />
-                    </DxFormLayoutItem>
+                    <div class="note-@i w-100 hidden">
+						<DxFormLayoutItem Caption="Note">
+							<DxMemo NullText="Scrivi le tue note per il corriere..." Rows="1" />
+						</DxFormLayoutItem>
+                    </div>
                 </div>
+                i++;
             }
         </div>
 
         <div class="container flex flex-wrap">
-            <div class="fields-group-wrap w-50">
+            <div class="fields-group-wrap">
                 <DxFormLayoutItem ColSpanMd="6" ColSpanSm="12">
                     <p class="mb-0">Data: <b>@DateTime.Now</b></p>
                 </DxFormLayoutItem>
@@ -178,6 +187,7 @@ else
     </DxFormLayout>
     
 }
+
 
 @code{
     public bool isXSmallScreen { get; set; }

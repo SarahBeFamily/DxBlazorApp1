@@ -67,4 +67,8 @@
     ::deep #menu-top {
         display: none;
     }
+
+    .nav-buttons-container {
+        padding: 1rem 0rem;
+    }
 }
