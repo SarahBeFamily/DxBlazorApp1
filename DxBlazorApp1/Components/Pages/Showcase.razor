@@ -32,13 +32,13 @@
 
 <h1>Tabella e Filtri</h1>
 
-<ISysHeaderNavigator>
-    <TabInfo>
-        <ISysBtn Text="Ricambio" RenderStyle="Tab" CssClass="icon-info active" OnClick="OpenPopup" />
-    </TabInfo>
+<ISysHeaderNavigator @bind-SearchText="@SearchText" @bind-ShowFilterRow="@ShowFilterRow">
+    <Tabs>
+        <ISysHeaderNavigatorTab Text="Ricambio" OnClick="OpenPopup"></ISysHeaderNavigatorTab>
+    </Tabs>
 
     <Filters>
-        <ISysHeaderNavigatorFilter Text="Assegnata"  />
+        <ISysHeaderNavigatorFilter Text="Assegnata" />
         <ISysHeaderNavigatorFilter Text="In lavorazione" Active="true" />
         <ISysHeaderNavigatorFilter Text="Blocco per quote" />
         <ISysHeaderNavigatorFilter Text="Sospesa" />
@@ -47,14 +47,14 @@
                         FilteringMode="DataGridFilteringMode.Contains"
                         TextFieldName="@nameof(Location.RagioneSociale)"
                         Data="@Locations"
-                        Value="@Trasportatore"/>
+                        Value="@Trasportatore" />
         </ISysHeaderNavigatorFilter>
     </Filters>
 
 </ISysHeaderNavigator>
 <DxGrid Data="@FIRs"
         @ref="GridFir"
-        ShowFilterRow="true"
+        ShowFilterRow="@ShowFilterRow"
         ShowGroupPanel="true"
         ShowSearchBox="false"
         SearchText="@SearchText"
