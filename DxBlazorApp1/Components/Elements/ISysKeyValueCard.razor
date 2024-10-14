@@ -1,11 +1,23 @@
-﻿<div class="data-wrap flex">
+﻿<div class="data-wrap flex flex-wrap justify-content-between">
     @foreach (var data in Valori)
     {
-        <div class="data">
-            <p>
-                <span class="data-label">@data.Key</span>
-                <span class="data-value">@data.Value</span>
-            </p>
+        var Icon = "bi bi-clipboard";
+        switch (data.Key)
+        {
+            case "Ragione sociale":
+                Icon = "bi bi-house-door";
+                break;
+            case "Codice":
+                Icon = "bi bi-hash";
+                break;
+            default:
+                Icon = "bi bi-clipboard";
+                break;
+        }
+
+        <div class="data flex flex-column">
+            <p class="data-label font-titles"><i class="@Icon"></i> @data.Key</p>
+            <p class="data-value font-titles">@data.Value</p>
         </div>
     }
 </div>

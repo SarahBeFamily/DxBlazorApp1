@@ -1,4 +1,22 @@
-﻿h1, h2, h3, h4, h5, h6 {
+﻿$mobile: 'max-width: 767px';
+$no_mobile: 'min-width: 768px';
+$tablet: 'min-width: 768px) and (max-width: 1023px';
+$md: 'min-width: 992px';
+$md-max: 'max-width: 991px';
+$lg: 'min-width: 1024px';
+$lg-xl: 'min-width: 1025px) and (max-width: 1199px';
+$xl: 'min-width: 1200px';
+$xxl: 'min-width: 1400px';
+$xxxl: 'min-width: 1600px';
+$wide: 'min-width: 1900px';
+
+@mixin media-query($media) {
+    @media screen and ($media) {
+        @content;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Archia' !important;
     text-align: left;
     color: var(--dark);
@@ -7,6 +25,10 @@
 h1, h2 {
     font-size: clamp(18px,7.5vw,32px);
     font-weight: bold;
+
+    @include media-query($mobile) {
+        font-size: clamp(18px,5.5vw,32px);
+    }
 }
 
 h3, h4, h5 {

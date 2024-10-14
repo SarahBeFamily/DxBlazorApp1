@@ -1,4 +1,7 @@
 ﻿@page "/richiesta-ritiro"
+@using DxBlazorApp1.Components.Elements;
+@using DevExpress.Blazor;
+@using System;
 
 <PageTitle>Richiesta di ritiro</PageTitle>
 
@@ -8,42 +11,211 @@
 {
     <div class="title-wrap">
         <h1>Richiesta di ritiro 🚚</h1>
-        <button class="offcanvas-open" onclick="document.querySelector('.offcanvas-data').classList.toggle('open')">Vedi dettagli</button>
+        <ISysBtn Icon="icon-chevron-down" CssClass="offcanvas-open" Text="Vedi dettagli" onclick="document.querySelector('.offcanvas-data').classList.toggle('open')"></ISysBtn>
     </div>
 
     <div class="offcanvas offcanvas-data">
 
-        <button class="offcanvas-close" onclick="document.querySelector('.offcanvas-data').classList.toggle('open')">Indietro</button>
+        <ISysBtn Icon="icon-chevron-down" CssClass="offcanvas-close" Text="Indietro" onclick="document.querySelector('.offcanvas-data').classList.toggle('open')"></ISysBtn>
 
         <div class="offcanvas-body">
-            <ISysKeyValueCard Valori="@Datas"></ISysKeyValueCard>
+            <DxFormLayout CaptionPosition="CaptionPosition.Vertical" CssClass="w-100 mt-4">
+
+            <div class="container">
+                <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <ISysKeyValueCard Valori="@Datas"></ISysKeyValueCard>
+                        </div>
+
+                    <div class="col-sm-12 col-md-6">
+                        <div class="alert w-100">
+                            <span>Quantità massima consentita <b>@_maxQta kg</b></span>
+                        </div>
+
+                        <div class="fields-group-wrap">
+                            <DxFormLayoutItem Caption="Luogo del ritiro" ColSpanMd="12">
+                                <DxComboBox NullText="Inserisci l'indirizzo" @bind-Value="@Value" Data="Address" />
+                            </DxFormLayoutItem>
+                        </div>
+			        </div>
+			        
+                </div>
+            </div>
+            </DxFormLayout>
         </div>
 
     </div>
+
+    <DxFormLayout CaptionPosition="CaptionPosition.Vertical" CssClass="w-100 mt-4">
+
+        <div class="container">
+
+            @foreach (var article in Articles)
+            {
+                var QtyNotZero = article.QtaPreview > 0 ? "on" : "";
+                var QtyPz = article.QtaPreview > 0 ? article.Weight / article.QtaPreview : 0;
+                var NoteOpen = false;
+
+                <div class="fields-group-wrap">
+                    @* <div class="icon-wrap">
+            <i class="icon-wheels icon-wheels-@article.Type --primary"></i>
+            </div> *@
+                    <DxFormLayoutItem Caption="@article.Name" CssClass="label-xl" ColSpanMd="6" ColSpanSm="12">
+                        <span>Peso medio: @(article.Weight)kg / cad</span>
+
+                        <div class="range-wrap">
+                            <input class="me-3" type="range" min="0" max="@_maxQta" step="50" @bind="@article.QtaPreview" @bind:event="oninput" @onchange="@(() => EditContext?.Validate())" />
+                            <div class="flex flex-column">
+                                <span class="var-data">ca @QtyPz pz.</span>
+                                <span class="var-data @QtyNotZero">Kg @article.QtaPreview.ToString("#,##0")</span>
+                            </div>
+                        </div>
+                    </DxFormLayoutItem>
+
+                    <ISysBtn CssClass="link" RenderStyle="Primary" Icon="bi bi-plus-circle" Text="Note" onclick="@(NoteOpen = true)"></ISysBtn>
+
+                    <DxFormLayoutItem Caption="Note" ColSpanMd="5" ColSpanSm="12" style="@(NoteOpen == false ? "display:none;" : "")">
+                        <DxMemo NullText="Scrivi le tue note per il corriere..." Rows="2" />
+                    </DxFormLayoutItem>
+                </div>
+            }
+        </div>
+
+        <div class="container flex flex-wrap">
+            <div class="fields-group-wrap w-50">
+                <DxFormLayoutItem ColSpanMd="6" ColSpanSm="12">
+                    <p class="mb-0">Data: <b>@DateTime.Now</b></p>
+                </DxFormLayoutItem>
+
+                <DxFormLayoutItem ColSpanMd="6" ColSpanSm="12">
+                    <p class="text-right primary-color mb-0">Totale raccolta: <b>@Articles.Sum(a => a.QtaPreview) kg</b></p>
+                </DxFormLayoutItem>
+
+                <DxFormLayoutItem Caption="Note generali per il ritiro" ColSpanMd="12" ColSpanSm="12">
+                    <DxMemo NullText="Scrivi le tue note per il corriere..." Rows="1" />
+                </DxFormLayoutItem>
+            </div>
+
+            <DxFormLayoutItem ColSpanMd="6" CssClass="mt-0 text-center align-self-center">
+                <DxButton CssClass="btn-with-chevron --primary mt-0" SubmitFormOnClick="true" Text="Invia richiesta" RenderStyle="@ButtonRenderStyle.Primary" />
+            </DxFormLayoutItem>
+        </div>
+
+    </DxFormLayout>
 
 }
 else
 {
     <h1>Richiesta di ritiro 🚚</h1>
-    <ISysKeyValueCard Valori="@Datas"></ISysKeyValueCard>
-    }
 
-<ISystemFormRitiro />
+    <DxFormLayout CaptionPosition="CaptionPosition.Vertical" CssClass="w-100 mt-4">
 
-@code {
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="alert w-100">
+                        <span>Quantità massima consentita <b>@_maxQta kg</b></span>
+                    </div>
+
+                    <div class="fields-group-wrap">
+                        <DxFormLayoutItem Caption="Luogo del ritiro" ColSpanMd="12">
+                            <DxComboBox NullText="Inserisci l'indirizzo" @bind-Value="@Value" Data="Address" />
+                        </DxFormLayoutItem>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <ISysKeyValueCard Valori="@Datas"></ISysKeyValueCard>
+                </div>
+            </div>
+
+            @foreach (var article in Articles)
+            {
+                var QtyNotZero = article.QtaPreview > 0 ? "on" : "";
+                var QtyPz = article.QtaPreview > 0 ? article.Weight / article.QtaPreview : 0;
+
+                <div class="fields-group-wrap">
+                    @* <div class="icon-wrap">
+            <i class="icon-wheels icon-wheels-@article.Type --primary"></i>
+            </div> *@
+                    <DxFormLayoutItem Caption="@article.Name" CssClass="label-xl" ColSpanMd="6" ColSpanSm="12">
+                        <span>Peso medio: @(article.Weight)kg / cad</span>
+
+                        <div class="range-wrap">
+                            <input class="me-3" type="range" min="0" max="@_maxQta" step="50" @bind="@article.QtaPreview" @bind:event="oninput" @onchange="@(() => EditContext?.Validate())" />
+                            <div class="flex flex-column">
+                                <span class="var-data">ca @QtyPz pz.</span>
+                                <span class="var-data @QtyNotZero">Kg @article.QtaPreview.ToString("#,##0")</span>
+                            </div>
+                        </div>
+                    </DxFormLayoutItem>
+                    <DxFormLayoutItem Caption="Note" ColSpanMd="5" ColSpanSm="12">
+                        <DxMemo NullText="Scrivi le tue note per il corriere..." Rows="2" />
+                    </DxFormLayoutItem>
+                </div>
+            }
+        </div>
+
+        <div class="container flex flex-wrap">
+            <div class="fields-group-wrap w-50">
+                <DxFormLayoutItem ColSpanMd="6" ColSpanSm="12">
+                    <p class="mb-0">Data: <b>@DateTime.Now</b></p>
+                </DxFormLayoutItem>
+
+                <DxFormLayoutItem ColSpanMd="6" ColSpanSm="12">
+                    <p class="text-right primary-color mb-0">Totale raccolta: <b>@Articles.Sum(a => a.QtaPreview) kg</b></p>
+                </DxFormLayoutItem>
+
+                <DxFormLayoutItem Caption="Note generali per il ritiro" ColSpanMd="12" ColSpanSm="12">
+                    <DxMemo NullText="Scrivi le tue note per il corriere..." Rows="1" />
+                </DxFormLayoutItem>
+            </div>
+
+            <DxFormLayoutItem ColSpanMd="6" CssClass="mt-0 text-center align-self-center">
+                <DxButton CssClass="btn-with-chevron --primary mt-0" SubmitFormOnClick="true" Text="Invia richiesta" RenderStyle="@ButtonRenderStyle.Primary" />
+            </DxFormLayoutItem>
+        </div>
+
+    </DxFormLayout>
+    
+}
+
+@code{
     public bool isXSmallScreen { get; set; }
+    int _maxQta = 1500;
+    string Value { get; set; }
 
+    public EditContext EditContext { get; private set; }
     public IEnumerable<KeyValuePair<string, string>> Datas { get; set; }
+    IEnumerable<string> Address = new List<string>() {
+        "Viale della pace",
+        "Via Manzoni",
+    };
+
+    List<Article> Articles = new List<Article>
+    {
+        new Article { Name = "Pneumatici fuori uso piccoli", Type = "sm", Weight = 1, QtaPreview = 0 },
+        new Article { Name = "Pneumatici fuori uso medi", Type = "md", Weight = 2, QtaPreview = 0 },
+        new Article { Name = "Pneumatici fuori uso grandi", Type = "lg", Weight = 3, QtaPreview = 0 },
+    };
+
+    public class Article
+    {
+        public required string Name { get; set; }
+        public required string Type { get; set; }
+        public int Weight { get; set; }
+        public int QtaPreview { get; set; }
+    }
 
     protected override void OnInitialized()
     {
-        Datas =
-        [
+        EditContext = new Microsoft.AspNetCore.Components.Forms.EditContext(this);
+        Datas = new List<KeyValuePair<string, string>>
+        {
             new KeyValuePair<string, string>("Ragione sociale", "Gommista di Test"),
             new KeyValuePair<string, string>("P.IVA", "123456789"),
             new KeyValuePair<string, string>("Codice Fiscale", "123456890sectyu"),
             new KeyValuePair<string, string>("Codice", "532142")
-        ];
+        };
     }
 
     public class Data
