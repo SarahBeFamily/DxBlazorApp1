@@ -133,7 +133,7 @@ a.link {
         border: 1px solid var(--light-gray);
         background: white;
         font-family: var(--font-titles);
-        padding: 6px 8px;
+        padding: 8px;
         font-size: clamp(13px, 0.7vw, 16px);
 
         &.active,
@@ -578,6 +578,34 @@ dxbl-spinedit {
     }
 }
 
+.isys-comboboxlabel {
+    margin: 12px;
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+
+    &.anno {
+        max-width: 175px;
+    }
+
+    .label-filter {
+        background: white;
+        display: flex;
+        align-items: center;
+        padding: 0 7px;
+
+        span {
+            margin-left: 5px;
+            color: gray;
+        }
+    }
+
+    dxbl-combo-box {
+        border: 0;
+        border-radius: 0 !important;
+        border-left: 1px solid var(--light-gray);
+    }
+}
+
 ul.filter-form {
     padding: 0;
     margin: 0;
@@ -713,7 +741,7 @@ ul.filter-form {
 }
 
 /** Cards **/
-.card {
+.isys-card {
     background-color: white;
     border-radius: 30px;
     padding: 25px;

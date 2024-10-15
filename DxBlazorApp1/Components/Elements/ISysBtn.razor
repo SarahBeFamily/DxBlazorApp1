@@ -1,8 +1,13 @@
-﻿<button class="isys-button @CssClass" render-style="@RenderStyle" @onclick="OnClick">
+﻿@{
+	var FlyoutClass = Flyout ? "flipping-button" : "";
+	var FlyoutlabelledBy = Flyout ? "flyout-flipping" : "";
+}
+
+<button class="isys-button @CssClass" render-style="@RenderStyle" @onclick="OnClick" aria-describedby="@FlyoutlabelledBy">
 	@if (Icon != null) {
-		<i class="@Icon"></i>
+		<i class="@Icon @FlyoutClass"></i>
 	}
 	@if (Text != null) {
-		<span>@Text</span>
+		<span class="@FlyoutClass">@Text</span>
 	}
 </button>

@@ -21,7 +21,7 @@
 		</ul>
 
         <DxTextBox ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" @bind-Text="SearchText" BindValueMode="BindValueMode.OnDelayedInput" NullText="Cerca" CssClass="isys-search-box mx-2" />
-        <ISysBtn RenderStyle="Primary" Icon="icon-filter" OnClick="filterToggle" />
+        <ISysBtn RenderStyle="Primary" Icon="icon-filter" OnClick="ToggleFilter" />
         
     </div>
 </div>
@@ -183,7 +183,7 @@
         public string Articolo { get; set; }
     }
     
-    public void filterToggle()
+    public void ToggleFilter()
 	{
 		IsFilterVisible = !IsFilterVisible;
 	}

@@ -9,28 +9,35 @@
 
 <h1>Archivio FIR 🚚</h1>
 
-<div class="grid-top-panel d-flex py-2 justify-content-between align-items-end">
-	<div class="d-flex">
-		<ISysBtn Text="Ricambio" RenderStyle="Tab" CssClass="icon-info active" OnClick="OpenPopup" />
-		<ISysBtn Text="Trade" RenderStyle="Tab" CssClass="icon-info" />
-	</div>
+<ISysHeaderNavigator>
+	<Tabs>
+		<ISysBtn Text="Ricambio" RenderStyle="Tab" CssClass="icon-info active" Flyout="true" OnClick="() => IsOpen = !IsOpen" />
+		<ISysBtn Text="Trade" RenderStyle="Tab" CssClass="icon-info" OnClick="OpenPopup" />
+	</Tabs>
 
-	<div class="d-flex">
-		<ul class="filter-form">
-			<li><ISysBtn RenderStyle="Secondary" Text="Assegnata" /></li>
-			<li><ISysBtn RenderStyle="Secondary" Text="In lavorazione" /></li>
-			<li><ISysBtn RenderStyle="Secondary" Text="Blocco per quote" /></li>
-			<li><ISysBtn RenderStyle="Secondary" Text="Sospesa" /></li>
-		</ul>
+	<Filters>
+		<ISysBtn RenderStyle="Secondary" Text="Assegnata" />
+		<ISysBtn RenderStyle="Secondary" Text="In lavorazione" />
+		<ISysBtn RenderStyle="Secondary" Text="Blocco per quote" />
+		<ISysBtn RenderStyle="Secondary" Text="Sospesa" />
+	</Filters>
+</ISysHeaderNavigator>
 
-        <DxTextBox ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto" @bind-Text="SearchText" BindValueMode="BindValueMode.OnDelayedInput" NullText="Cerca" CssClass="isys-search-box mx-2" />
-	</div>
-</div>
+<DxFormLayout>
+    <ISysComboBoxLabel Label="Anno" CssClass="anno">
+        <DxComboBox Data="@Anni" Value="@Anni" NullText="2024" />
+    </ISysComboBoxLabel>
+
+    <ISysComboBoxLabel Label="Sede" CssClass="sedi">
+		<DxComboBox Data="@Sedi" Value="@Sedi" NullText="Tutte" />
+	</ISysComboBoxLabel>
+	
+</DxFormLayout>
 
 <DxGrid Data="@FIRs" 
 		@ref="GridFir"
-        ShowFilterRow="true" 
-        ShowGroupPanel="true" 
+		ShowFilterRow="@IsFilterVisible"
+		ShowGroupPanel="true" 
         ShowSearchBox="false" 
         SearchText="@SearchText" 
         PagerNavigationMode="PagerNavigationMode.NumericButtons"
@@ -86,183 +93,205 @@
 	</FooterContentTemplate>
 </DxPopup>
 
+<DxFlyout @bind-IsOpen=IsOpen
+		  Id="flyout-flipping"
+		  PositionTarget=".flipping-overflow-container"
+		  Position=@Position
+		  CloseOnOutsideClick=false
+		  Width="240">
+	<span style="font-size: 0.75rem">Ritiro</span>
+</DxFlyout>
+
 @code {
-	public bool isXSmallScreen { get; set; }
-	bool PopupVisible { get; set; } = false;
-	string? SearchText { get; set; }
+    public bool isXSmallScreen { get; set; }
+    bool PopupVisible { get; set; } = false;
+    bool IsFilterVisible { get; set; } = true;
+    string? SearchText { get; set; }
+    bool IsOpen { get; set; } = false;
+    FlyoutPosition Position { get; set; } = FlyoutPosition.Top;
+    FlyoutAnimationType[] Animations { get; set; } = Enum.GetValues<FlyoutAnimationType>();
+    FlyoutAnimationType Animation { get; set; } = FlyoutAnimationType.Fade;
 
-	public IEnumerable<FIR> FIRs { get; set; }
+    public IEnumerable<FIR> FIRs { get; set; }
     IGrid GridFir;
-	void OpenPopup()
-	{
-		PopupVisible = true;
-	}
+    void OpenPopup()
+    {
+        PopupVisible = true;
+    }
 
-	protected override void OnInitialized() => FIRs = new List<FIR>
-		{
-			new FIR
-			{
-				Ticket = "FIR-123",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 1000,
-				Indirizzo = "Via Manzoni",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-124",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2000,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-125",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2500,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-123",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 1000,
-				Indirizzo = "Via Manzoni",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-124",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2000,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-125",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2500,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-123",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 1000,
-				Indirizzo = "Via Manzoni",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-124",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2000,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-125",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2500,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-123",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 1000,
-				Indirizzo = "Via Manzoni",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-124",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2000,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-125",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2500,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-123",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 1000,
-				Indirizzo = "Via Manzoni",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-124",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2000,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-125",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2500,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-123",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 1000,
-				Indirizzo = "Via Manzoni",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-124",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2000,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			},
-			new FIR
-			{
-				Ticket = "FIR-125",
-				DataRichiesta = DateTime.Now,
-				DataRitiro = DateTime.Now,
-				Qty = 2500,
-				Indirizzo = "Viale della pace",
-				Trasportatore = "Bartolini"
-			}
-		};
+    protected override void OnInitialized()
+    {
+        BuildFir();
+    }
+
+	private void BuildFir()
+        {
+            FIRs = new List<FIR>
+            {
+                new FIR
+                {
+                    Ticket = "FIR-123",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 1000,
+                    Indirizzo = "Via Manzoni",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-124",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2000,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-125",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2500,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-123",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 1000,
+                    Indirizzo = "Via Manzoni",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-124",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2000,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-125",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2500,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-123",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 1000,
+                    Indirizzo = "Via Manzoni",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-124",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2000,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-125",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2500,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-123",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 1000,
+                    Indirizzo = "Via Manzoni",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-124",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2000,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-125",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2500,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-123",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 1000,
+                    Indirizzo = "Via Manzoni",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-124",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2000,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-125",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2500,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-123",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 1000,
+                    Indirizzo = "Via Manzoni",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-124",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2000,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                },
+                new FIR
+                {
+                    Ticket = "FIR-125",
+                    DataRichiesta = DateTime.Now,
+                    DataRitiro = DateTime.Now,
+                    Qty = 2500,
+                    Indirizzo = "Viale della pace",
+                    Trasportatore = "Bartolini"
+                }
+            };
+        }
 
     public class FIR
     {
@@ -274,4 +303,11 @@
 		public string Trasportatore { get; set; }
 	}
 
+	public void ToggleFilter()
+	{
+		IsFilterVisible = !IsFilterVisible;
+	}
+
+	public string[] Anni = new string[] { "2021", "2020", "2019", "2018", "2017" };
+	public string[] Sedi = new string[] { "Sede 1", "Sede 2", "Sede 3", "Sede 4", "Sede 5" };
 }

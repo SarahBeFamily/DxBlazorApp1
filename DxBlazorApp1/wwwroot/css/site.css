@@ -164,12 +164,17 @@ html, body {
 }
 
 .block-content {
-    width: 31.25rem;
+    width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
     max-width: 100%;
+    padding: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: white;
 }
 
 .flex {display: flex;}

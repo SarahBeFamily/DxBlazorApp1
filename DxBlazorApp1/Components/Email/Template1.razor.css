@@ -1,0 +1,292 @@
+﻿/* reset */
+* {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('fonts/Archia-Light.eot');
+    src: url('fonts/Archia-Light.eot?#iefix') format('embedded-opentype'), url('fonts/Archia-Light.woff2') format('woff2'), url('fonts/Archia-Light.woff') format('woff'), url('fonts/Archia-Light.ttf') format('truetype'), url('fonts/Archia-Light.svg#Archia-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('fonts/Archia-Regular.eot');
+    src: url('fonts/Archia-Regular.eot?#iefix') format('embedded-opentype'), url('fonts/Archia-Regular.woff2') format('woff2'), url('fonts/Archia-Regular.woff') format('woff'), url('fonts/Archia-Regular.ttf') format('truetype'), url('fonts/Archia-Regular.svg#Archia-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('fonts/Archia-Bold.eot');
+    src: url('fonts/Archia-Bold.eot?#iefix') format('embedded-opentype'), url('fonts/Archia-Bold.woff2') format('woff2'), url('fonts/Archia-Bold.woff') format('woff'), url('fonts/Archia-Bold.ttf') format('truetype'), url('fonts/Archia-Bold.svg#Archia-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('fonts/Archia-Thin.eot');
+    src: url('fonts/Archia-Thin.eot?#iefix') format('embedded-opentype'), url('fonts/Archia-Thin.woff2') format('woff2'), url('fonts/Archia-Thin.woff') format('woff'), url('fonts/Archia-Thin.ttf') format('truetype'), url('fonts/Archia-Thin.svg#Archia-Thin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('fonts/Archia-SemiBold.eot');
+    src: url('fonts/Archia-SemiBold.eot?#iefix') format('embedded-opentype'), url('fonts/Archia-SemiBold.woff2') format('woff2'), url('fonts/Archia-SemiBold.woff') format('woff'), url('fonts/Archia-SemiBold.ttf') format('truetype'), url('fonts/Archia-SemiBold.svg#Archia-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Archia';
+    src: url('fonts/Archia-Medium.eot');
+    src: url('fonts/Archia-Medium.eot?#iefix') format('embedded-opentype'), url('fonts/Archia-Medium.woff2') format('woff2'), url('fonts/Archia-Medium.woff') format('woff'), url('fonts/Archia-Medium.ttf') format('truetype'), url('fonts/Archia-Medium.svg#Archia-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root,
+#email-template {
+    --first-color: #f6e5db;
+    --second-color: #f5f5f0;
+    --third-color: #ff5a1e;
+}
+
+body,
+#email-template {
+    background: linear-gradient(to bottom, var(--first-color) 38%, var(--second-color) 0%) fixed !important;
+    font-family: Archia, sans-serif;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: #191919;
+}
+
+
+span {
+    font-weight: bold;
+}
+
+
+li {
+    list-style: none;
+}
+
+p, ul, li {
+    font-size: 16px;
+    line-height: 1.4;
+    font-family: Archia, sans-serif;
+    color: #191919;
+}
+
+.important-small {
+    color: var(--third-color);
+}
+
+.important-big {
+    color: var(--third-color);
+    font-size: 36px;
+}
+
+/* Contenitore principale */
+
+.container {
+    width: 100%;
+}
+
+.container-small {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Contenitore principale */
+
+
+/* Header mail */
+
+.logo img {
+    width: 65px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.header-mail {
+    width: 92%;
+    padding: 3% 5%;
+}
+
+    .header-mail h1 {
+        font-size: 42px;
+        max-width: 55%;
+        margin: 0;
+    }
+/* Header mail */
+
+/* Contenuto della mail */
+
+.container-messaggio {
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.messaggio {
+    margin: 0 auto;
+    padding: 5%;
+}
+
+.user-mail {
+    text-decoration: underline;
+}
+
+.link-registrazione {
+    color: #ff5a1e;
+    text-decoration: none;
+}
+
+.hr-messaggio {
+    border: 1px solid var(--third-color);
+    width: 100%;
+    margin: 30px 0;
+}
+
+.data-registrazione {
+    font-weight: bold;
+}
+
+
+
+.dati-ordine {
+    width: 100%;
+    list-style: none;
+}
+
+    .dati-ordine > li {
+        width: 33%;
+        float: left;
+        padding-bottom: 3%;
+    }
+
+.data-prevista {
+    display: table;
+    width: 100%;
+    margin: 30px 0;
+}
+
+    .data-prevista div {
+        border: solid 2px var(--first-color);
+        border-radius: 10px;
+        padding: 3% 5%;
+        background-color: var(--second-color);
+        text-align: center;
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    .data-prevista p {
+        text-align: center;
+    }
+
+
+table.dati-articoli {
+    width: 100%;
+}
+
+    table.dati-articoli .titolo-articolo {
+        text-transform: uppercase;
+        width: 50%;
+        text-align: left;
+    }
+
+    table.dati-articoli tr {
+        padding: 5px 0;
+    }
+
+.note-trasportatore {
+    background-color: var(--second-color);
+    padding: 4% 0;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    margin-top: 80px;
+}
+
+    .note-trasportatore p {
+        text-align: center;
+    }
+
+/* Contenuto della mail */
+
+
+/* footer mail */
+.footer-mail {
+    padding: 3% 0;
+    width: 100%;
+    display: table;
+}
+
+
+    .footer-mail .logo,
+    .footer-mail .messaggio-footer,
+    .footer-mail p {
+        width: 100%;
+        text-align: center;
+    }
+
+/* footer mail */
+
+/* responsive */
+
+@media screen and (max-width: 500px) {
+
+    .logo img {
+        width: 35px;
+    }
+    
+    .header-mail h1 {
+        font-size: 36px;
+        max-width: 100%;
+    }
+
+    p, ul, li {
+        font-size: 13px;
+    }
+
+    .important-big {
+        font-size: 30px;
+    }
+
+    .dati-ordine > li {
+        width: 100%;
+        padding-bottom: 3%;
+    }
+
+    .data-prevista div {
+        width: 70%;
+    }
+
+    .dati.articoli tr {
+        border-bottom: 1px solid var(--first-color);
+    }
+
+    .dati-articoli td {
+        width: 100% !important;
+        float: left;
+        padding: 0;
+    }
+}

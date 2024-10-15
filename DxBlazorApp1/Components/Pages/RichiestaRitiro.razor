@@ -165,19 +165,27 @@ else
         </div>
 
         <div class="container flex flex-wrap">
-            <div class="fields-group-wrap w-50">
-                <DxFormLayoutItem ColSpanMd="6" ColSpanSm="12">
-                    <p class="mb-0">Data: <b>@DateTime.Now</b></p>
-                </DxFormLayoutItem>
+            <div class="w-50">
+                <div class="alert">
+                    <span>Quantità massima consentita <b>@_maxQta kg</b></span>
+                </div>
 
-                <DxFormLayoutItem ColSpanMd="6" ColSpanSm="12">
-                    <p class="text-right primary-color mb-0">Totale raccolta: <b>@Articles.Sum(a => a.QtaPreview) kg</b></p>
-                </DxFormLayoutItem>
+                <div class="fields-group-wrap">
 
-                <DxFormLayoutItem Caption="Note generali per il ritiro" ColSpanMd="12" ColSpanSm="12">
-                    <DxMemo NullText="Scrivi le tue note per il corriere..." Rows="1" />
-                </DxFormLayoutItem>
+                    <DxFormLayoutItem ColSpanMd="6" ColSpanSm="12">
+                        <p class="mb-0">Data: <b>@DateTime.Now</b></p>
+                    </DxFormLayoutItem>
+
+                    <DxFormLayoutItem ColSpanMd="6" ColSpanSm="12">
+                        <p class="text-right primary-color mb-0">Totale raccolta: <b>@Articles.Sum(a => a.QtaPreview) kg</b></p>
+                    </DxFormLayoutItem>
+
+                    <DxFormLayoutItem Caption="Note generali per il ritiro" ColSpanMd="12" ColSpanSm="12">
+                        <DxMemo NullText="Scrivi le tue note per il corriere..." Rows="1" />
+                    </DxFormLayoutItem>
+                </div>
             </div>
+            
 
             <DxFormLayoutItem ColSpanMd="6" CssClass="mt-0 text-center align-self-center">
                 <DxButton CssClass="btn-with-chevron --primary mt-0" SubmitFormOnClick="true" Text="Invia richiesta" RenderStyle="@ButtonRenderStyle.Primary" />

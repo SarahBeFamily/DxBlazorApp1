@@ -8,7 +8,9 @@ namespace DxBlazorApp1.Components.Elements
 		[Parameter] public string? Text { get; set; }
 		[Parameter] public string? CssClass { get; set; }
         [Parameter] public string? Icon { get; set; }
-        [Parameter] public required string RenderStyle { get; set; }
+		[Parameter] public bool Flyout { get; set; } = false;
+		[Parameter] public required string RenderStyle { get; set; }
 		[Parameter] public EventCallback OnClick { get; set; }
+
     }
 }
