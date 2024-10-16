@@ -758,6 +758,7 @@ ul.filter-form {
     }
 
     &.card-wrap {
+        display: flex;
         flex-direction: row;
 
         &.dark {

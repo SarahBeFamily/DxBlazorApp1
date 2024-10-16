@@ -401,38 +401,36 @@ header#main {
         min-height: calc(100vh - 85px);
     }
 
-    #dashboard {
-        .col-xl-2 {
-            @include media-query($xl) {
-                width: 20% !important;
-            }
-        }
-
-        .col-xl-4 {
-            @include media-query($xl) {
-                width: 40% !important;
-            }
-        }
-
-        .col-xl-8 {
-            @include media-query($xl) {
-                width: 60% !important;
-            }
-        }
-
-        .col-xl-10 {
-            @include media-query($xl) {
-                width: 80% !important;
-            }
+    .col-xl-2 {
+        @include media-query($xl) {
+            width: 20% !important;
         }
     }
-}
+
+    .col-xl-4 {
+        @include media-query($xl) {
+            width: 40% !important;
+        }
+    }
+
+    .col-xl-8 {
+        @include media-query($xl) {
+            width: 60% !important;
+        }
+    }
+
+    .col-xl-10 {
+        @include media-query($xl) {
+            width: 80% !important;
+        }
+    }
 
     .gutter-lg-max {
         @include media-query($md-max) {
             margin-bottom: var(--bs-gutter-x);
         }
     }
+}
 
 
 .alert {

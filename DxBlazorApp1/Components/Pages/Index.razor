@@ -11,122 +11,110 @@
         <p>Hai bisogno di <span class="info">richiedere un ritiro?</span> <a href="#">Prenotalo ora</a></p>
     </div>
 
-    <div id="dashboard" class="container">
-        <h2>Dashboard</h2>
+<ISysLayoutColumns Subtitle="Dashboard">
+        <ISysInnerColumn ColumnWidth1>
+            <Card Classes="card-col"
+                  FullHeight="false"
+                  Title="Peso totale raccolto"
+                  Text="[ton]"
+                  MainData="212,03"
+                  Percentage="+31%"
+                  Year="2023"
+                  Icon="icon-weight">
+            </Card>
 
-        <div class="row mb-30">
-            <div class="col-6 col-lg-3 col-xl-2 gutter-lg-max">
-                <Card Classes="card-col"
-                    FullHeight="false"
-                    Title="Peso totale raccolto"
-					Text="[ton]"
-					MainData="212,03"
-					Percentage="+31%"
-					Year="2023"
-					Icon="icon-weight">
-                </Card>
+            <Card Classes="card-col"
+                  FullHeight="false"
+                  Title="N° di richieste totali"
+                  MainData="23"
+                  Percentage="+20%"
+                  Year="2023"
+                  Icon="icon-doc-check">
+            </Card>
+        </ISysInnerColumn>
+        <ISysInnerColumn ColumnWidth4>
+            <Card Classes="with-child" Title="Quantità raccolta per mese">
+                <DxChart Data="@dataSource">
+                    <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)"
+                                         ArgumentField="@((SaleInfo s) => s.City)"
+                                         ValueField="@((SaleInfo s) => s.Amount)"
+                                         SeriesType="ChartSeriesType.Bar"
+                                         SummaryMethod="Enumerable.Max">
+                    </DxChartCommonSeries>
+                </DxChart>
+            </Card>
+        </ISysInnerColumn>
+    </ISysLayoutColumns>
 
-                 <Card Classes="card-col"
-                      FullHeight="false"
-                      Title="N° di richieste totali"
-                      MainData="23"
-                      Percentage="+20%"
-                      Year="2023"
-                      Icon="icon-doc-check">
-                </Card>
-            </div>
+    <ISysLayoutColumns>
+        <ISysInnerColumn ColumnWidth2>
+            <Card Classes="card-alt"
+                  Category="Documenti"
+                  Title="Archivio Fir"
+                  Text=">Hai bisogno di visionare rapidamente i tuoi documenti?"
+                  Link="#"
+                  LinkText="Visualizzali tutti"
+                  Icon="icon-doc-xl">
+            </Card>
+        </ISysInnerColumn>
+        <ISysInnerColumn ColumnWidth1>
+            <Card Classes="wheels"
+                  Title="Piccoli"
+                  MainData="6"
+                  Percentage="+6%"
+                  Year="2023"
+                  Icon="icon-wheels -sm">
+            </Card>
+        </ISysInnerColumn>
+        <ISysInnerColumn ColumnWidth1>
+            <Card Classes="wheels"
+                  Title="Medi"
+                  MainData="15"
+                  Percentage="+65%"
+                  Year="2023"
+                  Icon="icon-wheels -md">
+            </Card>
+        </ISysInnerColumn>
+        <ISysInnerColumn ColumnWidth1>
+            <Card Classes="wheels"
+                  Title="Grandi"
+                  MainData="2"
+                  Percentage="+9%"
+                  Year="2023"
+                  Icon="icon-wheels -xl">
+            </Card>
+        </ISysInnerColumn>
+    </ISysLayoutColumns>
 
-            @* <div class="col-6 col-lg-3 col-xl-2 gutter-lg-max">
-                
-            </div> *@
+    <ISysLayoutColumns>
+        <ISysInnerColumn ColumnWidth1>
+            <Card Classes="dark"
+				  Title="Ricambio"
+				  MainData="43.780"
+				  Um="Kg"
+				  TextAlt="Stoccaggio attuale"
+				  Icon="icon-cube">
+			</Card>
+        </ISysInnerColumn>
+        <ISysInnerColumn ColumnWidth2>
+            <Card Classes="card-wrap">
+				<Card Classes="main-data-primary"
+					  Title="Peso raccolto"
+					  MainData="327.540"
+					  Um="Kg"
+					  TextAlt="Mese corrente"
+					  Icon="icon-weight">
+				</Card>
 
-            <div class="col-12 col-lg-9 col-xl-10">
-                <Card Classes="with-child" Title="Quantità raccolta per mese">
-                    <DxChart Data="@dataSource">
-                        <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)"
-                                             ArgumentField="@((SaleInfo s) => s.City)"
-                                             ValueField="@((SaleInfo s) => s.Amount)"
-                                             SeriesType="ChartSeriesType.Bar"
-                                             SummaryMethod="Enumerable.Max">
-                        </DxChartCommonSeries>
-                    </DxChart>
-                </Card>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-6 col-xl-4 gutter-lg-max">
-                <Card Classes="card-alt"
-                      Category="Documenti"
-                      Title="Archivio Fir"
-                      Text=">Hai bisogno di visionare rapidamente i tuoi documenti?"
-                      Link="#"
-                      LinkText="Visualizzali tutti"
-                      Icon="icon-doc-xl">
-                </Card>
-            </div>
-
-            <div class="col-6 col-xl-2 gutter-lg-max">
-                <Card Classes="wheels"
-                      Title="Piccoli"
-                      MainData="6"
-                      Percentage="+6%"
-                      Year="2023"
-                      Icon="icon-wheels -sm">
-                </Card>
-            </div>
-
-            <div class="col-6 col-xl-2 gutter-lg-max">
-                <Card Classes="wheels"
-                      Title="Medi"
-                      MainData="15"
-                      Percentage="+65%"
-                      Year="2023"
-                      Icon="icon-wheels -md">
-                </Card>
-            </div>
-
-            <div class="col-6 col-xl-2 gutter-lg-max">
-                <Card Classes="wheels"
-                      Title="Grandi"
-                      MainData="2"
-                      Percentage="+9%"
-                      Year="2023"
-                      Icon="icon-wheels -xl">
-                </Card>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-6 col-lg-3 col-xl-2">
-                <Card Classes="dark"
-                      Title="Ricambio"
-                      MainData="43.780"
-                      Um="Kg"
-                      TextAlt="Stoccaggio attuale"
-                      Icon="icon-cube">
-                </Card>
-            </div>
-            <div class="col-6 col-lg-6 col-xl-4">
-                <Card Classes="card-wrap">
-                    <Card Classes="main-data-primary"
-                          Title="Peso raccolto"
-                          MainData="327.540"
-                          Um="Kg"
-                          TextAlt="Mese corrente"
-                          Icon="icon-weight">
-                    </Card>
-
-                    <Card Classes=""
-                          Title="Numero ritiri"
-                          MainData="61"
-                          TextAlt="Mese corrente"
-                          Icon="icon-clipboard">
-                    </Card>
-                </Card>
-            </div>
-        </div>
-    </div>
+				<Card Classes=""
+					  Title="Numero ritiri"
+					  MainData="61"
+					  TextAlt="Mese corrente"
+					  Icon="icon-clipboard">
+				</Card>
+			</Card>
+        </ISysInnerColumn>
+    </ISysLayoutColumns>
 
     @code {
         IEnumerable<SaleInfo> dataSource;

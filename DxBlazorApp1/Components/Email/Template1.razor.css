@@ -118,9 +118,7 @@ p, ul, li {
 
 /* Header mail */
 
-.logo img {
-    width: 65px;
-    height: auto;
+.logo {
     margin-bottom: 20px;
 }
 
@@ -131,7 +129,6 @@ p, ul, li {
 
     .header-mail h1 {
         font-size: 42px;
-        max-width: 55%;
         margin: 0;
     }
 /* Header mail */
@@ -169,8 +166,6 @@ p, ul, li {
     font-weight: bold;
 }
 
-
-
 .dati-ordine {
     width: 100%;
     list-style: none;
@@ -182,12 +177,12 @@ p, ul, li {
         padding-bottom: 3%;
     }
 
-.data-prevista {
+.dato-evidenza {
     display: table;
     width: 100%;
 }
 
-    .data-prevista div {
+    .dato-evidenza div {
         border: solid 2px var(--first-color);
         border-radius: 10px;
         padding: 3% 5%;
@@ -197,7 +192,7 @@ p, ul, li {
         margin: 30px auto;
     }
 
-    .data-prevista p {
+    .dato-evidenza p {
         text-align: center;
     }
 
@@ -216,7 +211,7 @@ table.dati-articoli {
         padding: 5px 0;
     }
 
-.note-trasportatore {
+.riquadro-grigio {
     background-color: var(--second-color);
     padding: 4% 0;
     border-radius: 10px;
@@ -225,9 +220,14 @@ table.dati-articoli {
     margin-top: 80px;
 }
 
-    .note-trasportatore p {
+    .riquadro-grigio p {
         text-align: center;
     }
+
+p.pre-footer {
+    text-align: center;
+    margin-top: 5%;
+}
 
 /* Contenuto della mail */
 
@@ -252,14 +252,9 @@ table.dati-articoli {
 /* responsive */
 
 @media screen and (max-width: 500px) {
-
-    .logo img {
-        width: 35px;
-    }
     
     .header-mail h1 {
         font-size: 36px;
-        max-width: 100%;
     }
 
     p, ul, li {
@@ -275,7 +270,7 @@ table.dati-articoli {
         padding-bottom: 3%;
     }
 
-    .data-prevista div {
+    .dato-evidenza div {
         width: 70%;
     }
 

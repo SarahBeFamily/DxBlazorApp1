@@ -2,41 +2,53 @@
 @using Microsoft.CodeAnalysis
 @rendermode InteractiveServer
 
-<h1>Card</h1>
-<ISysContainer>
-    <Row1Col2><Card Title="Titolo Card" Text="Testo" FullHeight="false"></Card></Row1Col2>
-    <Row1Col1><Card Title="Titolo Card" Text="Con icona" Icon="icon-weight" /></Row1Col1>
-    <Row1Col3>
+<h1>Showcase</h1>
+
+<ISysLayoutColumns Subtitle="Layout con Card (colonne 1+4)">
+    <ISysInnerColumn ColumnWidth1>
+        <Card Classes="card-col" Title="Titolo Card" Text="Testo" FullHeight="false"></Card>
+        <Card Classes="card-col" Title="Titolo Card" Text="Testo"></Card>
+	</ISysInnerColumn>
+    <ISysInnerColumn ColumnWidth4>
+        <Card Classes="with-child" Title="Quantità raccolta per mese">
+            <DxChart Data="@dataSource">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)"
+                                     ArgumentField="@((SaleInfo s) => s.City)"
+                                     ValueField="@((SaleInfo s) => s.Amount)"
+                                     SeriesType="ChartSeriesType.Bar"
+                                     SummaryMethod="Enumerable.Max">
+                </DxChartCommonSeries>
+            </DxChart>
+        </Card>
+    </ISysInnerColumn>
+</ISysLayoutColumns>
+
+<ISysLayoutColumns Subtitle="Layout con Card (colonne 2+1+1+1)">
+    <ISysInnerColumn ColumnWidth2>
         <Card Classes="card-alt"
               Category="Documenti"
               Title="Archivio Fir"
               Text=">Hai bisogno di visionare rapidamente i tuoi documenti?"
               Link="#"
               LinkText="Visualizzali tutti"
-              Icon="icon-doc-xl">
+              Icon="bi bi-airplane-fill">
         </Card>
-    </Row1Col3>
-    <Row2Col1><Card Title="Titolo Card" Text="Con icona" Icon="bi-alarm"></Card></Row2Col1>
-    <Row2Col2><Card Title="Titolo Card" Text="Testo full h"></Card></Row2Col2>
-    <Row2Col3>
-        <Card Classes="card-alt"
-              Category="Documenti"
-              Title="Archivio Fir"
-              Text=">Hai bisogno di visionare rapidamente i tuoi documenti?"
-              Link="#"
-              LinkText="Visualizzali tutti"
-              Icon="bi-alarm">
-        </Card>
-    </Row2Col3>
-</ISysContainer>
+    </ISysInnerColumn>
+    <ISysInnerColumn ColumnWidth1>
+        <Card Title="Titolo Card" Text="Con icona" Icon="icon-weight" />
+    </ISysInnerColumn>
+    <ISysInnerColumn ColumnWidth1>
+        <Card Title="Titolo Card" Text="Con icona" Icon="bi-alarm"></Card>
+    </ISysInnerColumn>
+    <ISysInnerColumn ColumnWidth1>
+        <Card Title="Titolo Card" Text="Testo full h"></Card>
+    </ISysInnerColumn>
+</ISysLayoutColumns>
+
 
 <h1>Tabella e Filtri</h1>
 
 <ISysHeaderNavigator @bind-SearchText="@SearchText" @bind-ShowFilterRow="@ShowFilterRow">
-    <Tabs>
-        <ISysHeaderNavigatorTab Text="Ricambio" OnClick="OpenPopup"></ISysHeaderNavigatorTab>
-    </Tabs>
-
     <Filters>
         <ISysHeaderNavigatorFilter Text="Assegnata" />
         <ISysHeaderNavigatorFilter Text="In lavorazione" Active="true" />
@@ -52,6 +64,25 @@
     </Filters>
 
 </ISysHeaderNavigator>
+
+<ISysHeaderNavigator>
+    <Tabs>
+        <ISysHeaderNavigatorTab Text="Ricambio" OnClick="OpenPopup"></ISysHeaderNavigatorTab>
+    </Tabs>
+
+    <Content>
+        <DxFormLayout>
+            <ISysComboBoxLabel Label="Anno" CssClass="anno">
+                <DxComboBox Data="@Anni" Value="@Anni" NullText="2024" />
+            </ISysComboBoxLabel>
+
+            <ISysComboBoxLabel Label="Sede" Icon="bi bi-building-fill">
+                <DxComboBox Data="@Sedi" Value="@Sedi" NullText="Tutte" />
+            </ISysComboBoxLabel>
+        </DxFormLayout>
+    </Content>
+</ISysHeaderNavigator>
+
 <DxGrid Data="@FIRs"
         @ref="GridFir"
         ShowFilterRow="@ShowFilterRow"

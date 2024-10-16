@@ -1,4 +1,5 @@
 ﻿using DevExpress.Blazor;
+using DxBlazorApp1.Services;
 
 namespace DxBlazorApp1.Components.Pages
 {
@@ -17,6 +18,12 @@ namespace DxBlazorApp1.Components.Pages
         IEnumerable<Location> Locations { get; set; }
         Location Trasportatore { get; set; }
         IGrid GridFir;
+        IEnumerable<SaleInfo> dataSource;
+
+        protected override async Task OnInitializedAsync()
+        {
+            dataSource = await Sales.GetSalesAsync();
+        }
 
         void OpenPopup()
         {
@@ -225,6 +232,7 @@ namespace DxBlazorApp1.Components.Pages
             public string Citta { get; set; }
         }
 
-
+        public string[] Anni = new string[] { "2021", "2020", "2019", "2018", "2017" };
+        public string[] Sedi = new string[] { "Sede 1", "Sede 2", "Sede 3", "Sede 4", "Sede 5" };
     }
 }
