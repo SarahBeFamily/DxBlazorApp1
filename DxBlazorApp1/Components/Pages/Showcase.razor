@@ -1,5 +1,4 @@
 ﻿@page "/showcase"
-@using Microsoft.CodeAnalysis
 @rendermode InteractiveServer
 
 <h1>Showcase</h1>
@@ -7,7 +6,7 @@
 <ISysLayoutColumns Subtitle="Layout con Card (colonne 1+4)">
     <ISysInnerColumn ColumnWidth1>
         <Card Classes="card-col" Title="Titolo Card" Text="Testo" FullHeight="false"></Card>
-        <Card Classes="card-col" Title="Titolo Card" Text="Testo"></Card>
+        <Card Classes="card-col" Title="Titolo Card" Text="Testo" FullHeight="false"></Card>
 	</ISysInnerColumn>
     <ISysInnerColumn ColumnWidth4>
         <Card Classes="with-child" Title="Quantità raccolta per mese">
@@ -67,7 +66,7 @@
 
 <ISysHeaderNavigator>
     <Tabs>
-        <ISysHeaderNavigatorTab Text="Ricambio" OnClick="OpenPopup"></ISysHeaderNavigatorTab>
+        <ISysHeaderNavigatorTab Text="Ricambio" FlyOutText="@FlyoutText"></ISysHeaderNavigatorTab>
     </Tabs>
 
     <Content>

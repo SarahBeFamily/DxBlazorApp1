@@ -1,20 +1,31 @@
-﻿@if (ChildContent is null)
-{
-    <button class="isys-button icon-info active" render-style="Tab" @onclick="OnClick">
-        @if (Text != null)
-        {
-            <span>@Text</span>
-        }
-    </button>
-}
-else
-{
-    @ChildContent
-}
+﻿<button class="isys-button icon-info active" render-style="Tab" @onclick="@(() => IsOpen=!IsOpen)" aria-describedby="@flyoutLabelledBy">
+    @if (Icon != null)
+    {
+        <i class="@Icon @flyoutClass"></i>
+    }
+    @if (Text != null)
+    {
+        <span class="@flyoutClass">@Text</span>
+    }
+</button>
+
+<DxFlyout @bind-IsOpen=IsOpen
+          Id="flyout-flipping"
+          PositionTarget=".flipping-overflow-container"
+          Position=@Position
+          Width="240px">
+    <span style="font-size: 0.75rem">@FlyOutText</span>
+</DxFlyout>
+
+
 
 @code
 {
-    [Parameter] public string? Text { get; set; }
-    [Parameter] public EventCallback OnClick { get; set; }
-    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter,EditorRequired] public string? Text { get; set; }
+    [Parameter,EditorRequired] public string? FlyOutText { get; set; }
+    [Parameter] public string? Icon { get; set; }
+    [Parameter] public FlyoutPosition Position { get; set; } = FlyoutPosition.Auto;
+    bool IsOpen { get; set; }
+    string flyoutClass =  "flipping-button" ; 
+    string flyoutLabelledBy = "flyout-flipping" ;
 }
