@@ -48,17 +48,20 @@
 <h1>Tabella e Filtri</h1>
 
 <ISysHeaderNavigator @bind-SearchText="@SearchText" @bind-ShowFilterRow="@ShowFilterRow">
+    <Tabs>
+        <ISysHeaderNavigatorTab Text="Ricambio" FlyOutText="@FlyoutText"></ISysHeaderNavigatorTab>
+    </Tabs>
     <Filters>
-        <ISysHeaderNavigatorFilter Text="Assegnata" />
-        <ISysHeaderNavigatorFilter Text="In lavorazione" Active="true" />
-        <ISysHeaderNavigatorFilter Text="Blocco per quote" />
-        <ISysHeaderNavigatorFilter Text="Sospesa" />
+        <ISysHeaderNavigatorFilter Text="Assegnata"/>
+        <ISysHeaderNavigatorFilter Text="In lavorazione" Active="true"/>
+        <ISysHeaderNavigatorFilter Text="Blocco per quote"/>
+        <ISysHeaderNavigatorFilter Text="Sospesa"/>
         <ISysHeaderNavigatorFilter>
             <DxComboBox NullText="Seleziona..."
                         FilteringMode="DataGridFilteringMode.Contains"
                         TextFieldName="@nameof(Location.RagioneSociale)"
                         Data="@Locations"
-                        Value="@Trasportatore" />
+                        Value="@Trasportatore"/>
         </ISysHeaderNavigatorFilter>
     </Filters>
 

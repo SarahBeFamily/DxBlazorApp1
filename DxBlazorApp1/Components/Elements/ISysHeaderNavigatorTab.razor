@@ -1,17 +1,17 @@
-﻿<button class="isys-button icon-info active" render-style="Tab" @onclick="@(() => IsOpen=!IsOpen)" aria-describedby="@flyoutLabelledBy">
+﻿<button class="isys-button icon-info active"  render-style="Tab" @onclick="@(Apri)" aria-describedby="@flyoutLabelledBy">
     @if (Icon != null)
     {
-        <i class="@Icon @flyoutClass"></i>
+        <i class="@Icon @flyoutClass" ></i>
     }
     @if (Text != null)
     {
-        <span class="@flyoutClass">@Text</span>
+        <span class="@flyoutClass" id="@UniqueId">@Text</span>
     }
 </button>
 
 <DxFlyout @bind-IsOpen=IsOpen
           Id="flyout-flipping"
-          PositionTarget=".flipping-overflow-container"
+          PositionTarget="@($"#{UniqueId}")"
           Position=@Position
           Width="240px">
     <span style="font-size: 0.75rem">@FlyOutText</span>
@@ -25,7 +25,14 @@
     [Parameter,EditorRequired] public string? FlyOutText { get; set; }
     [Parameter] public string? Icon { get; set; }
     [Parameter] public FlyoutPosition Position { get; set; } = FlyoutPosition.Auto;
-    bool IsOpen { get; set; }
+    bool IsOpen { get; set; } 
     string flyoutClass =  "flipping-button" ; 
     string flyoutLabelledBy = "flyout-flipping" ;
+    private string UniqueId => $"id-{GetHashCode()}";
+
+    private void Apri()
+    {
+        IsOpen = !IsOpen;
+    }
 }
+
