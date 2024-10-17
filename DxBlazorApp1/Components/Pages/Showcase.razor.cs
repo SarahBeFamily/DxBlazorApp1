@@ -14,6 +14,10 @@ namespace DxBlazorApp1.Components.Pages
         private decimal Quantita { get; set; }
         bool Selezionato { get; set; }
 
+        private string FlyoutText = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel
+        nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor,
+        imperdiet mauris. Fusce id purus magna.";
+
         IEnumerable<FIR> FIRs { get; set; }
         IEnumerable<Location> Locations { get; set; }
         Location Trasportatore { get; set; }

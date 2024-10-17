@@ -7,6 +7,7 @@
             List<MenuItemGroup> groups = [
                 new MenuItemGroup("Dashboard", "icon-nav icon-dashboard", "images/Home.svg", "/"),
                 new MenuItemGroup("ShowCase", "icon-nav icon-dashboard", "images/Home.svg", "showcase"),
+                new MenuItemGroup("Email", "icon-nav icon-dashboard", "images/Home.svg", "/mail-ritiro"),
                 new MenuItemGroup("Logistica", "icon-nav icon-logistica", "images/Logistica.svg", "#",
                      [
                         new("Richiesta ritiro", "", "", "richiesta-ritiro"),
