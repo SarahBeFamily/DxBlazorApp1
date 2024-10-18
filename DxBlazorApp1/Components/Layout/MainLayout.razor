@@ -26,12 +26,8 @@
         <div class="w-100 nav-buttons-container">
 
             <!-- PROVVISORIO: per me che non ho l'accesso -->
-            @{
-                var AnyNotification = true;
-                var activeNotif = AnyNotification ? "active-notif" : "";
-            }
-            <button class="rounded-button @activeNotif" @onclick="OpenNotifications"><i class="icon-notification"></i></button>
-
+            
+            <ISysNotificationBanner></ISysNotificationBanner>
             <div id="user-area">
                 <div class="menu-button d-flex align-items-center">
                     <div class="user-image" onclick="(document.getElementById('user-dropdown-panel').classList.toggle('open'))"><i class="bi bi-person-fill"></i></div>
@@ -42,11 +38,10 @@
                 </div>
 
                 <div id="user-dropdown-panel" class="dropdown-area">
-                    <DxButton RenderStyle="@ButtonRenderStyle.Link" CssClass="menu-button" NavigateUrl="Account/Manage" Text="Profilo" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
+                    <InteractiveManageAccount></InteractiveManageAccount>
 
-                    <form action="Account/Logout" method="post" class="display-desktop">
+                    <form action="Account/Logout" method="get" class="display-desktop">
                         <AntiforgeryToken />
-                        <input type="hidden" name="ReturnUrl" value="@currentUrl" />
                         <DxButton RenderStyle="@ButtonRenderStyle.Link" CssClass="menu-button"  SubmitFormOnClick="true" Text="Esci" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
                     </form>
                 </div>
@@ -81,7 +76,7 @@
 
         </div>
 
-        <ISysNotificationArea IsNotificationsOpen="@IsNotificationsOpen"></ISysNotificationArea>
+       
     </header>
 
     @{
@@ -109,7 +104,7 @@
 @code {
     public bool isXSmallScreen { get; set; }
     private string? currentUrl;
-    private bool IsNotificationsOpen { get; set; } = false;
+ 
 
     protected override void OnInitialized()
     {
@@ -128,8 +123,5 @@
         NavigationManager.LocationChanged -= OnLocationChanged;
     }
 
-    public void OpenNotifications()
-	{
-		IsNotificationsOpen = !IsNotificationsOpen;
-	}
+    
 }
