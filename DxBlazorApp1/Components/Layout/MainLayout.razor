@@ -24,27 +24,64 @@
 		}
 
         <div class="w-100 nav-buttons-container">
-            <NavLink href="logout" class="button-link">
-                <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="Logout" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-logout"></DxButton>
-            </NavLink>
-            <AuthorizeView>
-                <Authorized>
-                    <NavLink href="Account/Manage" class="button-link menubutton-float-end display-desktop">
-                        <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="@context.User.Identity?.Name" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-user"></DxButton>
-                    </NavLink>
+
+            <!-- PROVVISORIO: per me che non ho l'accesso -->
+            @{
+                var AnyNotification = true;
+                var activeNotif = AnyNotification ? "active-notif" : "";
+            }
+            <button class="rounded-button @activeNotif" @onclick="OpenNotifications"><i class="icon-notification"></i></button>
+
+            <div id="user-area">
+                <div class="menu-button d-flex align-items-center">
+                    <div class="user-image" onclick="(document.getElementById('user-dropdown-panel').classList.toggle('open'))"><i class="bi bi-person-fill"></i></div>
+                    <div class="user-info d-flex flex-column mx-3">
+                        <span class="name">Mario Rossi</span>
+                        <span class="role">Ruolo</span>
+                    </div>
+                </div>
+
+                <div id="user-dropdown-panel" class="dropdown-area">
+                    <DxButton RenderStyle="@ButtonRenderStyle.Link" CssClass="menu-button" NavigateUrl="Account/Manage" Text="Profilo" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
+
                     <form action="Account/Logout" method="post" class="display-desktop">
                         <AntiforgeryToken />
                         <input type="hidden" name="ReturnUrl" value="@currentUrl" />
-                        <DxButton RenderStyle="@ButtonRenderStyle.Dark" SubmitFormOnClick="true" Text="Log out" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-log-out"></DxButton>
+                        <DxButton RenderStyle="@ButtonRenderStyle.Link" CssClass="menu-button"  SubmitFormOnClick="true" Text="Esci" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
                     </form>
+                </div>
+            </div>
+
+            <!-- DEFINITIVO: utente già loggato -->
+            
+            @* <AuthorizeView>
+                <Authorized>
+                    <button class="rounded-button" @onclick="OpenNotifications"><i class="icon-notification"></i></button>
+
+                    <div id="user-area">
+                        <div class="menu-button d-flex align-items-center">
+                            <div class="user-image" onclick="(document.getElementById('user-dropdown-panel').classList.toggle('open'))"><i class="bi bi-person-fill"></i></div>
+                            <div class="user-info d-flex flex-column mx-3">
+						        <span class="name">Mario Rossi</span>
+						        <span class="role">Ruolo</span>
+                            </div>
+				        </div>
+
+                        <div id="user-dropdown-panel" class="dropdown-area">
+                            <DxButton RenderStyle="@ButtonRenderStyle.Link" CssClass="menu-button" NavigateUrl="Account/Manage" Text="Profilo" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
+                            <form action="Account/Logout" method="post" class="display-desktop">
+                                <AntiforgeryToken />
+                                <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                                <DxButton RenderStyle="@ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Esci" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
+                            </form>
+                        </div>
+                    </div>
                 </Authorized>
-                <NotAuthorized>
-                    <NavLink href="Account/Login" class="button-link menubutton-float-end display-desktop">
-                        <DxButton RenderStyle="@ButtonRenderStyle.Dark" Text="Log in" RenderStyleMode="@ButtonRenderStyleMode.Text" CssClass="menu-button" IconCssClass="icon icon-log-in"></DxButton>
-                    </NavLink>
-                </NotAuthorized>
-            </AuthorizeView>
+            </AuthorizeView> *@
+
         </div>
+
+        <ISysNotificationArea IsNotificationsOpen="@IsNotificationsOpen"></ISysNotificationArea>
     </header>
 
     @{
@@ -72,6 +109,7 @@
 @code {
     public bool isXSmallScreen { get; set; }
     private string? currentUrl;
+    private bool IsNotificationsOpen { get; set; } = false;
 
     protected override void OnInitialized()
     {
@@ -89,4 +127,9 @@
     {
         NavigationManager.LocationChanged -= OnLocationChanged;
     }
+
+    public void OpenNotifications()
+	{
+		IsNotificationsOpen = !IsNotificationsOpen;
+	}
 }

@@ -144,6 +144,98 @@ header#main {
         @include media-query($mobile) {
             padding-right: 17px !important;
         }
+
+        .rounded-button {
+            border: 1px solid #c8c3b9;
+            background: white;
+            font-family: var(--font-titles);
+            padding: 13px 18px;
+            font-size: clamp(13px, 0.7vw, 16px);
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.active-notif {
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 30%;
+                    right: 34%;
+                    width: 8px;
+                    height: 7px;
+                    background: var(--primary-color);
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+
+    #user-area {
+        position: relative;
+
+        .user-image {
+            border: 1px solid #c8c3b9;
+            background: white;
+            font-family: var(--font-titles);
+            padding: 13px 19px;
+            font-size: 21px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c8c3b9;
+            cursor: pointer;
+        }
+
+        .user-info {
+            font-family: var(--font-titles);
+            line-height: 1.2;
+
+            .name {
+                font-weight: 500;
+                font-size: clamp(18px,1.2vw, 24px);
+            }
+
+            .role {
+                font-size: clamp(14px,1.2vw, 18px);
+                color: #c8c3b9;
+            }
+        }
+
+        #user-dropdown-panel {
+            position: absolute;
+            width: 100%;
+            border-radius: 0 0 8px 8px;
+            background: white;
+            box-shadow: rgba(0,0,0,0.01) 0 0 25px 10px;
+            transition: all 0.5s ease;
+            display: none;
+            margin-top: 18px;
+
+            &.open {
+                display: block;
+            }
+        }
+
+        .dropdown-area .menu-button {
+            padding: 12px 14px 16px !important;
+            color: var(--dark);
+            border-top: 1px solid var(--light-gray);
+            width: 100%;
+            border-radius: 0 !important;
+            justify-content: flex-start;
+
+            &:hover {
+                background-color: var(--medium-gray);
+            }
+
+            span {
+                text-decoration: none !important;
+            }
+        }
     }
 }
 
@@ -467,6 +559,72 @@ header#main {
     bottom: 0;
     right: 0;
     z-index: 99;
+}
+
+#offcanvas-notifications {
+    position: fixed;
+    top: 90px;
+    right: 0;
+    background: white;
+    padding: 20px;
+    overflow: auto;
+    width: 320px;
+    box-shadow: rgba(0,0,0,0.01) 0 0 25px 10px;
+    transition: all 0.5s ease;
+    z-index: -1;
+
+    &.open-False {
+        right: -105%;
+    }
+
+    hr {
+        margin: 2rem 0 3rem;
+        color: var(--font-color);
+    }
+
+    .note-type {
+        h3 {
+            font-size: clamp(18px,1.7vw,20px);
+            font-weight: 600;
+        }
+
+        .note-header {
+            font-size: 13px;
+            padding: 6px 0 18px;
+
+            span {
+                color: var(--font-color);
+            }
+        }
+
+        .notification-item {
+            padding: 10px;
+            border-radius: 15px;
+            border: 1px solid var(--light-gray);
+            color: var(--font-color);
+            margin-bottom: 5px;
+            font-size: clamp(14px, 0.6vw, 16px);
+            font-family: var(--font-titles);
+
+            a:any-link {
+                color: var(--dark);
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .notification-item-body {
+                ul, li {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+            }
+
+            span {
+                color: var(--dark) !important;
+            }
+        }
+    }
 }
 
 /** mobile **/
