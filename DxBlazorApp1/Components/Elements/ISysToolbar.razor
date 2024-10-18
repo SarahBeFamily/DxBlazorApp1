@@ -1,0 +1,43 @@
+﻿@using Orientation = DevExpress.Blazor.Orientation
+
+<DxStackLayout Orientation="Orientation.Horizontal" >
+    <Items>
+        <DxStackLayoutItem>
+            <Template>
+                <DxToolbar>
+                    @foreach (var item in ToolbarItems)
+                    {
+                        <DxToolbarItem SubmitFormOnClick="@item.SubmitForm"
+                                       Alignment="@item.Alignment"
+                                       Click="@(() => ItemClicked.InvokeAsync(item))">
+                            @if (string.IsNullOrWhiteSpace(item.Text))
+                            {
+                                <i class="@item.Icon"></i>
+                            }
+                            else
+                            {
+                                <span>@item.Text</span>
+                            }
+
+                        </DxToolbarItem>
+                    }
+                </DxToolbar>
+            </Template>
+        </DxStackLayoutItem>
+        @if (ShowSearchBox)
+        {
+            <DxStackLayoutItem>
+                <Template>
+
+                    <DxTextBox Text="@SearchText"
+                               ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                               TextChanged="@((text) => OnTextChanged.InvokeAsync(text))"
+                               BindValueMode="BindValueMode.OnDelayedInput"
+                               NullText="Search"
+                               InputDelay="500" />
+
+                </Template>
+            </DxStackLayoutItem>
+        }
+    </Items>
+</DxStackLayout>
