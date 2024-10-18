@@ -603,7 +603,7 @@ header#main {
             border: 1px solid var(--light-gray);
             color: var(--font-color);
             margin-bottom: 5px;
-            font-size: clamp(14px, 0.6vw, 16px);
+            font-size: clamp(13px, 0.6vw, 16px);
             font-family: var(--font-titles);
 
             a:any-link {
@@ -612,16 +612,26 @@ header#main {
                 font-weight: 600;
             }
 
+            .notification-item-header {
+                display: flex;
+                justify-content: space-between;
+
+                span {
+                    color: var(--font-color);
+                    font-size: 12px;
+                }
+            }
+
             .notification-item-body {
                 ul, li {
                     list-style: none;
                     padding: 0;
                     margin: 0;
                 }
-            }
 
-            span {
-                color: var(--dark) !important;
+                span {
+                    color: var(--dark) !important;
+                }
             }
         }
     }
