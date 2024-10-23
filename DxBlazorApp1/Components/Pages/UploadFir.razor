@@ -1,0 +1,200 @@
+﻿@page "/upload-fir"
+@rendermode  InteractiveServer
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Stile per la divisione a metà dello schermo */
+        .split {
+            height: 80vh;
+            display: flex;
+        }
+
+        /* Stile per la parte sinistra (contenente i campi di input) */
+        .left {
+            flex: 1;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        /* Stile per la parte destra (visualizzazione del PDF) */
+        .right {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        .pdfTabs {
+            height: 65vh;
+        }
+    </style>
+</head>
+<DxButton Text="Show popup" Click="@(() => Model.PopupVisible = !Model.PopupVisible)"></DxButton>
+
+<DxPopup Visible="@Model.PopupVisible" Height="auto" Width="90%" c>
+    <BodyTemplate Context="popupContext">
+
+    <DxLoadingPanel @bind-Visible="PanelLoadVisible"
+                    IsContentBlocked="true"
+                    CssClass="w-100"
+                    ApplyBackgroundShading="true"
+                    Text="">
+        <div class="split">
+            <div class="BorderBase PopUpBorder left">
+
+                <EditForm Model="@Model" OnValidSubmit="@Save" Context="editContext">
+                    <ISysToolbar ToolbarItems="@ToolbarEditItems"></ISysToolbar>
+                    <DxFormLayout CssClass="w-100 py-3 px-3">
+                        <DataAnnotationsValidator></DataAnnotationsValidator>
+                        <DxFormLayoutItem ColSpanMd="12" Visible="@(Model.MotivazioneRifiuto?.Length > 0)">
+                            <DxTextBox @bind-Text="Model.MotivazioneRifiuto" ReadOnly="true" />
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Intermediario" ColSpanMd="6" CaptionPosition="CaptionPosition.Vertical">
+                            <DxTextBox @bind-Text="@Model.MediatorCompanyName" ReadOnly="true" />
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Produttore" ColSpanMd="6" CaptionPosition="CaptionPosition.Vertical">
+                            <DxTextBox @bind-Text="@Model.Produttore" ReadOnly="true" />
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Destinatario" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
+                            <DxComboBox Data="@Model.MyLocations"
+                                        EditFormat="{0}, {1} {2}"
+                                        ValueFieldName="ContactLocationId"
+                                        @bind-Value="Model.ContactLocationIdDestination">
+                                <Columns>
+                                    <DxListEditorColumn FieldName="ContactCompanyName" Caption="RagioneSociale" />
+                                    <DxListEditorColumn FieldName="LocationAddress" Caption="Indirizzo" />
+                                    <DxListEditorColumn FieldName="LocationCity" Caption="Citta" />
+                                </Columns>
+                            </DxComboBox>
+                            <ValidationMessage For="@(() => Model.ContactLocationIdDestination)"></ValidationMessage>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Trasportatore" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
+                            <DxComboBox Data="@Model.MyConveyors"
+                                        TextFieldName="CompanyName"
+                                        ValueFieldName="Id"
+                                        @bind-Value="Model.ConveyorContactId">
+                            </DxComboBox>
+                        </DxFormLayoutItem>
+
+                        <DxFormLayoutItem Caption="Conducente" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
+                            <DxTextBox @bind-Text="@Model.DriverName" />
+                            <ValidationMessage For="@(() => Model.DriverName)"></ValidationMessage>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Motrice" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="4">
+                            <DxComboBox Data="Model.Motrici"
+                                        TextFieldName="Plate"
+                                        ValueFieldName="Plate"
+                                        @bind-Value="@Model.TractorPlate">
+                            </DxComboBox>
+                            <ValidationMessage For="@(() => Model.TractorPlate)"></ValidationMessage>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="Rimorchio" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="4">
+                            <DxComboBox Data="Model.Rimorchi"
+                                        ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                                        TextFieldName="Plate"
+                                        ValueFieldName="Plate"
+                                        @bind-Value="@Model.TrailerPlate">
+                            </DxComboBox>
+                        </DxFormLayoutItem>
+
+                        <DxFormLayoutItem Caption="Articolo" ColSpanMd="12" CaptionPosition="CaptionPosition.Vertical">
+                            <DxTextBox @bind-Text="@Model.ArticleDescription" ReadOnly="true" />
+                        </DxFormLayoutItem>
+
+
+                        <DxFormLayoutItem Caption="NumeroDocumento" ColSpanMd="6" CaptionPosition="CaptionPosition.Vertical">
+                            <DxTextBox @bind-Text="@Model.NumeroDocumento" />
+                            <ValidationMessage For="@(() => Model.NumeroDocumento)"></ValidationMessage>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="EmessoIl" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
+                            <DxDateEdit @bind-Date="@Model.DataDocumento" />
+                            <ValidationMessage For="@(() => Model.DataDocumento)"></ValidationMessage>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem BeginRow="true" Caption="DataInizioTrasporto" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
+                            <DxDateEdit @bind-Date="@Model.DataInizioTrasporto" />
+                            <ValidationMessage For="@(() => Model.DataInizioTrasporto)"></ValidationMessage>
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="DataFineTrasporto" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
+                            <DxDateEdit @bind-Date="@Model.DataFineTrasporto" />
+                            <ValidationMessage For="@(() => Model.DataFineTrasporto)"></ValidationMessage>
+                        </DxFormLayoutItem>
+
+                        <DxFormLayoutItem BeginRow="true" Caption="Destinazione" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
+                            <DxComboBox Data="@Model.WasteDestinations"
+                                        FilteringMode="DataGridFilteringMode.Contains"
+                                        TextFieldName="Description"
+                                        ValueFieldName="Id"
+                                        @bind-Value="@Model.WasteDestinationId">
+                            </DxComboBox>
+                            <ValidationMessage For="@(() => Model.WasteDestinationId)"></ValidationMessage>
+
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="QuantitaPianificata" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
+                            <DxSpinEdit @bind-Value="@Model.QtaPlanned" DisplayFormat="N2" ReadOnly="true" ShowSpinButtons="false" />
+                        </DxFormLayoutItem>
+
+                        <DxFormLayoutItem Caption="QuantitaReale" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
+                            <DxSpinEdit @bind-Value="@Model.QtaReal" DisplayFormat="N2" Mask="N2" />
+                            <ValidationMessage For="@(() => Model.QtaReal)"></ValidationMessage>
+
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem Caption="NumeroColli" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
+                            <DxSpinEdit @bind-Value="@Model.NumeroColli" />
+                        </DxFormLayoutItem>
+                        <DxFormLayoutItem ColSpanMd="12" CaptionPosition="CaptionPosition.Horizontal">
+                            <DxUpload Name="myFile"
+                                      SelectButtonText="UploadFir"
+                                      UploadUrl="http://uploadurl"
+                                      AllowMultiFileUpload="false"
+                                      FileUploadError="@OnFileUploadError"
+                                      MaxFileSize="15000000"
+                                      FileUploadStart="@OnFileUploadStart"
+                                      FileUploaded="@((args) => OnFileUploaded(args))"
+                                      ChunkSize="200000"
+                                      AllowedFileExtensions="@(new List<string> { ".pdf" })"
+                                      ShowFileList="false">
+                            </DxUpload>
+                            <ValidationMessage For="@(() => Model.FileName)"></ValidationMessage>
+                        </DxFormLayoutItem>
+
+                        <DxFormLayoutItem ColSpanMd="12" CaptionPosition="CaptionPosition.Horizontal">
+                            <DxUpload Name="myFile"
+                                      SelectButtonText="UploadRettifica"
+                                      UploadUrl="http://uploadurl"
+                                      AllowMultiFileUpload="false"
+                                      FileUploadError="@OnFileUploadError"
+                                      MaxFileSize="15000000"
+                                      FileUploadStart="@OnFileUploadStart"
+                                      FileUploaded="@((args) => OnRettificaFirFileUploaded(args))"
+                                      ChunkSize="200000"
+                                      AllowedFileExtensions="@(new List<string> { ".pdf" })"
+                                      ShowFileList="false">
+                            </DxUpload>
+                        </DxFormLayoutItem>
+
+                    </DxFormLayout>
+                </EditForm>
+
+            </div>
+            <div class="right">
+
+
+                <DxTabs RenderMode="TabsRenderMode.OnDemand" @bind-ActiveTabIndex="@Model.ActiveTabIndex">
+                    <DxTabPage Text="Fir">
+                        <div class="pdfTabs">
+                                <embed src="Formulario.pdf" type="application/pdf" width="100%" height="600px" />
+                        </div>
+                    </DxTabPage>
+                    <DxTabPage Text="Rettifica">
+                        <div class="pdfTabs">
+                                <embed src="Formulario.pdf" type="application/pdf" width="100%" height="600px" />
+                        </div>
+                    </DxTabPage>
+                </DxTabs>
+            </div>
+        </div>
+    </DxLoadingPanel>
+    </BodyTemplate>
+</DxPopup>
+

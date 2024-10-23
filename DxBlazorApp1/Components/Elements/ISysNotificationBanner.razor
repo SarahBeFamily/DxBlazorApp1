@@ -1,0 +1,14 @@
+﻿@rendermode InteractiveServer
+<button class="rounded-button @activeNotif" @onclick="OpenNotifications"><i class="icon-notification"></i></button>
+
+<ISysNotificationArea IsNotificationsOpen="@IsNotificationsOpen"></ISysNotificationArea>
+@code
+{
+    private bool AnyNotification { get; set; } = true;
+    private string activeNotif => AnyNotification ? "active-notif" : "";
+    private bool IsNotificationsOpen { get; set; } = false;
+    public void OpenNotifications()
+    {
+        IsNotificationsOpen = !IsNotificationsOpen;
+    }
+}

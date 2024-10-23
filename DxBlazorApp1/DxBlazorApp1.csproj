@@ -26,6 +26,9 @@
   <ItemGroup>
     <None Remove="Components\Pages\Dashboard.razor.css" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\Formulario.pdf" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="DartSassBuilder" Version="1.1.0" />

@@ -8,6 +8,7 @@
                 new MenuItemGroup("Dashboard", "icon-nav icon-dashboard", "images/Home.svg", "/"),
                 new MenuItemGroup("ShowCase", "icon-nav icon-dashboard", "images/Home.svg", "showcase"),
                 new MenuItemGroup("Email", "icon-nav icon-dashboard", "images/Home.svg", "/mail-ritiro"),
+                new MenuItemGroup("Upload Fir", "icon-nav icon-dashboard", "images/Home.svg", "/upload-fir"),
                 new MenuItemGroup("Logistica", "icon-nav icon-logistica", "images/Logistica.svg", "#",
                      [
                         new("Richiesta ritiro", "", "", "richiesta-ritiro"),
