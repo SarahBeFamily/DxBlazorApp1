@@ -103,15 +103,16 @@
                         </DxFormLayoutItem>
 
 
-                        <DxFormLayoutItem Caption="NumeroDocumento" ColSpanMd="6" CaptionPosition="CaptionPosition.Vertical">
+                        <DxFormLayoutItem Caption="NumeroDocumento" ColSpanMd="12" CaptionPosition="CaptionPosition.Vertical">
                             <DxTextBox @bind-Text="@Model.NumeroDocumento" />
                             <ValidationMessage For="@(() => Model.NumeroDocumento)"></ValidationMessage>
                         </DxFormLayoutItem>
+
                         <DxFormLayoutItem Caption="EmessoIl" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
                             <DxDateEdit @bind-Date="@Model.DataDocumento" />
                             <ValidationMessage For="@(() => Model.DataDocumento)"></ValidationMessage>
                         </DxFormLayoutItem>
-                        <DxFormLayoutItem BeginRow="true" Caption="DataInizioTrasporto" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
+                        <DxFormLayoutItem Caption="DataInizioTrasporto" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
                             <DxDateEdit @bind-Date="@Model.DataInizioTrasporto" />
                             <ValidationMessage For="@(() => Model.DataInizioTrasporto)"></ValidationMessage>
                         </DxFormLayoutItem>
@@ -142,36 +143,40 @@
                         <DxFormLayoutItem Caption="NumeroColli" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
                             <DxSpinEdit @bind-Value="@Model.NumeroColli" />
                         </DxFormLayoutItem>
-                        <DxFormLayoutItem ColSpanMd="12" CaptionPosition="CaptionPosition.Horizontal">
-                            <DxUpload Name="myFile"
-                                      SelectButtonText="UploadFir"
-                                      UploadUrl="http://uploadurl"
-                                      AllowMultiFileUpload="false"
-                                      FileUploadError="@OnFileUploadError"
-                                      MaxFileSize="15000000"
-                                      FileUploadStart="@OnFileUploadStart"
-                                      FileUploaded="@((args) => OnFileUploaded(args))"
-                                      ChunkSize="200000"
-                                      AllowedFileExtensions="@(new List<string> { ".pdf" })"
-                                      ShowFileList="false">
-                            </DxUpload>
-                            <ValidationMessage For="@(() => Model.FileName)"></ValidationMessage>
-                        </DxFormLayoutItem>
 
-                        <DxFormLayoutItem ColSpanMd="12" CaptionPosition="CaptionPosition.Horizontal">
-                            <DxUpload Name="myFile"
-                                      SelectButtonText="UploadRettifica"
-                                      UploadUrl="http://uploadurl"
-                                      AllowMultiFileUpload="false"
-                                      FileUploadError="@OnFileUploadError"
-                                      MaxFileSize="15000000"
-                                      FileUploadStart="@OnFileUploadStart"
-                                      FileUploaded="@((args) => OnRettificaFirFileUploaded(args))"
-                                      ChunkSize="200000"
-                                      AllowedFileExtensions="@(new List<string> { ".pdf" })"
-                                      ShowFileList="false">
-                            </DxUpload>
-                        </DxFormLayoutItem>
+                        <div class="d-flex gap-1" style="width:30%;">
+                                <DxFormLayoutItem ColSpanMd="12" CaptionPosition="CaptionPosition.Horizontal">
+                                    <DxUpload Name="myFile"
+                                              SelectButtonText="UploadFir"
+                                              UploadUrl="http://uploadurl"
+                                              AllowMultiFileUpload="false"
+                                              FileUploadError="@OnFileUploadError"
+                                              MaxFileSize="15000000"
+                                              FileUploadStart="@OnFileUploadStart"
+                                              FileUploaded="@((args) => OnFileUploaded(args))"
+                                              ChunkSize="200000"
+                                              AllowedFileExtensions="@(new List<string> { ".pdf" })"
+                                              ShowFileList="false">
+                                    </DxUpload>
+                                    <ValidationMessage For="@(() => Model.FileName)"></ValidationMessage>
+                                </DxFormLayoutItem>
+
+                                <DxFormLayoutItem ColSpanMd="12" CaptionPosition="CaptionPosition.Horizontal">
+                                    <DxUpload Name="myFile"
+                                              SelectButtonText="UploadRettifica"
+                                              UploadUrl="http://uploadurl"
+                                              AllowMultiFileUpload="false"
+                                              FileUploadError="@OnFileUploadError"
+                                              MaxFileSize="15000000"
+                                              FileUploadStart="@OnFileUploadStart"
+                                              FileUploaded="@((args) => OnRettificaFirFileUploaded(args))"
+                                              ChunkSize="200000"
+                                              AllowedFileExtensions="@(new List<string> { ".pdf" })"
+                                              ShowFileList="false">
+                                    </DxUpload>
+                                </DxFormLayoutItem>
+                        </div>
+                        
 
                     </DxFormLayout>
                 </EditForm>

@@ -193,6 +193,34 @@ a.link {
     font-weight: 500 !important;
 }
 
+/** tabs dentro popup **/
+.dxbl-modal-content {
+    .BorderBase.PopUpBorder.left {
+        overflow-y: auto;
+    }
+
+    .dxbl-tabs > .dxbl-tabs-tablist li {
+        > div {
+            padding: 5px 15px 7px !important;
+            border-top-left-radius: 10px !important;
+            border-top-right-radius: 10px !important;
+        }
+    }
+
+    .dxbl-text-edit:not(.dxbl-memo-edit) {
+        height: 32px !important;
+        padding-left: 2px;
+    }
+
+    .dxbl-fl label {
+        font-size: 13px !important;
+        padding-bottom: 0;
+    }
+    /*.dxbl-fl .dxbl-fl-item {
+        margin-top: 8px;
+    }*/
+}
+
 /** Form **/
 
 .dxbl-tabs {
