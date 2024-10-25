@@ -1,6 +1,5 @@
 ﻿using DevExpress.Blazor;
 using DxBlazorApp1.Services;
-using Microsoft.AspNetCore.Components;
 
 namespace DxBlazorApp1.Components.Pages
 {
@@ -228,6 +227,7 @@ namespace DxBlazorApp1.Components.Pages
             public int Qty { get; set; }
             public string Indirizzo { get; set; }
             public string Trasportatore { get; set; }
+            public string? Stato { get; set; }
         }
 
         public class Location

@@ -98,7 +98,8 @@
         ShowSearchBox="false"
         SearchText="@SearchText"
         PagerNavigationMode="PagerNavigationMode.NumericButtons"
-        ColumnResizeMode="GridColumnResizeMode.NextColumn">
+        ColumnResizeMode="GridColumnResizeMode.NextColumn"
+        EditMode="GridEditMode.PopupEditForm">
     <Columns>
         <ISysCommandEditColumn></ISysCommandEditColumn>
         <ISysCommandViewColumn></ISysCommandViewColumn>
@@ -114,17 +115,23 @@
         <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
         <DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
         <DxGridDataColumn FieldName="Indirizzo" />
+        <DxGridCommandColumn Caption="Stato" ClearFilterButtonVisible="false">
+            <HeaderTemplate>Stato</HeaderTemplate>
+            <CellDisplayTemplate>
+               badge
+            </CellDisplayTemplate>
+        </DxGridCommandColumn>
     </Columns>
     <DetailRowTemplate>
         <text>Note di dettaglio della riga</text>
     </DetailRowTemplate>
     <EditFormTemplate Context="editContext">
-        <DxFormLayout>
+        <DxFormLayout CaptionPosition="CaptionPosition.Vertical">
             <DxFormLayoutItem Caption="Data richiesta" ColSpanMd="4">
                 @editContext.GetEditor("DataRichiesta")
             </DxFormLayoutItem>
             <DxFormLayoutItem Caption="Data" ColSpanMd="4">
-                @editContext.GetEditor("Data ritiro")
+                @editContext.GetEditor("DataRitiro")
             </DxFormLayoutItem>
             <DxFormLayoutItem Caption="Qty" ColSpanMd="4">
                 @editContext.GetEditor("Qty")
