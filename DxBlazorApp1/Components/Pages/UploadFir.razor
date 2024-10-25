@@ -1,35 +1,6 @@
 ﻿@page "/upload-fir"
 @rendermode  InteractiveServer
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* Stile per la divisione a metà dello schermo */
-        .split {
-            height: 80vh;
-            display: flex;
-        }
-
-        /* Stile per la parte sinistra (contenente i campi di input) */
-        .left {
-            flex: 1;
-            padding: 20px;
-            background-color: #f0f0f0;
-        }
-
-        /* Stile per la parte destra (visualizzazione del PDF) */
-        .right {
-            flex: 1;
-            padding: 20px;
-            background-color: #ffffff;
-        }
-
-        .pdfTabs {
-            height: 65vh;
-        }
-    </style>
-</head>
 <DxButton Text="Show popup" Click="@(() => Model.PopupVisible = !Model.PopupVisible)"></DxButton>
 
 <DxPopup Visible="@Model.PopupVisible" Height="auto" Width="90%" c>
@@ -40,9 +11,9 @@
                     CssClass="w-100"
                     ApplyBackgroundShading="true"
                     Text="">
-        <div class="split">
-            <div class="BorderBase PopUpBorder left">
 
+        <ISysPopupInnerLayout>
+            <ChildContentLeft>
                 <EditForm Model="@Model" OnValidSubmit="@Save" Context="editContext">
                     <ISysToolbar ToolbarItems="@ToolbarEditItems"></ISysToolbar>
                     <DxFormLayout CssClass="w-100 py-3 px-3">
@@ -144,7 +115,7 @@
                             <DxSpinEdit @bind-Value="@Model.NumeroColli" />
                         </DxFormLayoutItem>
 
-                        <div class="d-flex gap-1" style="width:30%;">
+                            <div class="d-flex gap-1" style="width:30%;">
                                 <DxFormLayoutItem ColSpanMd="12" CaptionPosition="CaptionPosition.Horizontal">
                                     <DxUpload Name="myFile"
                                               SelectButtonText="UploadFir"
@@ -175,30 +146,27 @@
                                               ShowFileList="false">
                                     </DxUpload>
                                 </DxFormLayoutItem>
-                        </div>
-                        
+                            </div>
 
-                    </DxFormLayout>
-                </EditForm>
-
-            </div>
-            <div class="right">
-
-
-                <DxTabs RenderMode="TabsRenderMode.OnDemand" @bind-ActiveTabIndex="@Model.ActiveTabIndex">
-                    <DxTabPage Text="Fir">
-                        <div class="pdfTabs">
+                        </DxFormLayout>
+                    </EditForm>
+            </ChildContentLeft>
+            <ChildContentRight>
+                    <DxTabs RenderMode="TabsRenderMode.OnDemand" @bind-ActiveTabIndex="@Model.ActiveTabIndex">
+                        <DxTabPage Text="Fir">
+                            <div class="pdfTabs">
                                 <embed src="Formulario.pdf" type="application/pdf" width="100%" height="600px" />
-                        </div>
-                    </DxTabPage>
-                    <DxTabPage Text="Rettifica">
-                        <div class="pdfTabs">
+                            </div>
+                        </DxTabPage>
+                        <DxTabPage Text="Rettifica">
+                            <div class="pdfTabs">
                                 <embed src="Formulario.pdf" type="application/pdf" width="100%" height="600px" />
-                        </div>
-                    </DxTabPage>
-                </DxTabs>
-            </div>
-        </div>
+                            </div>
+                        </DxTabPage>
+                    </DxTabs>
+            </ChildContentRight>
+        </ISysPopupInnerLayout>
+
     </DxLoadingPanel>
     </BodyTemplate>
 </DxPopup>

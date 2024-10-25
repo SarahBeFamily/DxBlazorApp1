@@ -69,6 +69,10 @@
     --rgb-dark: 25, 25, 25;
     --font-text: 'DM Sans', sans-serif;
     --font-titles: 'Archia', sans-serif;
+    --grigio: #ccc;
+    --verde: #198754;
+    --giallo: #FF9C07;
+    --dark-gray: #46413C;
     --bs-primary: var(--primary-color) !important;
     --bs-body-color: var(--dark) !important;
     --bs-link-color-rgb: var(--rgb-primary-color) !important;

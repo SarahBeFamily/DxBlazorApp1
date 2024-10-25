@@ -44,6 +44,12 @@
     </ISysInnerColumn>
 </ISysLayoutColumns>
 
+<h1>Bottoni</h1>
+<div class="d-flex">
+    <ISysBtn RenderStyle="Primary" Icon="bi bi-file-earmark-arrow-up" />
+</div>
+
+
 
 <h1>Tabella e Filtri</h1>
 
@@ -108,7 +114,6 @@
         <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
         <DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
         <DxGridDataColumn FieldName="Indirizzo" />
-        <DxGridDataColumn FieldName="Trasportatore" />
     </Columns>
     <DetailRowTemplate>
         <text>Note di dettaglio della riga</text>
@@ -141,6 +146,7 @@
                   Click="@context.CloseCallback" />
     </FooterContentTemplate>
 </DxPopup>
+
 
 <h1>Editor</h1>
 <DxFormLayout CaptionPosition="CaptionPosition.Vertical">

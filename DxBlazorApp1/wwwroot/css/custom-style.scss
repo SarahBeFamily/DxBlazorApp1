@@ -219,6 +219,8 @@ header#main {
             transition: all 0.5s ease;
             display: none;
             margin-top: 18px;
+            max-width: 180px;
+            right: 0;
 
             &.open {
                 display: block;

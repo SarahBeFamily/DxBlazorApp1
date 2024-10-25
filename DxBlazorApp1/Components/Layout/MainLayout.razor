@@ -29,7 +29,7 @@
             
             <ISysNotificationBanner></ISysNotificationBanner>
             <div id="user-area">
-                <div class="menu-button d-flex align-items-center" onclick="(document.getElementById('user-dropdown-panel').classList.toggle('open'))">
+                <div class="menu-button d-flex align-items-center" onclick="(document.getElementById('user-dropdown-panel').classList.toggle('open'))" onmouseover="(document.getElementById('user-dropdown-panel').classList.add('open'))">
                     <div class="user-image"><i class="bi bi-person-fill"></i></div>
                     <div class="user-info d-flex flex-column mx-3">
                         <span class="email">i.modenin@axxelera.it</span>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                <div id="user-dropdown-panel" class="dropdown-area">
+                <div id="user-dropdown-panel" class="dropdown-area" onmouseleave="(this.classList.remove('open'))">
                     <InteractiveManageAccount></InteractiveManageAccount>
 
                     <form action="Account/Logout" method="get" class="display-desktop">

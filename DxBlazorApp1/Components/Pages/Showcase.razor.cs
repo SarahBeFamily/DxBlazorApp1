@@ -1,5 +1,6 @@
 ﻿using DevExpress.Blazor;
 using DxBlazorApp1.Services;
+using Microsoft.AspNetCore.Components;
 
 namespace DxBlazorApp1.Components.Pages
 {
@@ -51,7 +52,7 @@ namespace DxBlazorApp1.Components.Pages
                     DataRitiro = DateTime.Now,
                     Qty = 1000,
                     Indirizzo = "Via Manzoni",
-                    Trasportatore = "Bartolini"
+                    Trasportatore = "Bartolini",
                 },
                 new FIR
                 {
@@ -60,7 +61,7 @@ namespace DxBlazorApp1.Components.Pages
                     DataRitiro = DateTime.Now,
                     Qty = 2000,
                     Indirizzo = "Viale della pace",
-                    Trasportatore = "Bartolini"
+                    Trasportatore = "Bartolini",
                 },
                 new FIR
                 {
@@ -69,7 +70,7 @@ namespace DxBlazorApp1.Components.Pages
                     DataRitiro = DateTime.Now,
                     Qty = 2500,
                     Indirizzo = "Viale della pace",
-                    Trasportatore = "Bartolini"
+                    Trasportatore = "Bartolini",
                 },
                 new FIR
                 {
@@ -78,7 +79,7 @@ namespace DxBlazorApp1.Components.Pages
                     DataRitiro = DateTime.Now,
                     Qty = 1000,
                     Indirizzo = "Via Manzoni",
-                    Trasportatore = "Bartolini"
+                    Trasportatore = "Bartolini",
                 },
                 new FIR
                 {
@@ -87,7 +88,7 @@ namespace DxBlazorApp1.Components.Pages
                     DataRitiro = DateTime.Now,
                     Qty = 2000,
                     Indirizzo = "Viale della pace",
-                    Trasportatore = "Bartolini"
+                    Trasportatore = "Bartolini",
                 },
                 new FIR
                 {
@@ -96,7 +97,7 @@ namespace DxBlazorApp1.Components.Pages
                     DataRitiro = DateTime.Now,
                     Qty = 2500,
                     Indirizzo = "Viale della pace",
-                    Trasportatore = "Bartolini"
+                    Trasportatore = "Bartolini",
                 },
                 new FIR
                 {
@@ -105,7 +106,7 @@ namespace DxBlazorApp1.Components.Pages
                     DataRitiro = DateTime.Now,
                     Qty = 1000,
                     Indirizzo = "Via Manzoni",
-                    Trasportatore = "Bartolini"
+                    Trasportatore = "Bartolini",
                 },
                 new FIR
                 {
@@ -114,7 +115,7 @@ namespace DxBlazorApp1.Components.Pages
                     DataRitiro = DateTime.Now,
                     Qty = 2000,
                     Indirizzo = "Viale della pace",
-                    Trasportatore = "Bartolini"
+                    Trasportatore = "Bartolini",
                 },
                 new FIR
                 {
@@ -123,7 +124,7 @@ namespace DxBlazorApp1.Components.Pages
                     DataRitiro = DateTime.Now,
                     Qty = 2500,
                     Indirizzo = "Viale della pace",
-                    Trasportatore = "Bartolini"
+                    Trasportatore = "Bartolini",
                 },
                 new FIR
                 {
@@ -132,7 +133,7 @@ namespace DxBlazorApp1.Components.Pages
                     DataRitiro = DateTime.Now,
                     Qty = 1000,
                     Indirizzo = "Via Manzoni",
-                    Trasportatore = "Bartolini"
+                    Trasportatore = "Bartolini",
                 },
                 new FIR
                 {
@@ -238,5 +239,6 @@ namespace DxBlazorApp1.Components.Pages
 
         public string[] Anni = new string[] { "2021", "2020", "2019", "2018", "2017" };
         public string[] Sedi = new string[] { "Sede 1", "Sede 2", "Sede 3", "Sede 4", "Sede 5" };
+
     }
 }
