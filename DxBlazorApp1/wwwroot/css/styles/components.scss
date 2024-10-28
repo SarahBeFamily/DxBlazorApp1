@@ -199,30 +199,30 @@ a.link {
     padding: 6px 10px;
     font-weight: 400;
     word-wrap: break-word;
-    font-size: clamp(13px,1vw, 16px);
-
-    &.grigio {
+    font-size: clamp(13px,0.6vw,16px);
+    
+    &.gray {
         background: var(--grigio);
         color: var(--dark-gray);
     }
 
-    &.verde {
+    &.green {
         background: var(--verde);
         color: white;
     }
 
-    &.giallo {
+    &.yellow {
         background: var(--giallo);
         color: white;
     }
 
-    &.rosso,
-    &.arancio {
+    &.red,
+    &.orange {
         background: var(--primary-color);
         color: white;
     }
 
-    &.nero {
+    &.black {
         background: var(--dark-gray);
         color: white;
     }
@@ -654,12 +654,10 @@ dxbl-spinedit {
     }
 
 .dxbl-text-edit {
-    --dxbl-text-edit-focus-shadow-color: rgba(var(--rgb-primary-color), 40%) !important;
-    --dxbl-text-edit-focus-border-color: rgba(var(--rgb-primary-color), 50%) !important;
+    //--dxbl-text-edit-focus-shadow-color: rgba(var(--rgb-primary-color), 40%) !important;
+    //--dxbl-text-edit-focus-border-color: rgba(var(--rgb-primary-color), 50%) !important;
 
     &.isys-search-box {
-        /*border: 0 !important;
-        border-radius: 4px !important;*/
         font-family: var(--font-titles);
         color: #333;
 

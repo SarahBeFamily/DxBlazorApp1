@@ -74,6 +74,7 @@
     --giallo: #FF9C07;
     --dark-gray: #46413C;
     --bs-primary: var(--primary-color) !important;
+    --bs-primary-rgb: var(--rgb-primary-color) !important;
     --bs-body-color: var(--dark) !important;
     --bs-link-color-rgb: var(--rgb-primary-color) !important;
     --bs-link-hover-color-rgb: var(--rgb-dark) !important;
