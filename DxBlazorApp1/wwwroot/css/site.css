@@ -198,3 +198,7 @@ html, body {
 .text-right {text-align: right;}
 .hidden {display: none !important;}
 
+/** https://supportcenter.devexpress.com/ticket/details/t1260418/conditionally-showvalidationicon **/
+.dxbl-image.dxbl-edit-validation-status-icon-valid {
+    display: none !important;
+}
