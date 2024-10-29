@@ -1,5 +1,6 @@
 ﻿using DevExpress.Blazor;
 using DxBlazorApp1.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace DxBlazorApp1.Components.Pages
 {
@@ -23,6 +24,8 @@ namespace DxBlazorApp1.Components.Pages
         Location Trasportatore { get; set; }
         IGrid GridFir;
         IEnumerable<SaleInfo> dataSource;
+
+        protected ViewModel Model { get; set; } = new();
 
         protected override async Task OnInitializedAsync()
         {
@@ -240,5 +243,15 @@ namespace DxBlazorApp1.Components.Pages
         public string[] Anni = new string[] { "2021", "2020", "2019", "2018", "2017" };
         public string[] Sedi = new string[] { "Sede 1", "Sede 2", "Sede 3", "Sede 4", "Sede 5" };
 
+        protected class ViewModel
+        {
+            [Required]
+            public string? TestoObbligatorio { get; set; }
+
+            public string? ReadOnlyText { get; set; } = "Sola lettura";
+            public string? Facoltativo { get; set; }
+        }
+
     }
+
 }

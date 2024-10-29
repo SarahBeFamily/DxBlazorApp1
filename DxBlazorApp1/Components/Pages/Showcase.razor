@@ -7,7 +7,7 @@
     <ISysInnerColumn ColumnWidth1>
         <Card Classes="card-col" Title="Titolo Card" Text="Testo" FullHeight="false"></Card>
         <Card Classes="card-col" Title="Titolo Card" Text="Testo" FullHeight="false"></Card>
-	</ISysInnerColumn>
+    </ISysInnerColumn>
     <ISysInnerColumn ColumnWidth4>
         <Card Classes="with-child" Title="Quantità raccolta per mese">
             <DxChart Data="@dataSource">
@@ -58,16 +58,16 @@
         <ISysHeaderNavigatorTab Text="Ricambio" FlyOutText="@FlyoutText"></ISysHeaderNavigatorTab>
     </Tabs>
     <Filters>
-        <ISysHeaderNavigatorFilter Text="Assegnata"/>
-        <ISysHeaderNavigatorFilter Text="In lavorazione" Active="true"/>
-        <ISysHeaderNavigatorFilter Text="Blocco per quote"/>
-        <ISysHeaderNavigatorFilter Text="Sospesa"/>
+        <ISysHeaderNavigatorFilter Text="Assegnata" />
+        <ISysHeaderNavigatorFilter Text="In lavorazione" Active="true" />
+        <ISysHeaderNavigatorFilter Text="Blocco per quote" />
+        <ISysHeaderNavigatorFilter Text="Sospesa" />
         <ISysHeaderNavigatorFilter>
             <DxComboBox NullText="Seleziona..."
                         FilteringMode="DataGridFilteringMode.Contains"
                         TextFieldName="@nameof(Location.RagioneSociale)"
                         Data="@Locations"
-                        Value="@Trasportatore"/>
+                        Value="@Trasportatore" />
         </ISysHeaderNavigatorFilter>
     </Filters>
 
@@ -118,7 +118,7 @@
         <DxGridCommandColumn Caption="Stato" ClearFilterButtonVisible="false">
             <HeaderTemplate>Stato</HeaderTemplate>
             <CellDisplayTemplate>
-               <ISysBadge Label="Assegnata" ColorYellow="true" />
+                <ISysBadge Label="Assegnata" ColorYellow="true" />
             </CellDisplayTemplate>
         </DxGridCommandColumn>
     </Columns>
@@ -156,46 +156,59 @@
 
 
 <h1>Editor</h1>
-<DxFormLayout CaptionPosition="CaptionPosition.Vertical">
+<EditForm Model="@Model" Context="formContext">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <DxFormLayout CaptionPosition="CaptionPosition.Vertical">
 
-    <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
-        <DxTextBox NullText="Scrivi del testo"></DxTextBox>
-    </DxFormLayoutItem>
-    <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
-        <DxTextBox NullText="Readonly" ReadOnly="true"></DxTextBox>
-    </DxFormLayoutItem>
-    <DxFormLayoutItem Caption="DxCheckBox" ColSpanMd="4">
-        <DxCheckBox @bind-Checked="@Selezionato">Multimedia</DxCheckBox>
-    </DxFormLayoutItem>
-
-
-    <DxFormLayoutItem Caption="DxDateEdit" ColSpanMd="4">
-        <DxDateEdit @bind-Date="@DateTimeValue"></DxDateEdit>
-    </DxFormLayoutItem>
-    <DxFormLayoutItem Caption="DxComboBox" ColSpanMd="4">
-        <DxComboBox Data="@FIRs"
-                    TextFieldName="@nameof(FIR.Indirizzo)"
-                    ValueFieldName="@nameof(FIR.Ticket)"
-                    NullText="Seleziona..."
-                    ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
-                    @bind-Value="@Ticket" />
-    </DxFormLayoutItem>
-    <DxFormLayoutItem Caption="DxSpinEdit" ColSpanMd="4">
-        <DxSpinEdit @bind-Value="@Quantita" DisplayFormat="N2" Mask="N2" />
-    </DxFormLayoutItem>
-    <DxFormLayoutGroup Caption="Viaggio">
-        <DxFormLayoutItem Caption="Destinatario" ColSpanMd="6">
-            <DxComboBox Data="@Locations"
-                        EditFormat="{0}, {1} {2}"
-                        ValueFieldName="@nameof(Location.RagioneSociale)"
-                        @bind-Value="@Trasportatore">
-                <Columns>
-                    <DxListEditorColumn FieldName="@nameof(Location.RagioneSociale)" Caption="RagioneSociale" />
-                    <DxListEditorColumn FieldName="@nameof(Location.Indirizzo)" Caption="Indirizzo" />
-                    <DxListEditorColumn FieldName="@nameof(Location.Citta)" Caption="Citta" />
-                </Columns>
-            </DxComboBox>
+        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+            <DxTextBox @bind-Text="@Model.TestoObbligatorio" NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+            <DxTextBox @bind-Text="@Model.Facoltativo" NullText="Facoltativo" ></DxTextBox>
         </DxFormLayoutItem>
 
-    </DxFormLayoutGroup>
-</DxFormLayout>
+         <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+            <DxTextBox NullText="Readonly" @bind-Text="@Model.ReadOnlyText" ReadOnly="true"></DxTextBox>
+        </DxFormLayoutItem>
+         <DxFormLayoutItem Caption="DxCheckBox" ColSpanMd="4">
+            <DxCheckBox @bind-Checked="@Selezionato">Multimedia</DxCheckBox>
+        </DxFormLayoutItem>
+
+
+        <DxFormLayoutItem Caption="DxDateEdit" ColSpanMd="4">
+            <DxDateEdit @bind-Date="@DateTimeValue"></DxDateEdit>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Caption="DxComboBox" ColSpanMd="4">
+            <DxComboBox Data="@FIRs"
+                        TextFieldName="@nameof(FIR.Indirizzo)"
+                        ValueFieldName="@nameof(FIR.Ticket)"
+                        NullText="Seleziona..."
+                        ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                        @bind-Value="@Ticket" />
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Caption="DxSpinEdit" ColSpanMd="4">
+            <DxSpinEdit @bind-Value="@Quantita" DisplayFormat="N2" Mask="N2" />
+        </DxFormLayoutItem>
+
+        <DxFormLayoutGroup Caption="Viaggio">
+            <DxFormLayoutItem Caption="Destinatario" ColSpanMd="6">
+                <DxComboBox Data="@Locations"
+                            EditFormat="{0}, {1} {2}"
+                            ValueFieldName="@nameof(Location.RagioneSociale)"
+                            @bind-Value="@Trasportatore">
+                    <Columns>
+                        <DxListEditorColumn FieldName="@nameof(Location.RagioneSociale)" Caption="RagioneSociale" />
+                        <DxListEditorColumn FieldName="@nameof(Location.Indirizzo)" Caption="Indirizzo" />
+                        <DxListEditorColumn FieldName="@nameof(Location.Citta)" Caption="Citta" />
+                    </Columns>
+                </DxComboBox>
+            </DxFormLayoutItem>
+
+        </DxFormLayoutGroup>  
+        <DxFormLayoutItem>
+            <DxButton Text="Salva" SubmitFormOnClick="true"></DxButton>
+        </DxFormLayoutItem>
+    </DxFormLayout>
+
+
+</EditForm>
