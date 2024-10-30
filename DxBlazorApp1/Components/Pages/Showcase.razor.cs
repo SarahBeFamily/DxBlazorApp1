@@ -8,6 +8,7 @@ namespace DxBlazorApp1.Components.Pages
     {
         bool isXSmallScreen { get; set; }
         bool PopupVisible { get; set; } = false;
+        string PopupClass { get; set; }
         string? SearchText { get; set; }
         bool ShowFilterRow { get; set; }
         DateTime DateTimeValue { get; set; } = DateTime.Now;
@@ -35,6 +36,24 @@ namespace DxBlazorApp1.Components.Pages
         void OpenPopup()
         {
             PopupVisible = true;
+        }
+
+        void OpenPopupSmall()
+        {
+            PopupVisible = true;
+            PopupClass = "small";
+        }
+
+        void OpenPopupMedium()
+        {
+            PopupVisible = true;
+            PopupClass = "medium";
+        }
+
+        void OpenPopupBig()
+        {
+            PopupVisible = true;
+            PopupClass = "big";
         }
 
         protected override void OnInitialized()

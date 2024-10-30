@@ -45,8 +45,10 @@
 </ISysLayoutColumns>
 
 <h1>Bottoni</h1>
-<div class="d-flex">
-    <ISysBtn RenderStyle="Primary" Icon="bi bi-file-earmark-arrow-up" />
+<div class="d-flex gap-1 my-3">
+    <ISysBtn RenderStyle="Primary" Icon="bi bi-1-circle-fill" Text="Popup small" OnClick="OpenPopupSmall" />
+    <ISysBtn RenderStyle="Secondary" Icon="bi bi-2-circle-fill" Text="Popup medium" OnClick="OpenPopupMedium" />
+    <ISysBtn RenderStyle="Primary" Icon="bi bi-3-circle-fill" Text="Popup big" OnClick="OpenPopupBig" />
 </div>
 
 
@@ -143,6 +145,8 @@
     </EditFormTemplate>
 </DxGrid>
 <DxPopup @bind-Visible="@PopupVisible"
+		 ShowCloseButton="true"
+         CssClass="@PopupClass"
          HeaderText="Dettaglio"
          BodyText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel
              nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor,

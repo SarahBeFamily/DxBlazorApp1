@@ -2,9 +2,10 @@
 	var FlyoutClass = Flyout ? "flipping-button" : "";
 	var FlyoutlabelledBy = Flyout ? "flyout-flipping" : "";
 	var IconOnlyClass = Icon != null && Text == null ? "icon-only" : "";
+	var IconTextClass = Icon != null && Text != null ? "icon-text" : "";
 }
 
-<button class="isys-button @CssClass @IconOnlyClass" render-style="@RenderStyle" @onclick="OnClick" aria-describedby="@FlyoutlabelledBy">
+<button class="isys-button @CssClass @IconOnlyClass @IconTextClass" render-style="@RenderStyle" @onclick="OnClick" aria-describedby="@FlyoutlabelledBy">
 	@if (Icon != null) {
 		<i class="@Icon @FlyoutClass"></i>
 	}

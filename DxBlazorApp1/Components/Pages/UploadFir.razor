@@ -3,7 +3,7 @@
 
 <DxButton Text="Show popup" Click="@(() => Model.PopupVisible = !Model.PopupVisible)"></DxButton>
 
-<DxPopup Visible="@Model.PopupVisible" Height="auto" Width="90%" c>
+<DxPopup Visible="@Model.PopupVisible" Height="auto" CssClass="big">
     <BodyTemplate Context="popupContext">
 
     <DxLoadingPanel @bind-Visible="PanelLoadVisible"

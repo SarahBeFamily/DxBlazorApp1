@@ -127,6 +127,15 @@ a.link {
             color: white;
             border-color: var(--dark);
         }
+
+        &.icon-text {
+            padding: 8px 17px 7px 13px;
+            border-radius: 30px;
+
+            span {
+                margin-left: 10px;
+            }
+        }
     }
 
     &[render-style="Secondary"] {
@@ -140,6 +149,14 @@ a.link {
         &:hover {
             background: var(--primary-color);
             color: white;
+        }
+
+        &.icon-text {
+            padding: 4px 10px;
+
+            span {
+                margin-left: 10px;
+            }
         }
     }
 }
@@ -230,7 +247,34 @@ a.link {
 
 /** popup **/
 
-.dxbl-modal-content {
+.dxbl-popup {
+
+    &.small {
+        --dxbl-popup-width: 40vw;
+        --dxbl-popup-max-width: 800px;
+
+        @include media-query($no_mobile) {
+            min-width: 500px;
+        }
+    }
+
+    &.medium {
+        --dxbl-popup-width: 70vw;
+        --dxbl-popup-max-width: 1180px;
+
+        @include media-query($no_mobile) {
+            min-width: 700px;
+        }
+    }
+
+    &.big {
+        --dxbl-popup-width: 90vw;
+        --dxbl-popup-max-width: 1400px;
+
+        @include media-query($no_mobile) {
+            min-width: 900px;
+        }
+    }
     /* Stile per la divisione a metà dello schermo */
     .split {
         height: 80vh;
