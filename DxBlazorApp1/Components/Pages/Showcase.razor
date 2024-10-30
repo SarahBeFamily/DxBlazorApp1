@@ -155,7 +155,7 @@
 </DxPopup>
 
 
-<h1>Editor</h1>
+<h1>Form Editor</h1>
 <EditForm Model="@Model" Context="formContext">
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <DxFormLayout CaptionPosition="CaptionPosition.Vertical">
@@ -167,10 +167,10 @@
             <DxTextBox @bind-Text="@Model.Facoltativo" NullText="Facoltativo" ></DxTextBox>
         </DxFormLayoutItem>
 
-         <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
             <DxTextBox NullText="Readonly" @bind-Text="@Model.ReadOnlyText" ReadOnly="true"></DxTextBox>
         </DxFormLayoutItem>
-         <DxFormLayoutItem Caption="DxCheckBox" ColSpanMd="4">
+        <DxFormLayoutItem Caption="DxCheckBox" ColSpanMd="4">
             <DxCheckBox @bind-Checked="@Selezionato">Multimedia</DxCheckBox>
         </DxFormLayoutItem>
 
@@ -212,3 +212,6 @@
 
 
 </EditForm>
+
+<h1>Editor</h1>
+<DxTextBox @bind-Text="@Model.TestoObbligatorio"></DxTextBox>
