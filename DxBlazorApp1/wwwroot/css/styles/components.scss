@@ -114,12 +114,14 @@ a.link {
 
     &[render-style="Primary"] {
         border: 1px solid var(--primary-color);
+        border-radius: 30px;
         background: var(--primary-color);
         font-family: var(--font-titles);
         color: white;
-        border-radius: 4px;
         display: flex;
         align-items: center;
+        padding-left: 18px;
+        padding-right: 18px;
 
         &.active,
         &:hover {
@@ -128,9 +130,12 @@ a.link {
             border-color: var(--dark);
         }
 
+        &.icon-only {
+            border-radius: 4px !important;
+        }
+
         &.icon-text {
             padding: 8px 17px 7px 13px;
-            border-radius: 30px;
 
             span {
                 margin-left: 10px;
