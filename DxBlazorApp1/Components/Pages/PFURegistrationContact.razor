@@ -1,0 +1,196 @@
+﻿@page "/registrazione"
+@rendermode InteractiveServer
+@layout RegistrationLayout
+
+    <div id="loginPage">
+
+        <div id="logo">
+            <img src="images/logo-iSystem-white@2x.png" alt="iSystem" class="brand-image" width="63" height="80" />
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-8">
+                <div class="mainAreaRegistration">
+                    
+                    @if (VisStep1)
+                    {
+                        <div class="alert alert-primary" role="alert">  RegistrazionePortale</div>
+                        <div class="cardCustom cardFilter BorderBase mb-2 mt-2" style="padding:20px;">
+                            <EditForm Model="@UserRegistration">
+                                <DataAnnotationsValidator />
+                                <DxFormLayout>
+                                    <DxFormLayoutGroup Caption="Registration_SedeLegale">
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="RagioneSociale" ColSpanMd="8" Context="CompanyName">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeLegaleCompanyName"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="FormaGiuridica" ColSpanMd="4" Context="LegalStructureId">
+                                            <DxComboBox Data="@ListLegalStructure"
+                                                        FilteringMode="DataGridFilteringMode.Contains"
+                                                        TextFieldName="Description"
+                                                        ValueFieldName="Id"
+                                                        @bind-Value="@UserRegistration.SedeLegaleLegalStructureId"
+                                                         />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="PIva" ColSpanMd="6" Context="VatNum">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeLegaleVatNum"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="CodiceFiscale" ColSpanMd="6" Context="FiscalCode">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeLegaleFiscalCode"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Indirizzo" ColSpanMd="8" Context="Address">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeLegaleAddress"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="CAP" ColSpanMd="4" Context="ZIPcode">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeLegaleZIPcode"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Citta" ColSpanMd="8" Context="City">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeLegaleCity"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Provincia" ColSpanMd="4" Context="ProvinceId">
+                                            <DxComboBox Data="@ListProvince"
+                                                        FilteringMode="DataGridFilteringMode.Contains"
+                                                        TextFieldName="Description"
+                                                        ValueFieldName="Id"
+                                                        @bind-Value="@UserRegistration.SedeLegaleProvinceId"
+                                                         />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Email" ColSpanMd="6" Context="Email">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeLegaleCompanyEmail"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="NumeroTelefono" ColSpanMd="6" Context="PhoneNumber">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeLegaleCompanyPhoneNumber"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="" ColSpanMd="6" Context="CompanyName">
+                                            <DxCheckBox @bind-Checked="@UserRegistration.MatchSedeOperativa" LabelWrapMode="LabelWrapMode.WordWrap">Registration_SedeOperativaCoincideLegale</DxCheckBox>
+                                        </DxFormLayoutItem>
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Ateco" ColSpanMd="6" Context="Ateco">
+                                            <DxComboBox Data="@AtecoCodes"
+                                                        ListRenderMode="ListRenderMode.Virtual"
+                                                        FilteringMode="DataGridFilteringMode.Contains"
+                                                        @bind-Value="@UserRegistration.AtecoId"
+                                                         />
+                                        </DxFormLayoutItem>
+
+                                    </DxFormLayoutGroup>
+
+                                    <DxFormLayoutGroup Caption="Registration_SedeOperativa" Visible="@(!UserRegistration.MatchSedeOperativa)">
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="RagioneSociale" ColSpanMd="8" Context="CompanyName">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeOperativa.CompanyName"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Indirizzo" ColSpanMd="8" Context="Address">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeOperativa.Address"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="CAP" ColSpanMd="4" Context="ZIPcode">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeOperativa.ZIPcode"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Citta" ColSpanMd="8" Context="City">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeOperativa.City"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Provincia" ColSpanMd="4" Context="ProvinceId">
+                                            <DxComboBox Data="@ListProvince"
+                                                        FilteringMode="DataGridFilteringMode.Contains"
+                                                        TextFieldName="Description"
+                                                        ValueFieldName="Id"
+                                                        @bind-Value="@UserRegistration.SedeOperativa.ProvinceId"
+                                                         />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Email" ColSpanMd="6" Context="Email">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeOperativa.CompanyEmail"  />
+                                        </DxFormLayoutItem>
+
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="NumeroTelefono" ColSpanMd="6" Context="PhoneNumber">
+                                            <DxTextBox @bind-Text="@UserRegistration.SedeOperativa.CompanyPhoneNumber"  />
+                                        </DxFormLayoutItem>
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Ateco" ColSpanMd="6" Context="Ateco">
+                                            <DxComboBox Data="@AtecoCodes"
+                                                        ListRenderMode="ListRenderMode.Virtual"
+                                                        FilteringMode="DataGridFilteringMode.Contains"
+                                                       
+                                                        @bind-Value="@UserRegistration.SedeOperativa.AtecoId"
+                                                         />
+                                        </DxFormLayoutItem>
+                                        <DxFormLayoutItem Context="multiSede" ColSpanMd="12" Caption="">
+                                            <div class="alert alert-info" role="alert">
+                                                Registration_Multisede
+                                            </div>
+                                        </DxFormLayoutItem>
+                                    </DxFormLayoutGroup>
+
+                                    <DxFormLayoutGroup Caption="Registration_Account">
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Nome" ColSpanMd="6" Context="Nome">
+                                            <DxTextBox @bind-Text="@UserRegistration.Name"  />
+                                        </DxFormLayoutItem>
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Cognome" ColSpanMd="6" Context="Nome">
+                                            <DxTextBox @bind-Text="@UserRegistration.Surname"  />
+                                        </DxFormLayoutItem>
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="Email" ColSpanMd="6" Context="Email">
+                                            <DxTextBox @bind-Text="@UserRegistration.Email"  />
+                                        </DxFormLayoutItem>
+                                        <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="NumeroCellulare" ColSpanMd="6" Context="MobileNumber">
+                                            <DxTextBox @bind-Text="@UserRegistration.MobileNumber"  />
+                                        </DxFormLayoutItem>
+                                    </DxFormLayoutGroup>
+                                    <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="" ColSpanMd="12" Context="privacy">
+                                    <DxCheckBox @bind-Checked="@UserRegistration.PrivacyAccepted">Accetto i <a href="https://innovandotech.com/privacy-policy">termini</a> </DxCheckBox>
+                                    </DxFormLayoutItem>
+                                    <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" Caption="" ColSpanMd="12" Context="privacy">
+                                    <DxCheckBox @bind-Checked="@UserRegistration.TermsAccepted">Accetto i <a href="https://innovandotech.com/privacy-policy">termini</a></DxCheckBox>
+                                    </DxFormLayoutItem>
+                                    <DxFormLayoutItem Context="istruzioni" ColSpanMd="12" Caption="">
+                                        <div class="alert alert-info" role="alert">
+                                            Registration_Istruzioni
+                                        </div>
+                                    </DxFormLayoutItem>
+                                    <DxFormLayoutItem ColSpanMd="12" Context="submitContext">
+                                        <DxButton SubmitFormOnClick="true" RenderStyle="ButtonRenderStyle.Primary" Text="Invia"></DxButton>
+                                    </DxFormLayoutItem>
+                                </DxFormLayout>
+                            </EditForm>
+                        </div>
+                    }
+                    @if (VisStep2)
+                    {
+                        <div class="cardCustom cardFilter BorderBase mb-2 mt-2" style="padding:20px;">
+                            <DxFormLayout>
+                                <DxFormLayoutGroup Caption="Registration_ConfermaEmail">
+                                    <DxFormLayoutItem ColSpanMd="12">
+                                        Registration_VerificaEmail
+                                    </DxFormLayoutItem>
+                                </DxFormLayoutGroup>
+                            </DxFormLayout>
+                            
+                        </div>
+                    }
+                    @if (VisStep3)
+                    {
+                        <div class="cardCustom cardFilter BorderBase mb-2 mt-2" style="padding:20px;">
+                            <DxFormLayout>
+                                <DxFormLayoutGroup Caption="IscrizioneAvvenuta">
+                                    <DxFormLayoutItem ColSpanMd="12">
+                                       <div>Registration_Successo </div>
+                                    </DxFormLayoutItem>
+                                </DxFormLayoutGroup>
+                            </DxFormLayout>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
