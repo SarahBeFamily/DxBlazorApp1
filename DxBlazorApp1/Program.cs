@@ -14,6 +14,7 @@ builder.Services.AddDevExpressBlazor(options =>
 {
     options.BootstrapVersion = DevExpress.Blazor.BootstrapVersion.v5;
     options.SizeMode = SizeMode.Medium;
+    options.ShowValidationIcon = true;
 });
 
 builder.Services.AddSingleton<WeatherForecastService>();
