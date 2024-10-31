@@ -132,8 +132,7 @@ a.link {
 
         &.icon-only {
             border-radius: 4px !important;
-            padding-left: 4px;
-            padding-right: 4px;
+            padding: 1px 6px;
         }
 
         &.icon-text {
@@ -364,6 +363,11 @@ a.link {
     }
 }
 
+/* classe per form layout allineato a destra */
+dxbl-form-layout-item.align-right > .dxbl-fl-ctrl {
+    text-align: right;
+}
+
 .dxbl-tabs-tablist {
     border: 0 !important;
 }
@@ -422,6 +426,7 @@ a.link {
         &.icon-only {
             margin-bottom: 5px;
             margin-left: .25rem;
+            padding: 1px 6px;
         }
     }
 

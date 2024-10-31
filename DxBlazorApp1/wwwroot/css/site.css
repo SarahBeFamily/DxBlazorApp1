@@ -106,7 +106,7 @@ html, body {
     flex-direction: column;*/
 }
 
-.valid.modified:not([type=checkbox]) {
+.valid.modified:not([type=checkbox],[role=radiogroup]) {
     outline: 1px solid #26b050 !important;
 }
 

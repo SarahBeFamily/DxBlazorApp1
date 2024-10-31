@@ -31,9 +31,13 @@
                         </div>
 
                     <div class="col-sm-12 col-md-6">
-                        <div class="alert w-100">
+                        @* <div class="alert w-100">
                             <span>Quantità massima consentita <b>@_maxQta kg</b></span>
-                        </div>
+                        </div> *@
+
+                            <ISysAlert Width="100">
+                                <InnerText>Quantità massima consentita <b>@_maxQta kg</b></InnerText>
+                            </ISysAlert>
 
                         <div class="fields-group-wrap">
                             <DxFormLayoutItem Caption="Luogo del ritiro" ColSpanMd="12">
@@ -122,9 +126,12 @@ else
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-6">
-                    <div class="alert w-100">
+                    @* <div class="alert w-100">
                         <span>Quantità massima consentita <b>@_maxQta kg</b></span>
-                    </div>
+                    </div> *@
+                    <ISysAlert Width="100">
+                        <InnerText>Quantità massima consentita <b>@_maxQta kg</b></InnerText>
+                    </ISysAlert>
 
                     <div class="fields-group-wrap">
                         <DxFormLayoutItem Caption="Luogo del ritiro" ColSpanMd="12">
@@ -166,9 +173,12 @@ else
 
         <div class="container flex flex-wrap">
             <div class="w-50">
-                <div class="alert">
+                <ISysAlert>
+                    <InnerText>Quantità massima consentita <b>@_maxQta kg</b></InnerText>
+                </ISysAlert>
+				@*<div class="alert">
                     <span>Quantità massima consentita <b>@_maxQta kg</b></span>
-                </div>
+                </div> *@
 
                 <div class="fields-group-wrap">
 

@@ -1,0 +1,13 @@
+﻿@{
+    var WidthClass = Width != null ? "w-" + Width : "";
+}
+
+<div class="isys-alert @WidthClass">
+    <span>@InnerText</span>
+</div>
+
+@code {
+    // Custom alert per la pagina di ritiro
+	[Parameter]	public string Width { get; set; }
+    [Parameter] public RenderFragment InnerText { get; set; }
+}
