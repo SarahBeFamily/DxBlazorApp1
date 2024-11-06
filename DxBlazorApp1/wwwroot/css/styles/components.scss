@@ -155,6 +155,11 @@ a.link {
         &:hover {
             background: var(--primary-color);
             color: white;
+
+            .badge-number {
+                background: white;
+                color: var(--primary-color);
+            }
         }
 
         &.icon-text {
@@ -163,6 +168,14 @@ a.link {
             span {
                 margin-left: 10px;
             }
+        }
+
+        .badge-number {
+            background: var(--dark-gray);
+            color: white;
+            padding: 3px 6px 2px 5px;
+            border-radius: 30px;
+            font-size: 11px !important;
         }
     }
 }
