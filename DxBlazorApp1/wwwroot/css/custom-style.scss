@@ -84,6 +84,27 @@ $wide: 'min-width: 1900px';
 
     .bg-photo {
         background: url('../images/login-bg-photo.png') no-repeat top right;
+    }
+    /** Slider sfondo schermata Login **/
+    #img_slider {
+        width: 100%;
+
+        img {
+            width: auto;
+            height: 89vh;
+            position: absolute;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            transition: all 1s ease;
+
+            &.fade {
+                opacity: 1;
+            }
+        }
+    }
+
+    .bg-photo, #slider {
         background-size: contain;
         position: fixed;
         top: 0;

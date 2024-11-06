@@ -30,7 +30,34 @@
         </DxFormLayout>
     </div>
 
-    <div class="bg-photo"></div>
+    @* <div class="bg-photo"></div> *@
+    <div id="slider">
+        <div id="img_slider">
+            <img src="/images/sfondo-login1.png">
+            <img src="/images/sfondo-login2.png">
+            <img src="/images/sfondo-login3.png">
+            <img src="/images/sfondo-login4.png">
+        </div>
+    </div>
+
+    <script>
+        var slider = document.querySelector("#img_slider");
+        var img_in_slider = slider.querySelectorAll("img");
+        var n_img = img_in_slider.length;
+        var corrente = 0;
+
+        function play() {
+            corrente++;
+            if (corrente > n_img)  corrente = 1;
+
+            for (var i = n_img; i > 0; i--) {
+                slider.querySelector("img:nth-child(" + i + ")").classList.remove("fade");
+            }
+            slider.querySelector("img:nth-child(" + corrente + ")").classList.add("fade");
+        }
+
+        setInterval(play, 2000);
+    </script>
 
 </div>
 
