@@ -660,6 +660,41 @@ dxbl-form-layout-item.align-right > .dxbl-fl-ctrl {
     }
 }
 
+.isys-ai-content {
+    --text: attr(data-ai);
+    --color: attr(data-ai-result);
+
+    label {
+        &::after {
+            content: var(--text);
+            margin-left: 8px;
+            font-size: 11px;
+            color: white;
+            font-weight: 400;
+            padding: 0px 7px 1px;
+            border-radius: 30px;
+        }
+
+        &.High {
+            &::after {
+                background: var(--verde);
+            }
+        }
+
+        &.Medium {
+            &::after {
+                background: var(--giallo);
+            }
+        }
+
+        &.Low {
+            &::after {
+                background: var(--rosso);
+            }
+        }
+    }
+}
+
 
     input[type="range"]::-webkit-slider-runnable-track {
         background: var(--light-gray);
