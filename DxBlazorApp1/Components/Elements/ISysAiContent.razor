@@ -1,27 +1,31 @@
-﻿@inject IJSRuntime JsRuntime
+﻿@inject IJSRuntime JS
 
 <div class="isys-ai-content" data-ai="@AiText" data-ai-result="@Result">
-	@ChildContent
+
+    @ChildContent
 </div>
 
-<script>
-	document.addEventListener("DOMContentLoaded", function () {
-		var aiContent = document.querySelector(".isys-ai-content");
-		var aiText = aiContent.getAttribute("data-ai");
-		var aiResult = aiContent.getAttribute("data-ai-result");
-		var label = aiContent.querySelector("label");
-
-		label.classList.add(aiResult);
-		label.setAttribute("data-ai", aiText);
-	});
-</script>
-
 @code {
-	/// <summary>
-	/// Contenitore per campi form che interagiscono con l'AI. Aggiunge l'etichetta per l'AI e i risultati dopo la label del campo child.
-	/// </summary>
+    /// <summary>
+    /// Contenitore per campi form che interagiscono con l'AI. Aggiunge l'etichetta per l'AI e i risultati dopo la label del campo child.
+    /// </summary>
 
-	[Parameter] public required RenderFragment ChildContent { get; set; }
-	[Parameter] public string AiText { get; set; }
-	[Parameter] public string Result { get; set; } // ["Low", "Medium", "High"];
+    [Parameter] public required RenderFragment ChildContent { get; set; }
+
+    [Parameter] public string AiText { get; set; } 
+    [Parameter] public string Result { get; set; }  // ["Low", "Medium", "High"];
+
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+         if (firstRender )
+         {
+            var module = await JS.InvokeAsync<IJSObjectReference>("import", "./Components/Elements/ISysAiContent.razor.js");
+            var objRef = DotNetObjectReference.Create(this);
+            await module.InvokeVoidAsync("renderAI", objRef);
+         }
+    }
+
+   
+
 }
