@@ -590,6 +590,8 @@ header#main {
     bottom: 0;
     right: 0;
     z-index: 99;
+    height: 400px;
+    display: flex;
 }
 
 #offcanvas-notifications {

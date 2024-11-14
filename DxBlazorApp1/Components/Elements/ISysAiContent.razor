@@ -1,7 +1,16 @@
 ﻿@inject IJSRuntime JS
 
-<div class="isys-ai-content" data-ai="@AiText" data-ai-result="@Result">
-
+@{
+    var colLenght = "dxbl-col";
+    
+    if (ColSpan > 0) colLenght += $" dxbl-col-{ColSpan}";
+    if (ColSpanMd > 0) colLenght += $" dxbl-col-md-{ColSpanMd}";
+    if (ColSpanLg > 0) colLenght += $" dxbl-col-lg-{ColSpanLg}";
+	if (ColSpanXl > 0) colLenght += $" dxbl-col-xl-{ColSpanXl}";
+	if (ColSpanXxl > 0) colLenght += $" dxbl-col-xxl-{ColSpanXxl}";
+	if (ColSpanXxxl > 0) colLenght += $" dxbl-col-xxxl-{ColSpanXxxl}";
+}
+<div class="isys-ai-content @colLenght @Result" data-ai="@AiText" data-ai-result="@Result">
     @ChildContent
 </div>
 
@@ -15,17 +24,11 @@
     [Parameter] public string AiText { get; set; } 
     [Parameter] public string Result { get; set; }  // ["Low", "Medium", "High"];
 
-    
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-         if (firstRender )
-         {
-            var module = await JS.InvokeAsync<IJSObjectReference>("import", "./Components/Elements/ISysAiContent.razor.js");
-            var objRef = DotNetObjectReference.Create(this);
-            await module.InvokeVoidAsync("renderAI", objRef);
-         }
-    }
-
-   
+    [Parameter] public int ColSpan { get; set; } = 0;
+    [Parameter] public int ColSpanMd { get; set; } = 0;
+    [Parameter] public int ColSpanLg { get; set; } = 0;
+    [Parameter] public int ColSpanXl { get; set; } = 0;
+    [Parameter] public int ColSpanXxl { get; set; } = 0;
+    [Parameter] public int ColSpanXxxl { get; set; } = 0;
 
 }

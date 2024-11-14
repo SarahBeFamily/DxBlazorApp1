@@ -262,9 +262,21 @@
 <h1>Form con badge AI</h1>
 
 <DxFormLayout>
-    <ISysAiContent AiText="accuratezza 98%" Result="Medium">
+    <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="4">
 	    <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
 		    <DxTextBox @bind-Text="@Model.TestoObbligatorio" NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
 	    </DxFormLayoutItem>
+    </ISysAiContent>
+
+    <ISysAiContent AiText="accuratezza 58%" Result="Low" ColSpanMd="4">
+        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+            <DxTextBox></DxTextBox>
+        </DxFormLayoutItem>
+    </ISysAiContent>
+
+    <ISysAiContent AiText="accuratezza 88%" Result="Medium" ColSpanMd="4">
+        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+            <DxTextBox></DxTextBox>
+        </DxFormLayoutItem>
     </ISysAiContent>
 </DxFormLayout>

@@ -1,6 +1,7 @@
 ﻿@implements IDisposable
 @inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@isXSmallScreen" />
 
@@ -96,7 +97,7 @@
 
     <footer>
         <div id="assistenza">
-           <iframe frameborder="0" src="/zendesk.html"></iframe>
+           <iframe frameborder="0" width="366" src="/zendesk.html"></iframe>
         </div>
     </footer>
 </div>
@@ -123,5 +124,16 @@
         NavigationManager.LocationChanged -= OnLocationChanged;
     }
 
-    
+    // invoke javascript function
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        
+        if (firstRender)
+        {
+            var module = await JS.InvokeAsync<IJSObjectReference>("import", "./ISysAiContent.js");
+            var objRef = DotNetObjectReference.Create(this);
+            await module.InvokeVoidAsync("renderAI", objRef);
+        }
+    }
+
 }

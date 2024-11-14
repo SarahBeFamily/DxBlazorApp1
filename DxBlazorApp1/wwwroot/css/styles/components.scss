@@ -663,35 +663,50 @@ dxbl-form-layout-item.align-right > .dxbl-fl-ctrl {
 .isys-ai-content {
     --text: attr(data-ai);
     --color: attr(data-ai-result);
+    padding: 0 !important;
+
+    &.High {
+        label::after {
+            background: var(--verde);
+            content: var(--text);
+        }
+    }
+
+    &.Medium {
+        label::after {
+            background: var(--giallo);
+            content: var(--text);
+        }
+    }
+
+    &.Low {
+        label::after {
+            background: var(--rosso);
+            content: var(--text);
+        }
+    }
 
     label {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        width: 100% !important;
+
         &::after {
-            content: var(--text);
-            margin-left: 8px;
             font-size: 11px;
             color: white;
             font-weight: 400;
             padding: 0px 7px 1px;
             border-radius: 30px;
+            position: absolute;
+            right: 0;
         }
+    }
 
-        &.High {
-            &::after {
-                background: var(--verde);
-            }
-        }
-
-        &.Medium {
-            &::after {
-                background: var(--giallo);
-            }
-        }
-
-        &.Low {
-            &::after {
-                background: var(--rosso);
-            }
-        }
+    .dxbl-fl-item {
+        display: flex;
+        flex-direction: column !important;
+        width: 100%;
     }
 }
 
