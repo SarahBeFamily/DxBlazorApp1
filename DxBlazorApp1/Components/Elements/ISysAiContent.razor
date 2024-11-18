@@ -1,34 +1,14 @@
-﻿@inject IJSRuntime JS
-
-@{
-    var colLenght = "dxbl-col";
-    
-    if (ColSpan > 0) colLenght += $" dxbl-col-{ColSpan}";
-    if (ColSpanMd > 0) colLenght += $" dxbl-col-md-{ColSpanMd}";
-    if (ColSpanLg > 0) colLenght += $" dxbl-col-lg-{ColSpanLg}";
-	if (ColSpanXl > 0) colLenght += $" dxbl-col-xl-{ColSpanXl}";
-	if (ColSpanXxl > 0) colLenght += $" dxbl-col-xxl-{ColSpanXxl}";
-	if (ColSpanXxxl > 0) colLenght += $" dxbl-col-xxxl-{ColSpanXxxl}";
-}
-<div class="isys-ai-content @colLenght @Result" data-ai="@AiText" data-ai-result="@Result">
-    @ChildContent
+﻿<div class="isys-ai-content dxbl-text @Result">
+    <label>@Label</label>
+    <span>@AiText</span>
 </div>
 
 @code {
     /// <summary>
-    /// Contenitore per campi form che interagiscono con l'AI. Aggiunge l'etichetta per l'AI e i risultati dopo la label del campo child.
+    /// Contenitore per campi form che interagiscono con l'AI. Aggiunge l'etichetta per l'AI e i risultati dopo la label.
     /// </summary>
 
-    [Parameter] public required RenderFragment ChildContent { get; set; }
-
+    [Parameter] public required string Label { get; set; } 
     [Parameter] public string AiText { get; set; } 
-    [Parameter] public string Result { get; set; }  // ["Low", "Medium", "High"];
-
-    [Parameter] public int ColSpan { get; set; } = 0;
-    [Parameter] public int ColSpanMd { get; set; } = 0;
-    [Parameter] public int ColSpanLg { get; set; } = 0;
-    [Parameter] public int ColSpanXl { get; set; } = 0;
-    [Parameter] public int ColSpanXxl { get; set; } = 0;
-    [Parameter] public int ColSpanXxxl { get; set; } = 0;
-
+    [Parameter] public string Result { get; set; }  // ["Low", "Medium", "High"]
 }

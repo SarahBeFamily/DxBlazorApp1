@@ -661,52 +661,33 @@ dxbl-form-layout-item.align-right > .dxbl-fl-ctrl {
 }
 
 .isys-ai-content {
-    --text: attr(data-ai);
-    --color: attr(data-ai-result);
+    display: flex;
+    align-items: center;
     padding: 0 !important;
 
-    &.High {
-        label::after {
-            background: var(--verde);
-            content: var(--text);
-        }
+    &.High span {
+        background: var(--verde);
     }
 
-    &.Medium {
-        label::after {
-            background: var(--giallo);
-            content: var(--text);
-        }
+    &.Medium span {
+        background: var(--giallo);
     }
 
-    &.Low {
-        label::after {
-            background: var(--rosso);
-            content: var(--text);
-        }
+    &.Low span {
+        background: var(--rosso);
     }
 
     label {
-        display: flex;
-        flex-wrap: wrap;
-        position: relative;
-        width: 100% !important;
-
-        &::after {
-            font-size: 11px;
-            color: white;
-            font-weight: 400;
-            padding: 0px 7px 1px;
-            border-radius: 30px;
-            position: absolute;
-            right: 0;
-        }
+        padding: var(--dxbl-text-padding-y) var(--dxbl-text-padding-x);
+        padding-left: 0 !important;
     }
 
-    .dxbl-fl-item {
-        display: flex;
-        flex-direction: column !important;
-        width: 100%;
+    span {
+        font-size: 11px;
+        color: white !important;
+        font-weight: 400;
+        padding: 1px 7px;
+        border-radius: 30px;
     }
 }
 

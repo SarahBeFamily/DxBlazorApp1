@@ -262,21 +262,37 @@
 <h1>Form con badge AI</h1>
 
 <DxFormLayout>
-    <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="4">
-	    <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
-		    <DxTextBox @bind-Text="@Model.TestoObbligatorio" NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
+    
+	    <DxFormLayoutItem ColSpanMd="4" CssClass="flex-column">
+            <CaptionTemplate>
+                <ISysAiContent Label="DxTextBox" AiText="accuratezza 98%" Result="High"></ISysAiContent>
+            </CaptionTemplate>
+            <Template>
+		        <DxTextBox @bind-Text="@Model.TestoObbligatorio" NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
+            </Template>
 	    </DxFormLayoutItem>
-    </ISysAiContent>
+    
+        <DxFormLayoutItem ColSpanMd="4" CssClass="flex-column">
+            <CaptionTemplate>
+                <ISysAiContent Label="DxTextBox" AiText="accuratezza 88%" Result="Medium"></ISysAiContent>
+            </CaptionTemplate>
+            <Template>
+                <DxTextBox NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
+            </Template>
+        </DxFormLayoutItem>
 
-    <ISysAiContent AiText="accuratezza 58%" Result="Low" ColSpanMd="4">
+    <DxFormLayoutItem ColSpanMd="4" CssClass="flex-column">
+        <CaptionTemplate>
+            <ISysAiContent Label="DxTextBox" AiText="accuratezza 38%" Result="Low"></ISysAiContent>
+        </CaptionTemplate>
+        <Template>
+            <DxTextBox NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
+        </Template>
+    </DxFormLayoutItem>
+
+    @* <ISysAiContent AiText="accuratezza 88%" Result="Medium" ColSpanMd="4">
         <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
             <DxTextBox></DxTextBox>
         </DxFormLayoutItem>
-    </ISysAiContent>
-
-    <ISysAiContent AiText="accuratezza 88%" Result="Medium" ColSpanMd="4">
-        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
-            <DxTextBox></DxTextBox>
-        </DxFormLayoutItem>
-    </ISysAiContent>
+    </ISysAiContent> *@
 </DxFormLayout>

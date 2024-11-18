@@ -19,58 +19,78 @@
                     <DxFormLayout CssClass="w-100 py-3 px-3">
                         <DataAnnotationsValidator></DataAnnotationsValidator>
 
-                            <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="12">
                                 <DxFormLayoutItem ColSpanMd="12" Visible="@(Model.MotivazioneRifiuto?.Length > 0)">
                                     <DxTextBox @bind-Text="Model.MotivazioneRifiuto" ReadOnly="true" />
                                 </DxFormLayoutItem>
-                            </ISysAiContent>
 
-                            <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="6">
-                                <DxFormLayoutItem Caption="Intermediario" ColSpanMd="6" CaptionPosition="CaptionPosition.Vertical">
+                            <DxFormLayoutItem ColSpanMd="6" CaptionPosition="CaptionPosition.Vertical">
+                                <CaptionTemplate>
+                                    <ISysAiContent Label="Intermediario" AiText="accuratezza 98%" Result="High"></ISysAiContent>
+                                </CaptionTemplate>
+                                <Template>
                                     <DxTextBox @bind-Text="@Model.MediatorCompanyName" ReadOnly="true" />
-                                </DxFormLayoutItem>
-                            </ISysAiContent>
+                                </Template>
+                            </DxFormLayoutItem>
+                            
+                                @* <DxFormLayoutItem Caption="Intermediario" ColSpanMd="6" CaptionPosition="CaptionPosition.Vertical">
+                                    <DxTextBox @bind-Text="@Model.MediatorCompanyName" ReadOnly="true" />
+                                </DxFormLayoutItem> *@
+                            
+
                         
-                            <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="6">
+                            
                                 <DxFormLayoutItem Caption="Produttore" ColSpanMd="6" CaptionPosition="CaptionPosition.Vertical">
-                                    <DxTextBox @bind-Text="@Model.Produttore" ReadOnly="true" />
+                                    <CaptionTemplate>
+                                        <ISysAiContent Label="Produttore" AiText="accuratezza 98%" Result="High"></ISysAiContent>
+                                    </CaptionTemplate>
+                                    <Template>
+                                        <DxTextBox @bind-Text="@Model.Produttore" ReadOnly="true" />
+                                    </Template>
                                 </DxFormLayoutItem>
-                            </ISysAiContent>
+                           
                         
-                            <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="12">
-                                <DxFormLayoutItem Caption="Destinatario" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
-                                    <DxComboBox Data="@Model.MyLocations"
-                                                EditFormat="{0}, {1} {2}"
-                                                ValueFieldName="ContactLocationId"
-                                                @bind-Value="Model.ContactLocationIdDestination">
-                                        <Columns>
-                                            <DxListEditorColumn FieldName="ContactCompanyName" Caption="RagioneSociale" />
-                                            <DxListEditorColumn FieldName="LocationAddress" Caption="Indirizzo" />
-                                            <DxListEditorColumn FieldName="LocationCity" Caption="Citta" />
-                                        </Columns>
-                                    </DxComboBox>
-                                    <ValidationMessage For="@(() => Model.ContactLocationIdDestination)"></ValidationMessage>
+                                <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
+                                    <CaptionTemplate>
+                                        <ISysAiContent Label="Destinatario" AiText="accuratezza 88%" Result="Medium"></ISysAiContent>
+                                    </CaptionTemplate>
+                                    <Template>
+                                        <DxComboBox Data="@Model.MyLocations"
+                                                    EditFormat="{0}, {1} {2}"
+                                                    ValueFieldName="ContactLocationId"
+                                                    @bind-Value="Model.ContactLocationIdDestination">
+                                            <Columns>
+                                                <DxListEditorColumn FieldName="ContactCompanyName" Caption="RagioneSociale" />
+                                                <DxListEditorColumn FieldName="LocationAddress" Caption="Indirizzo" />
+                                                <DxListEditorColumn FieldName="LocationCity" Caption="Citta" />
+                                            </Columns>
+                                        </DxComboBox>
+                                        <ValidationMessage For="@(() => Model.ContactLocationIdDestination)"></ValidationMessage>
+                                    </Template>
                                 </DxFormLayoutItem>
-                            </ISysAiContent>
                         
-                            <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="12">
-                                <DxFormLayoutItem Caption="Trasportatore" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
-                                    <DxComboBox Data="@Model.MyConveyors"
-                                                TextFieldName="CompanyName"
-                                                ValueFieldName="Id"
-                                                @bind-Value="Model.ConveyorContactId">
-                                    </DxComboBox>
+                                <DxFormLayoutItem CaptionPosition="CaptionPosition.Vertical" ColSpanMd="12">
+                                    <CaptionTemplate>
+										<ISysAiContent Label="Trasportatore" AiText="accuratezza 58%" Result="Low"></ISysAiContent>
+                                    </CaptionTemplate>
+                                    <Template>
+                                        <DxComboBox Data="@Model.MyConveyors"
+                                                    TextFieldName="CompanyName"
+                                                    ValueFieldName="Id"
+                                                    @bind-Value="Model.ConveyorContactId">
+                                        </DxComboBox>
+                                    </Template>
                                 </DxFormLayoutItem>
-                            </ISysAiContent>
 
-                            <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="4">
                                 <DxFormLayoutItem Caption="Conducente" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
-                                    <DxTextBox @bind-Text="@Model.DriverName" />
-                                    <ValidationMessage For="@(() => Model.DriverName)"></ValidationMessage>
+                                    <CaptionTemplate>
+                                        <ISysAiContent Label="Conducente" AiText="accuratezza 58%" Result="Low"></ISysAiContent>
+                                    </CaptionTemplate>
+                                    <Template>
+										<DxTextBox @bind-Text="@Model.DriverName" />
+                                        <ValidationMessage For="@(() => Model.DriverName)"></ValidationMessage>
+                                    </Template>
                                 </DxFormLayoutItem>
-                            </ISysAiContent>
 
-                            <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="4">
                                 <DxFormLayoutItem Caption="Motrice" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="4">
                                     <DxComboBox Data="Model.Motrici"
                                                 TextFieldName="Plate"
@@ -79,9 +99,7 @@
                                     </DxComboBox>
                                     <ValidationMessage For="@(() => Model.TractorPlate)"></ValidationMessage>
                                 </DxFormLayoutItem>
-                            </ISysAiContent>
                         
-                            <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="4">
                                 <DxFormLayoutItem Caption="Rimorchio" CaptionPosition="CaptionPosition.Vertical" ColSpanMd="4">
                                     <DxComboBox Data="Model.Rimorchi"
                                                 ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
@@ -90,21 +108,16 @@
                                                 @bind-Value="@Model.TrailerPlate">
                                     </DxComboBox>
                                 </DxFormLayoutItem>
-                            </ISysAiContent>
                         
                         
-                            <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="12">
                                 <DxFormLayoutItem Caption="Articolo" ColSpanMd="12" CaptionPosition="CaptionPosition.Vertical">
                                     <DxTextBox @bind-Text="@Model.ArticleDescription" ReadOnly="true" />
                                 </DxFormLayoutItem>
-                            </ISysAiContent>
 
-                            <ISysAiContent AiText="accuratezza 98%" Result="High" ColSpanMd="12">
                                 <DxFormLayoutItem Caption="NumeroDocumento" ColSpanMd="12" CaptionPosition="CaptionPosition.Vertical">
                                     <DxTextBox @bind-Text="@Model.NumeroDocumento" />
                                     <ValidationMessage For="@(() => Model.NumeroDocumento)"></ValidationMessage>
                                 </DxFormLayoutItem>
-                            </ISysAiContent>
 
                         <DxFormLayoutItem Caption="EmessoIl" ColSpanMd="4" CaptionPosition="CaptionPosition.Vertical">
                             <DxDateEdit @bind-Date="@Model.DataDocumento" />
