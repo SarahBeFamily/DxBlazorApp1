@@ -97,15 +97,50 @@
 
     <footer>
         <div id="assistenza">
-           <iframe frameborder="0" width="366" height="647" src="/zendesk.html" style="bottom: 0;  position: absolute;  right: 0;"></iframe>
+            <img id="myLauncher" src="/images/fab-button.svg" onclick="openWidget()" />
+           @* <iframe id="launcher" frameborder="0" width="366" height="647" src="/zendesk.html" style="bottom: 0;  position: absolute;  right: -370px;"></iframe> *@
         </div>
+        <script>
+            window.zESettings = {
+                webWidget: {
+                    zIndex: 999999,
+                    position: { horizontal: 'right', vertical: 'bottom' },
+                    color: {
+                        theme: '#FF5A1E',
+                        launcher: '#FF5A1E', // This will also update the badge
+                        launcherText: '#E589B7',
+                        button: '#FF5A1E',
+                        resultLists: '#FF5A1E',
+                        header: '##FF5A1E',
+                        articleLinks: '#FF5A1E'
+                    }
+
+
+                }
+            };
+        </script>
+        <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=ed7eb23a-5b9e-4862-8258-0c81599b3b67"></script>
+        <script type="text/javascript">
+            zE('webWidget', 'hide');
+
+            function openWidget() {
+                zE("webWidget", "show")
+                zE("webWidget", "open")
+                document.querySelector("#myLauncher").style.opacity = 0
+            }
+
+            zE('webWidget:on', 'close', function () {
+                zE('webWidget', 'hide');
+                document.querySelector('#myLauncher').style.opacity = 1;
+            })
+        </script>
     </footer>
 </div>
 
 @code {
     public bool isXSmallScreen { get; set; }
     private string? currentUrl;
- 
+
 
     protected override void OnInitialized()
     {
@@ -125,15 +160,15 @@
     }
 
     // invoke javascript function
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
+    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // {
         
-        if (firstRender)
-        {
-            var module = await JS.InvokeAsync<IJSObjectReference>("import", "./ISysAiContent.js");
-            var objRef = DotNetObjectReference.Create(this);
-            await module.InvokeVoidAsync("renderAI", objRef);
-        }
-    }
+    //     if (firstRender)
+    //     {
+    //         var module = await JS.InvokeAsync<IJSObjectReference>("import", "./ISysAiContent.js");
+    //         var objRef = DotNetObjectReference.Create(this);
+    //         await module.InvokeVoidAsync("renderAI", objRef);
+    //     }
+    // }
 
 }

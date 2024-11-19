@@ -1,0 +1,31 @@
+﻿<div class="isys-ai-content-button @Result">
+    <i class="icon-stars-ai-@Result" @onclick="@(Apri)" aria-describedby="@flyoutLabelledBy"></i>
+    <span>@AiTextResult</span>
+</div>
+
+<DxFlyout @bind-IsOpen=IsOpen
+          Id="flyout-flipping-dark"
+          PositionTarget="@($"#{UniqueId}")"
+          Position=@Position
+          Width="240px">
+    <span style="font-size: 0.75rem">@FlyOutText</span>
+</DxFlyout>
+
+@code {
+    /// <summary>
+    /// Contenitore per il bottone che interagisce con l'AI e ne mostra il risultato.
+    /// </summary>
+
+    [Parameter] public string AiTextResult { get; set; } 
+    [Parameter] public string Result { get; set; }  // ["Low", "Medium", "High"]
+    [Parameter, EditorRequired] public string? FlyOutText { get; set; }
+    [Parameter] public FlyoutPosition Position { get; set; } = FlyoutPosition.Top;
+    bool IsOpen { get; set; }
+    string flyoutLabelledBy = "flyout-flipping-dark";
+    private string UniqueId => $"id-{GetHashCode()}";
+
+    private void Apri()
+    {
+        IsOpen = !IsOpen;
+    }
+}

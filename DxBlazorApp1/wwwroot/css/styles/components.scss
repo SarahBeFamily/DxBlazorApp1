@@ -660,10 +660,61 @@ dxbl-form-layout-item.align-right > .dxbl-fl-ctrl {
     }
 }
 
+.isys-ai-content-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 50px;
+    border: 1px solid;
+    font-weight: 500;
+
+    i {
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
+    &.Low {
+        border-color: var(--rosso);
+
+        span {
+            color: var(--rosso);
+        }
+    }
+
+    &.Medium {
+        border-color: var(--giallo);
+
+        span {
+            color: var(--giallo);
+        }
+    }
+
+    &.High {
+        border-color: var(--verde);
+
+        span {
+            color: var(--verde);
+        }
+    }
+
+}
+
+#flyout-flipping-dark {
+    --dxbl-flyout-arrow-color: #191919 !important;
+    --dxbl-flyout-arrow-base-border-color: #191919 !important;
+    background-color: #191919;
+    border-color: #191919;
+    border-radius: 8px;
+    color: white;
+    top: 50%;
+    left: 40%;
+}
+
 .isys-ai-content {
     display: flex;
     align-items: center;
     padding: 0 !important;
+    flex-wrap: wrap;
 
     &.High span {
         background: var(--verde);

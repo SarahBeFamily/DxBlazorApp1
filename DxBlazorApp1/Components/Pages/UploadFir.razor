@@ -15,6 +15,8 @@
         <ISysPopupInnerLayout>
             <ChildContentLeft>
                 <EditForm Model="@Model" OnValidSubmit="@Save" Context="editContext">
+                        <ISysAiContentButton AiTextResult="Ricontrolla il documento" Result="Medium" FlyOutText="Questo testo è stato rilevato grazie alla nostra tecnologia di Intelligenza Artificiale.
+Verifica che le informazioni siano corrette." />
                     <ISysToolbar ToolbarItems="@ToolbarEditItems"></ISysToolbar>
                     <DxFormLayout CssClass="w-100 py-3 px-3">
                         <DataAnnotationsValidator></DataAnnotationsValidator>
