@@ -5,6 +5,8 @@ $dark: #191919;
 
 $mobile: 'max-width: 767px';
 $no_mobile: 'min-width: 768px';
+$no_tablet: 'min-width: 850px';
+$other: 'max-width: 849px';
 $tablet: 'min-width: 768px) and (max-width: 1023px';
 $md: 'min-width: 992px';
 $md-max: 'max-width: 991px';
@@ -79,6 +81,54 @@ $wide: 'min-width: 1900px';
         .dxbl-btn:not(.dxbl-btn-link) {
             padding: 12px 18px;
             font-weight: 600;
+        }
+    }
+
+    #login-old-site {
+        background: #252525;
+        border-radius: 24px;
+        padding: 40px 48px;
+        z-index: 99;
+        align-items: center;
+        margin-top: 30px;
+
+        @include media-query($mobile) {
+            left: 0 !important;
+            padding: 40px 30px;
+            position: relative;
+        }
+
+        @include media-query($no_mobile) {
+            position: fixed;
+            bottom: 22px;
+            right: 22px;
+        }
+
+        @include media-query($no_tablet) {
+            min-width: 810px;
+        }
+
+        @include media-query($other) {
+            left: 22px;
+        }
+
+        h2 {
+            color: white;
+            font-size: 24px;
+        }
+
+        p {
+            @include media-query($no_tablet) {
+                margin: 0;
+            }
+        }
+
+        .btn {
+            padding: 12px 18px;
+            font-weight: 600;
+            background-color: #03B0B8;
+            color: white;
+            border-radius: 54px;
         }
     }
 
