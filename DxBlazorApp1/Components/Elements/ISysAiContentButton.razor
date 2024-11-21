@@ -1,4 +1,4 @@
-﻿<div class="isys-ai-content-button @Result">
+﻿<div class="isys-ai-content-button @Result" id="@UniqueId">
     <i class="icon-stars-ai-@Result" @onclick="@(Apri)" aria-describedby="@flyoutLabelledBy"></i>
     <span>@AiTextResult</span>
 </div>
@@ -19,7 +19,7 @@
     [Parameter] public string AiTextResult { get; set; } 
     [Parameter] public string Result { get; set; }  // ["Low", "Medium", "High"]
     [Parameter, EditorRequired] public string? FlyOutText { get; set; }
-    [Parameter] public FlyoutPosition Position { get; set; } = FlyoutPosition.Top;
+    [Parameter] public FlyoutPosition Position { get; set; } = FlyoutPosition.Bottom;
     bool IsOpen { get; set; }
     string flyoutLabelledBy = "flyout-flipping-dark";
     private string UniqueId => $"id-{GetHashCode()}";
