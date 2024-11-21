@@ -30,7 +30,16 @@
         </DxFormLayout>
     </div>
 
-     <div class="bg-photo"></div> 
+    <div id="login-old-site" class="flex flex-wrap justify-content-between">
+        <div>
+            <h2>Sei un utente Waste Management?</h2>
+            <p>Accedi qui alla tua piattaforma</p>
+        </div>
+
+        <a href="https://www.isystem.it/it/area-riservata" target="_blank" class="btn btn-old">Accedi a Innovando System</a>
+    </div>
+
+    <div class="bg-photo"></div> 
     <div id="slider">
         <div id="img_slider">
             <img src="/images/sfondo-login1.png">
@@ -41,12 +50,14 @@
     </div>
 
     <script>
+        var bgphoto = document.querySelector(".bg-photo");
         var slider = document.querySelector("#img_slider");
         var img_in_slider = slider.querySelectorAll("img");
         var n_img = img_in_slider.length;
         var corrente = 0;
 
         function play() {
+            bgphoto.classList.add("fade");
             corrente++;
             if (corrente > n_img)  corrente = 1;
 
