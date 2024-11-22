@@ -105,7 +105,7 @@ $wide: 'min-width: 1900px';
         }
 
         @include media-query($no_tablet) {
-            min-width: 810px;
+            min-width: 410px;
         }
 
         @include media-query($other) {
