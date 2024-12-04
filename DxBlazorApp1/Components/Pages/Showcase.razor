@@ -193,6 +193,10 @@
         <DxFormLayoutItem Caption="DxSpinEdit" ColSpanMd="4">
             <DxSpinEdit @bind-Value="@Quantita" DisplayFormat="N2" Mask="N2" />
         </DxFormLayoutItem>
+        <DxFormLayoutItem Caption="Ruoli" ColSpanMd="6">
+            <DxTagBox Data="@Model.Ruoli"
+                      @bind-Values="@Model.RuoliAttivi" />
+        </DxFormLayoutItem>
 
         <DxFormLayoutGroup Caption="Viaggio">
             <DxFormLayoutItem Caption="Destinatario" ColSpanMd="6">
