@@ -181,7 +181,7 @@ a.link {
 }
 
 .dxbl-btn {
-    &:not(.dxbl-spin-btn-inc,.dxbl-spin-btn-dec,.dxbl-edit-btn-clear,.dxbl-edit-btn-dropdown) {
+    &:not(.dxbl-spin-btn-inc,.dxbl-spin-btn-dec,.dxbl-edit-btn-clear,.dxbl-edit-btn-dropdown,.dxbl-tag-btn-close) {
         border-radius: 30px;
         padding: 8px 18px;
     }
