@@ -328,7 +328,7 @@ a.link {
         }
     }
 
-    .dxbl-text-edit:not(.dxbl-memo-edit) {
+    .dxbl-text-edit:not(.dxbl-memo-edit,.dxbl-tag-box) {
         height: 32px !important;
         padding-left: 2px;
     }
