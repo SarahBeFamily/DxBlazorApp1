@@ -141,6 +141,10 @@
             <DxFormLayoutItem Caption="Indirizzo" ColSpanMd="8" BeginRow="true">
                 @editContext.GetEditor("Indirizzo")
             </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Ruoli" ColSpanMd="12">
+                <DxTagBox Data="@Model.Ruoli"
+                          @bind-Values="@Model.RuoliAttivi" />
+            </DxFormLayoutItem>
         </DxFormLayout>
     </EditFormTemplate>
 </DxGrid>
