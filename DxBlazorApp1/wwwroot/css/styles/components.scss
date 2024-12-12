@@ -655,9 +655,13 @@ dxbl-form-layout-item.align-right > .dxbl-fl-ctrl {
     border-color: var(--light-gray);
     padding: 4px 9px;
 
-    &:not(.dxbl-memo-edit) {
+    &:not(.dxbl-memo-edit,.dxbl-pager-page-edit) {
         height: 39px;
     }
+}
+
+.dxbl-pager .dxbl-pager-page-edit > input {
+    padding: 0;
 }
 
 .isys-ai-content-button {
