@@ -20,7 +20,7 @@ namespace DxBlazorApp1.Components.Pages
         nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor,
         imperdiet mauris. Fusce id purus magna.";
 
-        IEnumerable<FIR> FIRs { get; set; }
+        private List<FIR> FIRs { get; set; } = [];
         IEnumerable<Location> Locations { get; set; }
         Location Trasportatore { get; set; }
         IGrid GridFir;
@@ -65,7 +65,7 @@ namespace DxBlazorApp1.Components.Pages
 
         private void BuildFir()
         {
-            FIRs = new List<FIR>
+            var firTemplate = new List<FIR>
             {
                 new FIR
                 {
@@ -230,6 +230,10 @@ namespace DxBlazorApp1.Components.Pages
                     Trasportatore = "Bartolini"
                 }
             };
+            for (int i = 0; i < 30; i++)
+            {
+                FIRs.AddRange(firTemplate);
+            }
         }
 
         private void BuildLocation()
