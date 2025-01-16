@@ -881,6 +881,10 @@ ul.filter-form {
                 color: #46413c;
             }
         }
+
+        .dxbl-grid-header:not(.dxbl-grid-bordered-bottom) {
+            background-color: #ff9c072e !important;
+        }
     }
 
     td {
