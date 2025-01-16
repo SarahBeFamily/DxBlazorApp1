@@ -99,7 +99,6 @@
         ShowGroupPanel="true"
         ShowSearchBox="false"
         SearchText="@SearchText"
-
         ColumnResizeMode="GridColumnResizeMode.NextColumn"
         EditMode="GridEditMode.PopupEditForm">
     <Columns>
@@ -113,8 +112,14 @@
             </CellDisplayTemplate>
         </DxGridCommandColumn>
         <DxGridDataColumn FieldName="Ticket" />
-        <DxGridDataColumn FieldName="DataRichiesta" Caption="@("Data richiesta")" DisplayFormat="dd/MM/yyyy" />
-        <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
+
+        <DxGridBandColumn Caption="Periodo validità">
+            <Columns>
+                <DxGridDataColumn FieldName="DataRichiesta" Caption="@("Data richiesta")" DisplayFormat="dd/MM/yyyy" />
+                <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
+            </Columns>
+        </DxGridBandColumn>
+      
         <DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
         <DxGridDataColumn FieldName="Indirizzo" />
         <DxGridCommandColumn Caption="Stato" ClearFilterButtonVisible="false">
