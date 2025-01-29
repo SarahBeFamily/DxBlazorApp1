@@ -168,10 +168,13 @@
                 <DxTagBox Data="@Model.Ruoli"
                           @bind-Values="@Model.RuoliAttivi" />
             </DxFormLayoutItem>
-            <DxFormLayoutItem Caption="Stato" ColSpanMd="6">
+            <DxFormLayoutItem Caption="Stato" ColSpanMd="4">
                 <ISysBadge Label="Assegnata" Color="@ISysBadge.Green" ></ISysBadge>
             </DxFormLayoutItem>
-            <DxFormLayoutItem Caption="Stato" ColSpanMd="6">
+            <DxFormLayoutItem Caption="Stato" ColSpanMd="4">
+                <ISysBadge Label="Chiusa" Color="@ISysBadge.Gray"></ISysBadge>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Stato" ColSpanMd="4">
                 <ISysBadge Label="Chiusa" Color="@ISysBadge.Yellow"></ISysBadge>
             </DxFormLayoutItem>
         </DxFormLayout>
