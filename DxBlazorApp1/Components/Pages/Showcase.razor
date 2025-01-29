@@ -74,7 +74,7 @@
     </Tabs>
     <Filters>
         <ISysHeaderNavigatorFilter Text="Assegnata" BadgeNumber="27" />
-        <ISysHeaderNavigatorFilter Text="In lavorazione" Active="true" />
+        <ISysHeaderNavigatorFilter Text="In lavorazione" Active="true" BadgeNumber="8" />
         <ISysHeaderNavigatorFilter Text="Blocco per quote" BadgeNumber="100" />
         <ISysHeaderNavigatorFilter Text="Sospesa" BadgeNumber="6" />
         <ISysHeaderNavigatorFilter>
@@ -138,9 +138,14 @@
         <DxGridCommandColumn Caption="Stato" ClearFilterButtonVisible="false">
             <HeaderTemplate>Stato</HeaderTemplate>
             <CellDisplayTemplate>
-                <ISysBadge Label="Assegnata" ColorYellow="true" />
+                <ISysBadge Label="Assegnata" Color="@ISysBadge.Yellow" />
             </CellDisplayTemplate>
         </DxGridCommandColumn>
+        <DxGridDataColumn Caption="Stato">
+            <CellDisplayTemplate>
+                <ISysBadge Label="Lavorazione" Color="@ISysBadge.Green" />
+            </CellDisplayTemplate>
+        </DxGridDataColumn>
     </Columns>
     <DetailRowTemplate>
         <text>Note di dettaglio della riga</text>
@@ -162,6 +167,12 @@
             <DxFormLayoutItem Caption="Ruoli" ColSpanMd="12">
                 <DxTagBox Data="@Model.Ruoli"
                           @bind-Values="@Model.RuoliAttivi" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Stato" ColSpanMd="6">
+                <ISysBadge Label="Assegnata" Color="@ISysBadge.Green" ></ISysBadge>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Stato" ColSpanMd="6">
+                <ISysBadge Label="Chiusa" Color="@ISysBadge.Yellow"></ISysBadge>
             </DxFormLayoutItem>
         </DxFormLayout>
     </EditFormTemplate>
