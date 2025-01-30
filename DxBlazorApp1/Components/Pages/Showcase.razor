@@ -44,13 +44,26 @@
     </ISysInnerColumn>
 </ISysLayoutColumns>
 
-<h1>Bottoni</h1>
+<h1>SysButton</h1>
 <div class="d-flex gap-1 my-3">
     <ISysBtn RenderStyle="Primary" Icon="bi bi-1-circle-fill" Text="Popup small" OnClick="OpenPopupSmall" />
     <ISysBtn RenderStyle="Secondary" Icon="bi bi-2-circle-fill" Text="Popup medium" OnClick="OpenPopupMedium" />
     <ISysBtn RenderStyle="Primary" Text="Popup big" OnClick="OpenPopupBig" />
 </div>
 
+<h1>DxButtom</h1>
+<div class="d-flex gap-1 my-3">
+    <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="Primary" />
+    <DxButton RenderStyle="ButtonRenderStyle.Secondary" Text="Secondary" />
+    <DxButton RenderStyle="ButtonRenderStyle.Danger" Text="Danger" />
+    <DxButton RenderStyle="ButtonRenderStyle.Warning" Text="Warning" />
+    <DxButton RenderStyle="ButtonRenderStyle.Info" Text="Info" />
+    <DxButton RenderStyle="ButtonRenderStyle.Success" Text="Sucess" />
+    <DxButton RenderStyle="ButtonRenderStyle.Light" Text="Light" />
+    <DxButton RenderStyle="ButtonRenderStyle.Dark" Text="Dark" />
+    <DxButton RenderStyle="ButtonRenderStyle.Link" Text="Link" />
+    
+</div>
 
 
 <h1>Tabella e Filtri</h1>
@@ -61,7 +74,7 @@
     </Tabs>
     <Filters>
         <ISysHeaderNavigatorFilter Text="Assegnata" BadgeNumber="27" />
-        <ISysHeaderNavigatorFilter Text="In lavorazione" Active="true" />
+        <ISysHeaderNavigatorFilter Text="In lavorazione" Active="true" BadgeNumber="8" />
         <ISysHeaderNavigatorFilter Text="Blocco per quote" BadgeNumber="100" />
         <ISysHeaderNavigatorFilter Text="Sospesa" BadgeNumber="6" />
         <ISysHeaderNavigatorFilter>
@@ -125,9 +138,14 @@
         <DxGridCommandColumn Caption="Stato" ClearFilterButtonVisible="false">
             <HeaderTemplate>Stato</HeaderTemplate>
             <CellDisplayTemplate>
-                <ISysBadge Label="Assegnata" ColorYellow="true" />
+                <ISysBadge Label="Assegnata" Color="@ISysBadge.Yellow" />
             </CellDisplayTemplate>
         </DxGridCommandColumn>
+        <DxGridDataColumn Caption="Stato">
+            <CellDisplayTemplate>
+                <ISysBadge Label="Lavorazione" Color="@ISysBadge.Green" />
+            </CellDisplayTemplate>
+        </DxGridDataColumn>
     </Columns>
     <DetailRowTemplate>
         <text>Note di dettaglio della riga</text>
@@ -149,6 +167,15 @@
             <DxFormLayoutItem Caption="Ruoli" ColSpanMd="12">
                 <DxTagBox Data="@Model.Ruoli"
                           @bind-Values="@Model.RuoliAttivi" />
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Stato" ColSpanMd="4">
+                <ISysBadge Label="Assegnata" Color="@ISysBadge.Green" ></ISysBadge>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Stato" ColSpanMd="4">
+                <ISysBadge Label="Chiusa" Color="@ISysBadge.Gray"></ISysBadge>
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Stato" ColSpanMd="4">
+                <ISysBadge Label="Chiusa" Color="@ISysBadge.Yellow"></ISysBadge>
             </DxFormLayoutItem>
         </DxFormLayout>
     </EditFormTemplate>
