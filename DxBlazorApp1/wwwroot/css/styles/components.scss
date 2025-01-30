@@ -236,31 +236,32 @@ a.link {
     font-weight: 400;
     word-wrap: break-word;
     font-size: clamp(13px,0.6vw,16px);
-    
+    color: white;
+
     &.gray {
         background: var(--grigio);
-        color: var(--dark-gray);
+        color: var(--dark-gray) !important;
     }
 
     &.green {
         background: var(--verde);
-        color: white;
+        color: white !important;
     }
 
     &.yellow {
         background: var(--giallo);
-        color: white;
+        color: white !important;
     }
 
     &.red,
     &.orange {
         background: var(--primary-color);
-        color: white;
+        color: white !important;
     }
 
     &.black {
         background: var(--dark-gray);
-        color: white;
+        color: white !important;
     }
 }
 
