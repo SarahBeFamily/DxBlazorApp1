@@ -747,3 +747,7 @@ header#main {
         left: 0;
     }
 }
+
+.bg-gray-initial {
+    background-color: var(--gray) !important;
+}

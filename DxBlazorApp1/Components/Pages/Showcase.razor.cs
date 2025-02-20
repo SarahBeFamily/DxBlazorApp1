@@ -1,6 +1,6 @@
-﻿using DevExpress.Blazor;
+﻿using System.ComponentModel.DataAnnotations;
+using DevExpress.Blazor;
 using DxBlazorApp1.Services;
-using System.ComponentModel.DataAnnotations;
 
 namespace DxBlazorApp1.Components.Pages
 {
@@ -275,6 +275,26 @@ namespace DxBlazorApp1.Components.Pages
             public string? Facoltativo { get; set; }
             public IEnumerable<string> Ruoli { get; set; } = ["Admin", "BackOffice", "User", "Guest"];
             public IEnumerable<string> RuoliAttivi { get; set; } = ["Admin", "BackOffice"];
+        }
+
+        // logica del popup al click del pallino con la motivazione del cambio cliente
+
+        private bool MotivazionePopupVisible { get; set; }
+        private string MotivazionePopupText { get; set; } = string.Empty;
+
+        private void ShowMotivazionePopup(string? text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            MotivazionePopupText = text;
+            MotivazionePopupVisible = true;
+        }
+
+
+        private void CloseMotivazionePopup()
+        {
+            MotivazionePopupVisible = false;
         }
 
     }
