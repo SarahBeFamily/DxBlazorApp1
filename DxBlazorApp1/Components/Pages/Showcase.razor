@@ -134,7 +134,17 @@
         </DxGridBandColumn> *@
       
         <DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
-        <DxGridDataColumn FieldName="Indirizzo" />
+        <DxGridDataColumn FieldName="Indirizzo">
+            <!--Assegnazione di un badge se il cliente è stato modificato manualmente-->
+            <CellDisplayTemplate Context="context">
+
+                    <span style="cursor:pointer;" @onclick:stopPropagation @onclick='(() => ShowMotivazionePopup("Qui è scritta la motivazione"))'>
+                        <ISysAttention />
+                    </span>
+                    @context.HighlightedDisplayText
+
+            </CellDisplayTemplate>
+        </DxGridDataColumn>
         <DxGridCommandColumn Caption="Stato" ClearFilterButtonVisible="false">
             <HeaderTemplate>Stato</HeaderTemplate>
             <CellDisplayTemplate>
@@ -336,3 +346,15 @@
         </DxFormLayoutItem>
     </ISysAiContent> *@
 </DxFormLayout>
+
+<DxPopup ShowHeader="true"
+         ShowFooter="true"
+         HeaderText="Motivazione"
+         @bind-Visible="MotivazionePopupVisible">
+    <BodyContentTemplate>
+        <p class="@StyleConsts.Text.BlackText" style="color: black">@MotivazionePopupText</p>
+    </BodyContentTemplate>
+    <FooterContentTemplate>
+        <DxButton Text="Chiudi" Click="@CloseMotivazionePopup" />
+    </FooterContentTemplate>
+</DxPopup>

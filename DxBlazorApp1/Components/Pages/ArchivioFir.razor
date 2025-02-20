@@ -57,7 +57,18 @@
         <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
         <DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
         <DxGridDataColumn FieldName="Indirizzo" />
-        <DxGridDataColumn FieldName="Trasportatore" />
+        <DxGridDataColumn FieldName="Trasportatore">
+            <CellDisplayTemplate Context="context">
+                <span>
+                        <span style="cursor:pointer;" @onclick:stopPropagation @onclick='() => ShowMotivazionePopup("Motivazione scritta qui")'>
+                            <ISysAttention/>
+                        </span>
+
+                    @context.HighlightedDisplayText
+                </span>
+            </CellDisplayTemplate>
+        </DxGridDataColumn>
+            <DxGridDataColumn/>
     </Columns>
     <DetailRowTemplate>
         <text>Note di dettaglio della riga</text>
@@ -80,17 +91,30 @@
     </EditFormTemplate>
 </DxGrid>
 
-<DxPopup @bind-Visible="@PopupVisible"
-		 HeaderText="Dettaglio"
-		 BodyText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel
-             nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor,
-             imperdiet mauris. Fusce id purus magna."
-		 ShowFooter="true">
-	<FooterContentTemplate>
-		<DxButton RenderStyle="ButtonRenderStyle.Primary" Text="OK"
-				  Click="@context.CloseCallback" />
-	</FooterContentTemplate>
+<DxPopup ShowHeader="true"
+         ShowFooter="true"
+         HeaderText="Motivazione"
+         @bind-Visible="MotivazionePopupVisible">
+    <BodyContentTemplate>
+        <p class="">@MotivazionePopupText</p>
+    </BodyContentTemplate>
+    <FooterContentTemplate>
+        <DxButton Text="Chiudi" Click="@CloseMotivazionePopup" />
+    </FooterContentTemplate>
 </DxPopup>
+
+<DxPopup ShowHeader="true"
+         ShowFooter="true"
+         HeaderText="Motivazione"
+         @bind-Visible="MotivazionePopupVisible">
+    <BodyContentTemplate>
+        <p>@MotivazionePopupText</p>
+    </BodyContentTemplate>
+    <FooterContentTemplate>
+        <DxButton Text="Chiudi" Click="@CloseMotivazionePopup" />
+    </FooterContentTemplate>
+</DxPopup>
+
 
 <DxFlyout @bind-IsOpen=IsOpen
 		  Id="flyout-flipping"
@@ -101,6 +125,8 @@
 	<span style="font-size: 0.75rem">Ritiro</span>
 </DxFlyout>
 
+
+
 @code {
     public bool isXSmallScreen { get; set; }
     bool PopupVisible { get; set; } = false;
@@ -110,6 +136,22 @@
     FlyoutPosition Position { get; set; } = FlyoutPosition.Top;
     FlyoutAnimationType[] Animations { get; set; } = Enum.GetValues<FlyoutAnimationType>();
     FlyoutAnimationType Animation { get; set; } = FlyoutAnimationType.Fade;
+
+    private bool MotivazionePopupVisible { get; set; } = false;
+    private string MotivazionePopupText { get; set; } = string.Empty;
+
+
+    private void ShowMotivazionePopup(string? text)
+    {
+        MotivazionePopupText = string.IsNullOrEmpty(text) ? "Nessuna motivazione disponibile." : text;
+        MotivazionePopupVisible = true;
+    }
+
+
+    private void CloseMotivazionePopup()
+    {
+        MotivazionePopupVisible = false;
+    }
 
     public IEnumerable<FIR> FIRs { get; set; }
     IGrid GridFir;
